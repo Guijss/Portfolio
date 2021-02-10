@@ -3,7 +3,8 @@ import styled from 'styled-components';
 
 const HeroContainer = styled.div`
   height: 100vh;
-  width: 100vw;
+  width: calc(100vw - 6rem);
+  margin-left: 6rem;
   background: ${(props) => props.theme.primaryBgCol};
 `;
 

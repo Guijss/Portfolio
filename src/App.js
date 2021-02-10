@@ -6,11 +6,13 @@ import Projects from './components/Projects';
 import Sidebar from './components/Sidebar';
 
 const theme = {
-  primaryBgCol: '#0B0C10',
-  secondaryBgCol: '#1F2833',
+  primaryBgCol: '#0E0E11',
+  secondaryBgCol: '#1F1F23',
   primaryTextCol: '#C5C6C7',
   secondaryTextCol: '#66FCF1',
   extraCol: '#45A29E',
+  cardLightCol: '#3c3c44',
+  cardDarkCol: '#242429',
 };
 
 function App() {

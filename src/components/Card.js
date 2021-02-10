@@ -19,7 +19,7 @@ const BorderLeft = styled.div`
   left: 0;
   height: 8px;
   width: 8px;
-  background: ${(props) => props.theme.secondaryBgCol};
+  background: ${(props) => props.theme.cardLightCol};
   transform-origin: top left;
   transform: rotate(-45deg) scale(0);
   transition: transform 0.3s;
@@ -34,15 +34,15 @@ const FixedBorderLeft = styled.div`
   left: 0;
   height: calc(15rem - 10px);
   width: 10px;
-  background: ${(props) => props.theme.secondaryBgCol};
+  background: ${(props) => props.theme.cardLightCol};
   &::after {
     content: ' ';
     position: absolute;
-    bottom: -7px;
+    bottom: -6.5px;
     left: 0;
     width: 8px;
-    height: 100%;
-    background: ${(props) => props.theme.secondaryBgCol};
+    height: 50%;
+    background: ${(props) => props.theme.cardLightCol};
     transform: skewY(-45deg);
   }
 `;
@@ -53,8 +53,7 @@ const BorderBot = styled.div`
   right: 0;
   height: 8px;
   width: 8px;
-  filter: brightness(50%);
-  background: ${(props) => props.theme.secondaryBgCol};
+  background: ${(props) => props.theme.cardDarkCol};
   transform-origin: bottom right;
   transform: rotate(45deg) scale(0);
   transition: transform 0.3s;
@@ -69,16 +68,15 @@ const FixedBorderBot = styled.div`
   right: 0;
   height: 10px;
   width: calc(15rem - 10px);
-  filter: brightness(50%);
-  background: ${(props) => props.theme.secondaryBgCol};
+  background: ${(props) => props.theme.cardDarkCol};
   &::after {
     content: ' ';
     position: absolute;
-    left: -7px;
+    left: -6.5px;
     bottom: 0;
-    width: 100%;
+    width: 50%;
     height: 8px;
-    background: ${(props) => props.theme.secondaryBgCol};
+    background: ${(props) => props.theme.cardDarkCol};
     transform: skewX(-45deg);
   }
 `;
