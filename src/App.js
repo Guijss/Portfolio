@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import Home from './components/Home';
+import Apps from './components/Apps';
+import Contact from './components/Contact';
+import Navbar from './components/Navbar';
+import styled from 'styled-components';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+const PageWrapper = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+`;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <PageWrapper>
+      <Router forceRefresh={true}>
+        <Navbar />
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/Apps" component={Apps} />
+          <Route path="/Contact" component={Contact} />
+        </Switch>
+      </Router>
+    </PageWrapper>
   );
 }
 
