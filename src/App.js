@@ -1,9 +1,7 @@
-import Home from './components/Home';
-import Apps from './components/Apps';
-import Contact from './components/Contact';
 import Navbar from './components/Navbar';
 import styled from 'styled-components';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { navbarLinks } from './appLinks';
 
 const PageWrapper = styled.div`
   width: 100vw;
@@ -18,9 +16,16 @@ function App() {
       <Router forceRefresh={true}>
         <Navbar />
         <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/Apps" component={Apps} />
-          <Route path="/Contact" component={Contact} />
+          {navbarLinks.map((obj) => {
+            return (
+              <Route
+                key={obj.key}
+                path={obj.path}
+                exact={obj.exact}
+                component={obj.component}
+              />
+            );
+          })}
         </Switch>
       </Router>
     </PageWrapper>
