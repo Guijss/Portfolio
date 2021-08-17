@@ -52,7 +52,7 @@ const LinkCont = styled.li`
   justify-content: space-around;
   border: 1px solid transparent;
   &:hover {
-    background: rgb(28, 28, 28);
+    backdrop-filter: brightness(1.2);
   }
 `;
 

@@ -21,7 +21,11 @@ const Canvas = () => {
       <Switch>
         {sidebarLinks.map((obj) => {
           return (
-            <Route key={obj.key} path={obj.path} component={obj.component} />
+            <Route
+              key={obj.key}
+              path={obj.path}
+              render={() => <obj.component />}
+            />
           );
         })}
       </Switch>

@@ -1,63 +1,63 @@
 import React from 'react';
 import Sketch from 'react-p5';
 
+const blocks = [
+  [
+    [0, 0, 0, 0], // I
+    [0, 0, 0, 0],
+    [1, 1, 1, 1],
+    [0, 0, 0, 0],
+  ],
+  [
+    [0, 0, 0, 0], // S
+    [1, 1, 0, 0],
+    [0, 1, 1, 0],
+    [0, 0, 0, 0],
+  ],
+  [
+    [0, 0, 0, 0], // Z
+    [0, 1, 1, 0],
+    [1, 1, 0, 0],
+    [0, 0, 0, 0],
+  ],
+  [
+    [0, 1, 0, 0], // L
+    [0, 1, 0, 0],
+    [0, 1, 1, 0],
+    [0, 0, 0, 0],
+  ],
+  [
+    [0, 0, 1, 0], // J
+    [0, 0, 1, 0],
+    [0, 1, 1, 0],
+    [0, 0, 0, 0],
+  ],
+  [
+    [0, 0, 0, 0], // T
+    [0, 1, 0, 0],
+    [1, 1, 1, 0],
+    [0, 0, 0, 0],
+  ],
+  [
+    [0, 0, 0, 0], // O
+    [0, 1, 1, 0],
+    [0, 1, 1, 0],
+    [0, 0, 0, 0],
+  ],
+];
+
+let board;
+let settledBlocks = [];
+let currBlock = [];
+let cellSize;
+let cellColors = [];
+let rotationCounter = 0;
+let boardSize;
+let gameOver = false;
+let parentRef;
+let cnv;
+
 const Tetris = () => {
-  const blocks = [
-    [
-      [0, 0, 0, 0], // I
-      [0, 0, 0, 0],
-      [1, 1, 1, 1],
-      [0, 0, 0, 0],
-    ],
-    [
-      [0, 0, 0, 0], // S
-      [1, 1, 0, 0],
-      [0, 1, 1, 0],
-      [0, 0, 0, 0],
-    ],
-    [
-      [0, 0, 0, 0], // Z
-      [0, 1, 1, 0],
-      [1, 1, 0, 0],
-      [0, 0, 0, 0],
-    ],
-    [
-      [0, 1, 0, 0], // L
-      [0, 1, 0, 0],
-      [0, 1, 1, 0],
-      [0, 0, 0, 0],
-    ],
-    [
-      [0, 0, 1, 0], // J
-      [0, 0, 1, 0],
-      [0, 1, 1, 0],
-      [0, 0, 0, 0],
-    ],
-    [
-      [0, 0, 0, 0], // T
-      [0, 1, 0, 0],
-      [1, 1, 1, 0],
-      [0, 0, 0, 0],
-    ],
-    [
-      [0, 0, 0, 0], // O
-      [0, 1, 1, 0],
-      [0, 1, 1, 0],
-      [0, 0, 0, 0],
-    ],
-  ];
-
-  let board;
-  let settledBlocks = [];
-  let currBlock = [];
-  let cellSize;
-  let cellColors = [];
-  let rotationCounter = 0;
-  let boardSize;
-  let gameOver = false;
-  let parentRef;
-  let cnv;
-
   const setup = (p5, canvasParentRef) => {
     parentRef = canvasParentRef;
     boardSize = [12, 25]; // 2 side walls, 4 hidden rows on top. playable board is 10x20.
