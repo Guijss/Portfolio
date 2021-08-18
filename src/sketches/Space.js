@@ -73,9 +73,9 @@ const Space = () => {
     const dirVec = Vector.sub(
       p5.createVector(p5.mouseX, p5.mouseY),
       p5.createVector(p5.width / 2, p5.height / 2)
-    ).normalize();
-    xStart -= dirVec.x * 0.01;
-    yStart -= dirVec.y * 0.01;
+    );
+    xStart -= ((2 * dirVec.x) / p5.width) * 0.01;
+    yStart -= ((2 * dirVec.y) / p5.height) * 0.01;
   };
 
   const windowResized = (p5) => {

@@ -16,8 +16,8 @@ const TopBar = styled.div`
   position: relative;
   width: 100%;
   height: 10%;
+  padding-left: 10%;
   min-height: 1.5rem;
-  margin-left: 10%;
   border-bottom: 1px solid rgb(255, 255, 255, 0.1);
   display: flex;
   flex-direction: row;
@@ -29,12 +29,19 @@ let parentRef;
 let grid;
 let cellSizeX, cellSizeY;
 let offSetX;
+let dragging;
+let dragPos;
 
 const PathFinding = () => {
   const [isOpen, setIsOpen] = useState(false);
   const handleOnClick = () => {
-    console.log('clicked');
     setIsOpen(!isOpen);
+  };
+  const content = ['A*', 'Dijkstra', 'Breadth-first', 'Depth-first'];
+  const [selection, setSelection] = useState(content[0]);
+  const handleSelection = (sel) => {
+    setSelection(sel);
+    setIsOpen(false);
   };
 
   const setup = (p5, canvasParentRef) => {
@@ -45,7 +52,6 @@ const PathFinding = () => {
     p5.createCanvas(w, h).parent(canvasParentRef);
     cellSizeX = p5.floor(p5.width / 40);
     cellSizeY = p5.floor(p5.height / 25);
-    //cnv.position(0, 0);
     grid = setUpGridArr(40, 25);
     offSetX = (p5.width - 40 * cellSizeX) / 2;
     for (let i = 0; i < grid.length; i++) {
@@ -55,10 +61,15 @@ const PathFinding = () => {
           i * cellSizeX + offSetX,
           j * cellSizeY,
           cellSizeX,
-          cellSizeY
+          cellSizeY,
+          i,
+          j,
+          grid
         );
       }
     }
+    dragging = 0;
+    dragPos = p5.createVector(0, 0);
     p5.noLoop();
   };
 
@@ -104,7 +115,7 @@ const PathFinding = () => {
   };
 
   const mouseDragged = (p5) => {
-    if (parentRef === undefined) {
+    if (parentRef === undefined || isOpen) {
       return;
     }
     let mX = p5.floor((p5.mouseX - offSetX) / cellSizeX);
@@ -113,6 +124,21 @@ const PathFinding = () => {
       return;
     }
     if (p5.mouseButton === p5.LEFT) {
+      if (dragging > 0) {
+        if (dragPos.x !== mX || dragPos.y !== mY) {
+          if (dragging === 1) {
+            grid[dragPos.x][dragPos.y].setStart(false);
+            grid[mX][mY].setStart(true);
+          } else {
+            grid[dragPos.x][dragPos.y].setEnd(false);
+            grid[mX][mY].setEnd(true);
+          }
+          dragPos.x = mX;
+          dragPos.y = mY;
+        }
+        p5.redraw();
+        return;
+      }
       grid[mX][mY].setWall(true);
     } else if (p5.mouseButton === p5.RIGHT) {
       grid[mX][mY].setWall(false);
@@ -121,7 +147,7 @@ const PathFinding = () => {
   };
 
   const mousePressed = (p5) => {
-    if (parentRef === undefined) {
+    if (parentRef === undefined || isOpen) {
       return;
     }
     let mX = p5.floor((p5.mouseX - offSetX) / cellSizeX);
@@ -130,6 +156,13 @@ const PathFinding = () => {
       return;
     }
     if (p5.mouseButton === p5.LEFT) {
+      if (grid[mX][mY].start || grid[mX][mY].end) {
+        dragging = grid[mX][mY].start ? 1 : 2;
+        dragPos.x = mX;
+        dragPos.y = mY;
+        p5.cursor('grabbing');
+        return;
+      }
       grid[mX][mY].setWall(true);
     } else if (p5.mouseButton === p5.RIGHT) {
       grid[mX][mY].setWall(false);
@@ -137,13 +170,20 @@ const PathFinding = () => {
     p5.redraw();
   };
 
+  const mouseReleased = (p5) => {
+    p5.cursor('default');
+    dragging = 0;
+  };
+
   return (
     <SketchWrapper>
       <TopBar>
         <Dropdown
-          content={['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6']}
+          content={content}
           open={isOpen}
           clickHandler={handleOnClick}
+          selection={selection}
+          selectionHandler={handleSelection}
         />
       </TopBar>
       <Sketch
@@ -152,6 +192,7 @@ const PathFinding = () => {
         windowResized={windowResized}
         mouseDragged={mouseDragged}
         mousePressed={mousePressed}
+        mouseReleased={mouseReleased}
         style={{
           position: 'relative',
           width: '100%',

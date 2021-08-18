@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import { ReactComponent as LogoImg } from '../Logo.svg';
+import { ReactComponent as LogoImg } from '../assets/Logo.svg';
 import { navbarLinks } from '../appLinks';
 
 const NavbarWrapper = styled.div`

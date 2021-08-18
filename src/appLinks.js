@@ -1,5 +1,6 @@
 import PathFinding from './sketches/PathFinding';
 import Tetris from './sketches/Tetris';
+import Space from './sketches/Space';
 
 import Home from './components/Home';
 import Apps from './components/Apps';
@@ -9,8 +10,8 @@ export const sidebarLinks = [
   {
     key: 0,
     linkText: 'PathFinding',
-    path: '/Apps/PathFinding',
-    to: '/Apps/PathFinding',
+    path: '/apps/pathfinding',
+    to: '/apps/pathfinding',
     component: PathFinding,
     style: {
       color: 'rgb(93, 99, 116)',
@@ -19,290 +20,49 @@ export const sidebarLinks = [
   {
     key: 1,
     linkText: 'Tetris',
-    path: '/Apps/Tetris',
-    to: '/Apps/Tetris',
-    component: Tetris,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
-  },
-  //aaaaaaaaaaaaaaa
-  {
-    key: 1,
-    linkText: 'Tetris',
-    path: '/Apps/Tetris',
-    to: '/Apps/Tetris',
+    path: '/apps/tetris',
+    to: '/apps/tetris',
     component: Tetris,
     style: {
       color: 'rgb(93, 99, 116)',
     },
   },
   {
-    key: 1,
-    linkText: 'Tetris',
-    path: '/Apps/Tetris',
-    to: '/Apps/Tetris',
+    key: 2,
+    linkText: 'Synthesizer',
+    path: '/apps/synth',
+    to: '/apps/synth',
     component: Tetris,
     style: {
       color: 'rgb(93, 99, 116)',
     },
   },
   {
-    key: 1,
-    linkText: 'Tetris',
-    path: '/Apps/Tetris',
-    to: '/Apps/Tetris',
+    key: 3,
+    linkText: 'ScaleViewer',
+    path: '/apps/scale',
+    to: '/apps/scale',
     component: Tetris,
     style: {
       color: 'rgb(93, 99, 116)',
     },
   },
   {
-    key: 1,
-    linkText: 'Tetris',
-    path: '/Apps/Tetris',
-    to: '/Apps/Tetris',
+    key: 4,
+    linkText: 'Minesweeper',
+    path: '/apps/minesweeper',
+    to: '/apps/minesweeper',
     component: Tetris,
     style: {
       color: 'rgb(93, 99, 116)',
     },
   },
   {
-    key: 1,
-    linkText: 'Tetris',
-    path: '/Apps/Tetris',
-    to: '/Apps/Tetris',
-    component: Tetris,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
-  },
-  {
-    key: 1,
-    linkText: 'Tetris',
-    path: '/Apps/Tetris',
-    to: '/Apps/Tetris',
-    component: Tetris,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
-  },
-  {
-    key: 1,
-    linkText: 'Tetris',
-    path: '/Apps/Tetris',
-    to: '/Apps/Tetris',
-    component: Tetris,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
-  },
-  {
-    key: 1,
-    linkText: 'Tetris',
-    path: '/Apps/Tetris',
-    to: '/Apps/Tetris',
-    component: Tetris,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
-  },
-  {
-    key: 1,
-    linkText: 'Tetris',
-    path: '/Apps/Tetris',
-    to: '/Apps/Tetris',
-    component: Tetris,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
-  },
-  {
-    key: 1,
-    linkText: 'Tetris',
-    path: '/Apps/Tetris',
-    to: '/Apps/Tetris',
-    component: Tetris,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
-  },
-  {
-    key: 1,
-    linkText: 'Tetris',
-    path: '/Apps/Tetris',
-    to: '/Apps/Tetris',
-    component: Tetris,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
-  },
-  {
-    key: 1,
-    linkText: 'Tetris',
-    path: '/Apps/Tetris',
-    to: '/Apps/Tetris',
-    component: Tetris,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
-  },
-  {
-    key: 1,
-    linkText: 'Tetris',
-    path: '/Apps/Tetris',
-    to: '/Apps/Tetris',
-    component: Tetris,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
-  },
-  {
-    key: 1,
-    linkText: 'Tetris',
-    path: '/Apps/Tetris',
-    to: '/Apps/Tetris',
-    component: Tetris,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
-  },
-  {
-    key: 1,
-    linkText: 'Tetris',
-    path: '/Apps/Tetris',
-    to: '/Apps/Tetris',
-    component: Tetris,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
-  },
-  {
-    key: 1,
-    linkText: 'Tetris',
-    path: '/Apps/Tetris',
-    to: '/Apps/Tetris',
-    component: Tetris,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
-  },
-  {
-    key: 1,
-    linkText: 'Tetris',
-    path: '/Apps/Tetris',
-    to: '/Apps/Tetris',
-    component: Tetris,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
-  },
-  {
-    key: 1,
-    linkText: 'Tetris',
-    path: '/Apps/Tetris',
-    to: '/Apps/Tetris',
-    component: Tetris,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
-  },
-  {
-    key: 1,
-    linkText: 'Tetris',
-    path: '/Apps/Tetris',
-    to: '/Apps/Tetris',
-    component: Tetris,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
-  },
-  {
-    key: 1,
-    linkText: 'Tetris',
-    path: '/Apps/Tetris',
-    to: '/Apps/Tetris',
-    component: Tetris,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
-  },
-  {
-    key: 1,
-    linkText: 'Tetris',
-    path: '/Apps/Tetris',
-    to: '/Apps/Tetris',
-    component: Tetris,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
-  },
-  {
-    key: 1,
-    linkText: 'Tetris',
-    path: '/Apps/Tetris',
-    to: '/Apps/Tetris',
-    component: Tetris,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
-  },
-  {
-    key: 1,
-    linkText: 'Tetris',
-    path: '/Apps/Tetris',
-    to: '/Apps/Tetris',
-    component: Tetris,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
-  },
-  {
-    key: 1,
-    linkText: 'Tetris',
-    path: '/Apps/Tetris',
-    to: '/Apps/Tetris',
-    component: Tetris,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
-  },
-  {
-    key: 1,
-    linkText: 'Tetris',
-    path: '/Apps/Tetris',
-    to: '/Apps/Tetris',
-    component: Tetris,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
-  },
-  {
-    key: 1,
-    linkText: 'Tetris',
-    path: '/Apps/Tetris',
-    to: '/Apps/Tetris',
-    component: Tetris,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
-  },
-  {
-    key: 1,
-    linkText: 'Tetris',
-    path: '/Apps/Tetris',
-    to: '/Apps/Tetris',
-    component: Tetris,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
-  },
-  {
-    key: 1,
-    linkText: 'Tetris',
-    path: '/Apps/Tetris',
-    to: '/Apps/Tetris',
-    component: Tetris,
+    key: 5,
+    linkText: 'Space',
+    path: '/apps/space',
+    to: '/apps/space',
+    component: Space,
     style: {
       color: 'rgb(93, 99, 116)',
     },
