@@ -47,17 +47,17 @@ const blocks = [
 ];
 
 let board;
-let settledBlocks = [];
-let currBlock = [];
+let settledBlocks;
+let currBlock;
 let cellSize;
 let cellColors = [];
-let rotationCounter = 0;
+let rotationCounter;
 let boardSize;
-let gameOver = false;
+let gameOver;
 let parentRef;
 let cnv;
 
-const Tetris = () => {
+const Tetris = (props) => {
   const setup = (p5, canvasParentRef) => {
     parentRef = canvasParentRef;
     boardSize = [12, 25]; // 2 side walls, 4 hidden rows on top. playable board is 10x20.
@@ -66,20 +66,15 @@ const Tetris = () => {
     cnv = p5.createCanvas(w, h).parent(parentRef);
     cnv.position(parentRef.clientWidth / 2 - p5.width / 2, 4);
     cellSize = p5.height / 20;
-    board = setUpArray(boardSize[0], boardSize[1]);
-    cellColors = [
-      p5.color(255, 50, 19),
-      p5.color(255, 151, 28),
-      p5.color(255, 213, 0),
-      p5.color(114, 203, 59),
-      p5.color(3, 65, 174),
-      p5.color(0, 200, 200),
-      p5.color(100, 0, 100),
-    ];
-    spawnBlock(p5);
+    restartGame(p5);
   };
 
   const draw = (p5) => {
+    if (!props.isSelected) {
+      p5.noLoop();
+    } else if (props.isSelected && p5.isLooping()) {
+      p5.loop();
+    }
     //p5.background(0);
     p5.stroke(110, 255 / 2);
     p5.fill(30);
@@ -109,7 +104,11 @@ const Tetris = () => {
       p5.textSize(tSize);
       p5.textAlign(p5.CENTER, p5.CENTER);
       p5.textStyle(p5.BOLD);
-      p5.text('GAME OVER', p5.width / 2, p5.height / 2);
+      p5.text('GAME OVER', p5.width / 2, p5.height / 2 - 20);
+      p5.fill(150);
+      p5.textSize(tSize / 3);
+      p5.textAlign(p5.CENTER, p5.CENTER);
+      p5.text('Press any key to restart!', p5.width / 2, p5.height / 2 + 20);
     }
   };
 
@@ -286,7 +285,29 @@ const Tetris = () => {
     return arr;
   };
 
+  const restartGame = (p5) => {
+    board = setUpArray(boardSize[0], boardSize[1]);
+    cellColors = [
+      p5.color(255, 50, 19),
+      p5.color(255, 151, 28),
+      p5.color(255, 213, 0),
+      p5.color(114, 203, 59),
+      p5.color(3, 65, 174),
+      p5.color(0, 200, 200),
+      p5.color(100, 0, 100),
+    ];
+    settledBlocks = [];
+    currBlock = [];
+    rotationCounter = 0;
+    gameOver = false;
+    spawnBlock(p5);
+  };
+
   const keyPressed = (p5) => {
+    if (gameOver) {
+      gameOver = false;
+      restartGame(p5);
+    }
     if (p5.keyCode === p5.LEFT_ARROW) {
       moveBlock(p5, 0);
     }

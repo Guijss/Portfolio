@@ -15,7 +15,7 @@ const CanvasWrapper = styled.div`
   align-items: center;
 `;
 
-const Canvas = () => {
+const Canvas = (props) => {
   return (
     <CanvasWrapper>
       <Switch>
@@ -24,7 +24,11 @@ const Canvas = () => {
             <Route
               key={obj.key}
               path={obj.path}
-              render={() => <obj.component />}
+              render={() => (
+                <obj.component
+                  isSelected={props.selectedApp === obj.linkText}
+                />
+              )}
             />
           );
         })}

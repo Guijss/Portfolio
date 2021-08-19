@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Canvas from './Canvas';
 import Sidebar from './Sidebar';
@@ -15,10 +15,14 @@ const AppsWrapper = styled.div`
 `;
 
 const Apps = () => {
+  const [selectedApp, setSelectedApp] = useState(null);
+  const handleClick = (sel) => {
+    setSelectedApp(sel);
+  };
   return (
     <AppsWrapper>
-      <Canvas />
-      <Sidebar />
+      <Canvas selectedApp={selectedApp} />
+      <Sidebar handleClick={handleClick} />
     </AppsWrapper>
   );
 };

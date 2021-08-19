@@ -67,14 +67,18 @@ const NLink = styled(NavLink)`
   text-align: center;
 `;
 
-const Sidebar = () => {
+const Sidebar = (props) => {
   return (
     <SidebarWrapper>
       <SideBarNav>
         {sidebarLinks.map((obj) => {
           return (
             <LinkCont key={obj.key}>
-              <NLink to={obj.to} activeStyle={obj.style}>
+              <NLink
+                to={obj.to}
+                activeStyle={obj.style}
+                onClick={() => props.handleClick(obj.linkText)}
+              >
                 {obj.linkText}
               </NLink>
             </LinkCont>

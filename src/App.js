@@ -13,7 +13,7 @@ const PageWrapper = styled.div`
 function App() {
   return (
     <PageWrapper>
-      <Router forceRefresh={true}>
+      <Router>
         <Navbar />
         <Switch>
           {navbarLinks.map((obj) => {
