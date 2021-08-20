@@ -5,9 +5,16 @@ export default class Cell {
     this.y = y;
     this.sizeX = sizeX;
     this.sizeY = sizeY;
+    this.i = i;
+    this.j = j;
     this.wall = false;
     this.start = i === 0 && j === 0;
     this.end = i === grid.length - 1 && j === grid[0].length - 1;
+    this.parent = null;
+    this.g = Infinity;
+    this.f = Infinity;
+    this.h = 0;
+    this.visited = false;
   }
 
   render() {
@@ -18,6 +25,8 @@ export default class Cell {
       this.p.fill(140, 5, 30);
     } else if (this.end) {
       this.p.fill(5, 140, 30);
+    } else if (this.visited) {
+      this.p.fill(110, 20);
     } else {
       this.p.fill(30);
     }
@@ -53,5 +62,25 @@ export default class Cell {
       this.wall = false;
     }
     this.end = state;
+  }
+
+  setG(g) {
+    this.g = g;
+  }
+
+  setF(f) {
+    this.f = f;
+  }
+
+  setH(h) {
+    this.h = h;
+  }
+
+  setParent(parent) {
+    this.parent = parent;
+  }
+
+  setVisited(state) {
+    this.visited = state;
   }
 }
