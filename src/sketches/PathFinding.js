@@ -28,7 +28,7 @@ const TopBar = styled.div`
 
 const RunButton = styled.button`
   position: relative;
-  margin-left: 40%;
+  margin-left: 76%;
   width: 5%;
   height: 60%;
   background: rgb(30, 30, 30);
@@ -52,8 +52,8 @@ let start, goal;
 let dragging;
 let dragPos;
 let openList, closedList;
-let running;
-let p;
+let searching, drawing;
+let path;
 
 const PathFinding = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -68,20 +68,28 @@ const PathFinding = () => {
   };
 
   const pathFind = () => {
-    if (!running) {
-      running = true;
-      start.setG(0);
-      start.setF(0);
-      openList = [start];
-      closedList = [];
-      if (!p.isLooping()) {
-        p.loop();
+    for (let i = 0; i < grid.length; i++) {
+      for (let j = 0; j < grid[i].length; j++) {
+        grid[i][j].setG(0);
+        grid[i][j].setF(0);
+        grid[i][j].setH(0);
+        grid[i][j].setG(0);
+        grid[i][j].setParent(null);
+        grid[i][j].setOpen(false);
+        grid[i][j].setClosed(false);
       }
     }
+    path = [];
+    closedList = [];
+    openList = [start];
+    searching = true;
+    drawing = true;
+    // if (!p.isLooping()) {
+    //   p.loop();
+    // }
   };
 
   const setup = (p5, canvasParentRef) => {
-    p = p5;
     parentRef = canvasParentRef;
     parentRef.addEventListener('contextmenu', (e) => e.preventDefault());
     const h = parentRef.clientHeight;
@@ -109,58 +117,83 @@ const PathFinding = () => {
     goal = grid[grid.length - 1][grid[0].length - 1];
     dragging = 0;
     dragPos = p5.createVector(0, 0);
-    running = false;
-    p5.noLoop();
+    path = [];
+    openList = [];
+    closedList = [];
+    drawing = true;
   };
 
   const draw = (p5) => {
     if (grid === undefined) {
       return;
     }
-    p5.background(30);
-    //drawing backboard
-    for (let i = 0; i < grid.length; i++) {
-      for (let j = 0; j < grid[i].length; j++) {
-        grid[i][j].render();
+    if (drawing) {
+      p5.background(30);
+      //drawing backboard
+      for (let i = 0; i < grid.length; i++) {
+        for (let j = 0; j < grid[i].length; j++) {
+          grid[i][j].render();
+        }
+      }
+      if (path.length > 0) {
+        p5.push();
+        p5.noFill();
+        p5.stroke(225, 173, 1);
+        p5.strokeWeight(2);
+        p5.beginShape();
+        for (const p of path) {
+          p5.vertex(p.x + p.sizeX / 2, p.y + p.sizeY / 2);
+        }
+        p5.endShape();
+        p5.pop();
+      }
+
+      if (!searching) {
+        drawing = false;
       }
     }
-    // Pathfinding
-    if (running) {
-      if (openList.length === 0) {
-        console.log('fail!');
-        running = false;
-        p5.noLoop();
-        return;
-      }
-      const current = findLowestF(openList);
-      openList.splice(openList.indexOf(current), 1);
-      closedList.push(current);
-      if (current === goal) {
-        console.log('Found it!');
-        running = false;
-        drawPath(p5, current);
-        p5.noLoop();
-        return;
-      }
-      const neighbors = getNeighbors(current);
-      for (let neighbor of neighbors) {
-        if (closedList.includes(neighbor)) {
-          continue;
-        }
-        if (current.g < neighbor.g) {
-          const g = current.g + 1;
-          if (openList.includes(neighbor)) {
-            if (g > neighbor.g) {
-              continue;
+
+    // Pathfinding - loop 3 times per frame.
+    if (searching) {
+      for (let f = 0; f < 3; f++) {
+        if (openList.length > 0) {
+          let current = findLowestF(openList);
+          if (current === goal) {
+            makePath(goal);
+            searching = false;
+            return;
+          }
+          openList.splice(openList.indexOf(current), 1);
+          current.setOpen(false);
+          closedList.push(current);
+          current.setClosed(true);
+          let ns = getNeighbors(current);
+          for (let i = 0; i < ns.length; i++) {
+            const n = ns[i];
+            if (!closedList.includes(n)) {
+              let tempG = current.g + calcH(p5, n, current);
+              let newPath = false;
+              if (openList.includes(n)) {
+                if (tempG < n.g) {
+                  n.setG(tempG);
+                  newPath = true;
+                }
+              } else {
+                n.setG(tempG);
+                newPath = true;
+                openList.push(n);
+                n.setOpen(true);
+              }
+              if (newPath) {
+                n.setH(calcH(p5, n, goal));
+                n.setF(n.g + n.h);
+                n.setParent(current);
+              }
             }
           }
-          neighbor.setG(g);
-          neighbor.setH(calcH(p5, neighbor));
-          neighbor.setF(neighbor.g + neighbor.h);
-          neighbor.setParent(current);
-          if (!openList.includes(neighbor)) {
-            openList.push(neighbor);
-          }
+        } else {
+          searching = false;
+          //p5.noLoop();
         }
       }
     }
@@ -174,10 +207,10 @@ const PathFinding = () => {
     return arr;
   };
 
-  const getNeighbors = (current) => {
+  const getNeighbors = (c) => {
     let nArr = [];
-    const ci = current.i;
-    const cj = current.j;
+    const ci = c.i;
+    const cj = c.j;
     for (let i = -1; i <= 1; i++) {
       for (let j = -1; j <= 1; j++) {
         if (
@@ -196,9 +229,6 @@ const PathFinding = () => {
         ) {
           continue;
         } else {
-          if (!grid[ci + i][cj + j].end) {
-            grid[ci + i][cj + j].setVisited(true);
-          }
           nArr.push(grid[ci + i][cj + j]);
         }
       }
@@ -206,37 +236,35 @@ const PathFinding = () => {
     return nArr;
   };
 
-  const calcH = (p5, cell) => {
-    return (
-      (cell.i - goal.i) * (cell.i - goal.i) +
-      (cell.j - goal.j) * (cell.j - goal.j)
-    );
-    //return p5.abs(cell.i - goal.i) + p5.abs(cell.j - goal.j);
+  const calcH = (p5, cell1, cell2) => {
+    return p5.dist(cell1.i, cell1.j, cell2.i, cell2.j);
   };
 
   const findLowestF = (arr) => {
-    let lowest = Infinity;
-    let lowestEl;
-    for (let el of arr) {
-      if (el.f < lowest) {
-        lowest = el.f;
-        lowestEl = el;
+    let lowest = 0;
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i].f < arr[lowest].f) {
+        lowest = i;
       }
     }
-    return lowestEl;
+    return arr[lowest];
   };
 
-  const drawPath = (p5, cell) => {
-    p5.noFill();
-    p5.stroke(225, 173, 1);
-    p5.strokeWeight(2);
-    p5.beginShape();
+  const makePath = (cell) => {
     while (cell !== null) {
-      p5.vertex(cell.x + cell.sizeX / 2, cell.y + cell.sizeY / 2);
+      path.push(cell);
       cell = cell.parent;
     }
 
-    p5.endShape();
+    // p5.noFill();
+    // p5.stroke(225, 173, 1);
+    // p5.strokeWeight(2);
+    // p5.beginShape();
+    // while (cell !== null) {
+    //   p5.vertex(cell.x + cell.sizeX / 2, cell.y + cell.sizeY / 2);
+    //   cell = cell.parent;
+    // }
+    // p5.endShape();
   };
 
   const windowResized = (p5) => {
@@ -256,7 +284,7 @@ const PathFinding = () => {
         grid[i][j].setPosition(i * cellSizeX + offSetX, j * cellSizeY);
       }
     }
-    p5.redraw();
+    drawing = true;
   };
 
   const mouseDragged = (p5) => {
@@ -283,14 +311,14 @@ const PathFinding = () => {
           dragPos.x = mX;
           dragPos.y = mY;
         }
-        p5.redraw();
+        drawing = true;
         return;
       }
       grid[mX][mY].setWall(true);
     } else if (p5.mouseButton === p5.RIGHT) {
       grid[mX][mY].setWall(false);
     }
-    p5.redraw();
+    drawing = true;
   };
 
   const mousePressed = (p5) => {
@@ -314,7 +342,7 @@ const PathFinding = () => {
     } else if (p5.mouseButton === p5.RIGHT) {
       grid[mX][mY].setWall(false);
     }
-    p5.redraw();
+    drawing = true;
   };
 
   const mouseReleased = (p5) => {

@@ -11,10 +11,11 @@ export default class Cell {
     this.start = i === 0 && j === 0;
     this.end = i === grid.length - 1 && j === grid[0].length - 1;
     this.parent = null;
-    this.g = Infinity;
-    this.f = Infinity;
+    this.g = 0;
+    this.f = 0;
     this.h = 0;
-    this.visited = false;
+    this.open = false;
+    this.closed = false;
   }
 
   render() {
@@ -25,8 +26,10 @@ export default class Cell {
       this.p.fill(140, 5, 30);
     } else if (this.end) {
       this.p.fill(5, 140, 30);
-    } else if (this.visited) {
-      this.p.fill(110, 20);
+    } else if (this.closed) {
+      this.p.fill(90, 20);
+    } else if (this.open) {
+      this.p.fill(90, 40);
     } else {
       this.p.fill(30);
     }
@@ -80,7 +83,11 @@ export default class Cell {
     this.parent = parent;
   }
 
-  setVisited(state) {
-    this.visited = state;
+  setOpen(state) {
+    this.open = state;
+  }
+
+  setClosed(state) {
+    this.closed = state;
   }
 }
