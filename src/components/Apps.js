@@ -7,7 +7,7 @@ const AppsWrapper = styled.div`
   position: relative;
   margin: 0;
   padding: 0;
-  background: rgb(30, 30, 30);
+  background-color: rgb(30, 30, 30);
   width: 100vw;
   height: 90vh;
   display: flex;

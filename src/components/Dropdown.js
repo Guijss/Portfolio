@@ -34,7 +34,7 @@ const DdSecBox = styled.li`
   top: calc(50% + 0.8rem);
   border-radius: 0.5rem;
   border: 1px solid rgba(70, 70, 70);
-  background: rgb(30, 30, 30);
+  background-color: rgb(30, 30, 30);
   display: flex;
   flex-direction: column;
 `;

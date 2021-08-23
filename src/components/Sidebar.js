@@ -11,7 +11,7 @@ const SidebarWrapper = styled.div`
   min-width: 7rem;
   margin: 0;
   padding: 0;
-  background: rgb(20, 20, 20);
+  background-color: rgb(20, 20, 20);
   display: flex;
   flex-direction: column;
   box-shadow: -1px 0px 1px 0px rgba(110, 110, 110, 0.5);
@@ -19,6 +19,9 @@ const SidebarWrapper = styled.div`
   -moz-box-shadow: -1px 0px 1px 0px rgba(110, 110, 110, 0.5);
   overflow-y: scroll;
   overflow-x: hidden;
+  @media (max-width: 800px) {
+    width: 20%;
+  }
 
   &::-webkit-scrollbar {
     width: 0.5em;
@@ -28,7 +31,7 @@ const SidebarWrapper = styled.div`
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 3px;
     &:hover {
-      background: rgba(255, 255, 255, 0.2);
+      background-color: rgba(255, 255, 255, 0.2);
     }
   }
 `;

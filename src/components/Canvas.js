@@ -5,7 +5,7 @@ import { sidebarLinks } from '../appLinks';
 
 const CanvasWrapper = styled.div`
   position: relative;
-  background: rgb(30, 30, 30);
+  background-color: rgb(30, 30, 30);
   padding: 0;
   margin: 0;
   width: 90%;
@@ -13,6 +13,9 @@ const CanvasWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (max-width: 800px) {
+    width: 80%;
+  }
 `;
 
 const Canvas = (props) => {

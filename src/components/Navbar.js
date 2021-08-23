@@ -6,7 +6,7 @@ import { navbarLinks } from '../appLinks';
 
 const NavbarWrapper = styled.div`
   position: relative;
-  background: rgb(26, 26, 26);
+  background-color: rgb(26, 26, 26);
   z-index: 99;
   padding: 0;
   margin: 0;
@@ -53,7 +53,7 @@ const LogoWrapper = styled.div`
   min-width: 3rem;
   height: 10vh;
   min-height: 3rem;
-  background: transparent;
+  background-color: transparent;
   color: white;
   display: flex;
   justify-content: center;
