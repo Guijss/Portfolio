@@ -8,11 +8,11 @@ export default class Cell {
     this.i = i;
     this.j = j;
     this.wall = false;
-    this.start = i === 0 && j === 0;
-    this.end = i === grid.length - 1 && j === grid[0].length - 1;
+    this.start = false;
+    this.end = false;
     this.parent = null;
-    this.g = 0;
-    this.f = 0;
+    this.g = Infinity;
+    this.f = Infinity;
     this.h = 0;
     this.open = false;
     this.closed = false;
@@ -29,7 +29,7 @@ export default class Cell {
     } else if (this.closed) {
       this.p.fill(90, 20);
     } else if (this.open) {
-      this.p.fill(90, 40);
+      this.p.fill(90, 90, 110, 40);
     } else {
       this.p.fill(30);
     }
@@ -58,6 +58,7 @@ export default class Cell {
       this.wall = false;
     }
     this.start = state;
+    return this;
   }
 
   setEnd(state) {
@@ -65,6 +66,7 @@ export default class Cell {
       this.wall = false;
     }
     this.end = state;
+    return this;
   }
 
   setG(g) {

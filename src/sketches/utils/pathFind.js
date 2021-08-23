@@ -39,7 +39,32 @@ export const a_star = (p5, grid, openList, closedList, goal) => {
   }
 };
 
-export const dij = (p5, grid, openList, closedList, goal) => {};
+export const dij = (p5, grid, openList, closedList, goal) => {
+  if (openList.length > 0) {
+    let current = findLowestF(openList);
+    if (current === goal) {
+      const path = makePath(goal);
+      return [false, path, openList, closedList];
+    }
+    openList.splice(openList.indexOf(current), 1);
+    closedList.push(current);
+    current.setClosed(true);
+    let ns = getNeighbors(current, grid);
+    for (let i = 0; i < ns.length; i++) {
+      const n = ns[i];
+      if (!closedList.includes(n)) {
+        let tempF = current.f + calcH(p5, n, current);
+        if (tempF < n.f) {
+          n.f = tempF;
+          n.parent = current;
+        }
+      }
+    }
+    return [true, [], openList, closedList];
+  } else {
+    return [false, [], openList, closedList];
+  }
+};
 
 export const breadth_f = (p5, grid, openList, closedList, goal) => {};
 

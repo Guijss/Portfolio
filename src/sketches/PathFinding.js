@@ -4,7 +4,7 @@ import Cell from './classes/cell';
 import styled from 'styled-components';
 import Dropdown from '../components/Dropdown';
 import { FaPlay } from 'react-icons/fa';
-import { a_star } from './utils/pathFind';
+import { a_star, dij } from './utils/pathFind';
 import { ReactComponent as Mouse } from '../assets/mouse.svg';
 import { ReactComponent as Drag } from '../assets/drag.svg';
 
@@ -171,20 +171,31 @@ const PathFinding = () => {
   };
 
   const pathFind = () => {
+    openList = [];
+    closedList = [];
+    path = [];
     for (let i = 0; i < grid.length; i++) {
       for (let j = 0; j < grid[i].length; j++) {
-        grid[i][j].setG(0);
-        grid[i][j].setF(0);
-        grid[i][j].setH(0);
-        grid[i][j].setG(0);
+        if (selection === 'A*') {
+          grid[i][j].setG(0);
+          grid[i][j].setF(0);
+          grid[i][j].setH(0);
+          if (grid[i][j].start) {
+            openList.push(grid[i][j]);
+          }
+        } else if (selection === 'Dijkstra') {
+          if (grid[i][j].start) {
+            grid[i][j].setF(0);
+          } else {
+            grid[i][j].setF(Infinity);
+          }
+          openList.push(grid[i][j]);
+        }
         grid[i][j].setParent(null);
         grid[i][j].setOpen(false);
         grid[i][j].setClosed(false);
       }
     }
-    path = [];
-    closedList = [];
-    openList = [start];
     searching = true;
     drawing = true;
   };
@@ -213,8 +224,8 @@ const PathFinding = () => {
         );
       }
     }
-    start = grid[0][0];
-    goal = grid[grid.length - 1][grid[0].length - 1];
+    start = grid[10][11].setStart(true);
+    goal = grid[29][11].setEnd(true);
     dragging = 0;
     dragPos = p5.createVector(0, 0);
     path = [];
@@ -267,7 +278,13 @@ const PathFinding = () => {
             );
             break;
           case 'Dijkstra':
-            searching = false;
+            [searching, path, openList, closedList] = dij(
+              p5,
+              grid,
+              openList,
+              closedList,
+              goal
+            );
             break;
           case 'Breadth-first':
             searching = false;
@@ -323,13 +340,15 @@ const PathFinding = () => {
       if (dragging > 0) {
         if (dragPos.x !== mX || dragPos.y !== mY) {
           if (dragging === 1) {
-            grid[dragPos.x][dragPos.y].setStart(false);
-            grid[mX][mY].setStart(true);
-            start = grid[mX][mY];
+            if (!grid[mX][mY].end) {
+              start.setStart(false);
+              start = grid[mX][mY].setStart(true);
+            }
           } else {
-            grid[dragPos.x][dragPos.y].setEnd(false);
-            grid[mX][mY].setEnd(true);
-            goal = grid[mX][mY];
+            if (!grid[mX][mY].start) {
+              goal.setEnd(false);
+              goal = grid[mX][mY].setEnd(true);
+            }
           }
           dragPos.x = mX;
           dragPos.y = mY;
