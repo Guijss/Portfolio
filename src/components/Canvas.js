@@ -18,7 +18,7 @@ const CanvasWrapper = styled.div`
   }
 `;
 
-const Canvas = (props) => {
+const Canvas = () => {
   return (
     <CanvasWrapper>
       <Switch>
@@ -27,11 +27,7 @@ const Canvas = (props) => {
             <Route
               key={obj.key}
               path={obj.path}
-              render={() => (
-                <obj.component
-                  isSelected={props.selectedApp === obj.linkText}
-                />
-              )}
+              render={() => <obj.component />}
             />
           );
         })}

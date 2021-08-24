@@ -29,7 +29,7 @@ export default class Cell {
     } else if (this.closed) {
       this.p.fill(90, 20);
     } else if (this.open) {
-      this.p.fill(90, 90, 110, 40);
+      this.p.fill(90, 90, 150, 40);
     } else {
       this.p.fill(30);
     }

@@ -5,6 +5,7 @@ import Space from './sketches/Space';
 import Home from './components/Home';
 import Apps from './components/Apps';
 import Contact from './components/Contact';
+import Synth from './sketches/Synth';
 
 export const sidebarLinks = [
   {
@@ -32,7 +33,7 @@ export const sidebarLinks = [
     linkText: 'Synthesizer',
     path: '/apps/synth',
     to: '/apps/synth',
-    component: Tetris,
+    component: Synth,
     style: {
       color: 'rgb(93, 99, 116)',
     },

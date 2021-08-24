@@ -10,14 +10,12 @@ const Space = () => {
   let noiseOffset;
   let xStart;
   let yStart;
-  let cnv;
 
   const setup = (p5, canvasParentRef) => {
     parentRef = canvasParentRef;
     const w = parentRef.clientWidth;
     const h = parentRef.clientHeight;
-    cnv = p5.createCanvas(w, h).parent(parentRef);
-    cnv.style('z-index', 0);
+    p5.createCanvas(w, h).parent(parentRef);
     starsX = 25;
     starsY = 15;
     spacingX = p5.width / starsX;

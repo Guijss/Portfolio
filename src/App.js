@@ -1,6 +1,11 @@
 import Navbar from './components/Navbar';
 import styled from 'styled-components';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 import { navbarLinks } from './appLinks';
 
 const PageWrapper = styled.div`
@@ -16,6 +21,7 @@ function App() {
       <Router>
         <Navbar />
         <Switch>
+          <Redirect exact from="/apps" to="/apps/pathfinding" />
           {navbarLinks.map((obj) => {
             return (
               <Route

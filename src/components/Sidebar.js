@@ -77,11 +77,7 @@ const Sidebar = (props) => {
         {sidebarLinks.map((obj) => {
           return (
             <LinkCont key={obj.key}>
-              <NLink
-                to={obj.to}
-                activeStyle={obj.style}
-                onClick={() => props.handleClick(obj.linkText)}
-              >
+              <NLink to={obj.to} activeStyle={obj.style}>
                 {obj.linkText}
               </NLink>
             </LinkCont>

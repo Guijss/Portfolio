@@ -57,7 +57,7 @@ let gameOver;
 let parentRef;
 let cnv;
 
-const Tetris = (props) => {
+const Tetris = () => {
   const setup = (p5, canvasParentRef) => {
     parentRef = canvasParentRef;
     boardSize = [12, 25]; // 2 side walls, 4 hidden rows on top. playable board is 10x20.
@@ -70,11 +70,6 @@ const Tetris = (props) => {
   };
 
   const draw = (p5) => {
-    if (!props.isSelected) {
-      p5.noLoop();
-    } else if (props.isSelected && p5.isLooping()) {
-      p5.loop();
-    }
     //p5.background(0);
     p5.stroke(110, 255 / 2);
     p5.fill(30);
