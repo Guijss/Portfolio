@@ -6,6 +6,8 @@ import Home from './components/Home';
 import Apps from './components/Apps';
 import Contact from './components/Contact';
 import Synth from './sketches/Synth';
+import Lightning from './sketches/Lightning';
+import Tuner from './sketches/Tuner';
 
 export const sidebarLinks = [
   {
@@ -30,26 +32,6 @@ export const sidebarLinks = [
   },
   {
     key: 2,
-    linkText: 'Synthesizer',
-    path: '/apps/synth',
-    to: '/apps/synth',
-    component: Synth,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
-  },
-  {
-    key: 3,
-    linkText: 'ScaleViewer',
-    path: '/apps/scale',
-    to: '/apps/scale',
-    component: Tetris,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
-  },
-  {
-    key: 4,
     linkText: 'Minesweeper',
     path: '/apps/minesweeper',
     to: '/apps/minesweeper',
@@ -59,7 +41,47 @@ export const sidebarLinks = [
     },
   },
   {
+    key: 3,
+    linkText: 'Synthesizer',
+    path: '/apps/synth',
+    to: '/apps/synth',
+    component: Synth,
+    style: {
+      color: 'rgb(93, 99, 116)',
+    },
+  },
+  {
+    key: 4,
+    linkText: 'Scale Viewer',
+    path: '/apps/scale',
+    to: '/apps/scale',
+    component: Tetris,
+    style: {
+      color: 'rgb(93, 99, 116)',
+    },
+  },
+  {
     key: 5,
+    linkText: 'Guitar Tuner',
+    path: '/apps/tuner',
+    to: '/apps/tuner',
+    component: Tuner,
+    style: {
+      color: 'rgb(93, 99, 116)',
+    },
+  },
+  {
+    key: 6,
+    linkText: 'Lightning',
+    path: '/apps/lightning',
+    to: '/apps/lightning',
+    component: Lightning,
+    style: {
+      color: 'rgb(93, 99, 116)',
+    },
+  },
+  {
+    key: 7,
     linkText: 'Space',
     path: '/apps/space',
     to: '/apps/space',
