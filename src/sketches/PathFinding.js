@@ -8,7 +8,7 @@ import { a_star, dij } from './utils/pathFind';
 import { ReactComponent as Mouse } from '../assets/mouse.svg';
 import { ReactComponent as Drag } from '../assets/drag.svg';
 
-const SketchWrapper = styled.div`
+export const SketchWrapper = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
@@ -16,7 +16,7 @@ const SketchWrapper = styled.div`
   flex-direction: column;
 `;
 
-const TopBar = styled.div`
+export const TopBar = styled.div`
   position: relative;
   width: 100%;
   height: 10%;
@@ -27,6 +27,7 @@ const TopBar = styled.div`
   justify-content: space-around;
   align-items: center;
 `;
+
 const LabelWrapper = styled.div`
   position: relative;
   width: 50%;
