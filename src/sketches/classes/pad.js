@@ -4,11 +4,42 @@ export default class Pad {
     this.x = x;
     this.y = y;
     this.s = s;
+    this.hovered = false;
+    this.activated = false;
+    this.mouseControl = false;
+  }
+
+  update() {
+    if (
+      this.p.mouseX > this.x &&
+      this.p.mouseX < this.x + this.s &&
+      this.p.mouseY > this.y &&
+      this.p.mouseY < this.y + this.s
+    ) {
+      if (!this.activated) {
+        this.hovered = true;
+      }
+      if (this.p.mouseIsPressed && !this.mouseControl) {
+        this.activated = !this.activated;
+        this.mouseControl = true;
+      }
+    } else {
+      this.hovered = false;
+    }
+    if (!this.p.mouseIsPressed && this.mouseControl) {
+      this.mouseControl = false;
+    }
   }
 
   render() {
-    this.p.fill(30);
     this.p.stroke(255, 15);
+    if (this.activated) {
+      this.p.fill(200, 180, 0);
+    } else if (this.hovered) {
+      this.p.fill(50);
+    } else {
+      this.p.fill(30);
+    }
     this.p.square(this.x, this.y, this.s, 7);
   }
 }

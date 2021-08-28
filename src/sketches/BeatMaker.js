@@ -6,6 +6,8 @@ import { SketchWrapper, TopBar } from './PathFinding';
 
 let parentRef;
 let pads;
+let linePos;
+let currentBar;
 
 const BeatMaker = () => {
   const setup = (p5, canvasParentRef) => {
@@ -27,19 +29,33 @@ const BeatMaker = () => {
         );
       }
     }
+    linePos = 50;
+    currentBar = 0;
   };
 
   const draw = (p5) => {
     p5.background(30);
-    p5.stroke(255, 15);
     for (let i = 0; i < pads.length; i++) {
       for (let j = 0; j < pads[i].length; j++) {
+        pads[i][j].update();
         pads[i][j].render();
       }
     }
+    p5.stroke(255, 211, 0, 50);
     const w = (p5.width - 50) / 8;
-    for (let i = 0; i < 8; i++) {
-      p5.line(i * w + 50, 0, i * w + 50, p5.height);
+    const y1 = pads[0][0].y;
+    const y2 = pads[9][0].y + pads[0][0].s;
+    for (let i = 1; i < 8; i++) {
+      p5.line(i * w + 50, y1, i * w + 50, y2);
+    }
+    p5.stroke(255);
+    p5.line(linePos, 0, linePos, p5.height);
+    linePos += w / (1000 / p5.deltaTime);
+    const prevBar = currentBar;
+    currentBar = p5.floor((linePos - 50) / w);
+    if (linePos > p5.width) {
+      linePos = 50;
+      currentBar = 0;
     }
   };
 
