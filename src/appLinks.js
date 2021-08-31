@@ -1,5 +1,6 @@
 import PathFinding from './sketches/PathFinding';
 import Tetris from './sketches/Tetris';
+import Minesweeper from './sketches/Minesweeper';
 import Space from './sketches/Space';
 import BeatMaker from './sketches/BeatMaker';
 import Synth from './sketches/Synth';
@@ -35,7 +36,7 @@ export const sidebarLinks = [
     linkText: 'Minesweeper',
     path: '/apps/minesweeper',
     to: '/apps/minesweeper',
-    component: Tetris,
+    component: Minesweeper,
     style: {
       color: 'rgb(93, 99, 116)',
     },

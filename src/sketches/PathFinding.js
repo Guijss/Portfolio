@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Sketch from 'react-p5';
-import Cell from './classes/cell';
+import Cell from './classes/pfCell';
 import styled from 'styled-components';
 import Dropdown from '../components/Dropdown';
 import { FaPlay } from 'react-icons/fa';
@@ -139,7 +139,7 @@ const DeleteWallIcon = styled.div`
 let parentRef;
 let grid;
 let cellSizeX, cellSizeY;
-let offSetX;
+let offSetX, offsetY;
 let start, goal;
 let dragging;
 let dragPos;
@@ -207,16 +207,18 @@ const PathFinding = () => {
     const h = p5.max(parentRef.clientHeight, 400);
     const w = p5.max(parentRef.clientWidth, 800);
     p5.createCanvas(w, h).parent(canvasParentRef);
-    cellSizeX = p5.floor(p5.width / 40);
-    cellSizeY = p5.floor(p5.height / 25);
+    //cellSizeX = p5.floor(p5.width / 40);
+    cellSizeY = p5.floor((p5.height - 50) / 25);
+    cellSizeX = cellSizeY * 1.4;
     grid = setUpGridArr(40, 25);
+    offsetY = (p5.height - 25 * cellSizeY) / 2;
     offSetX = (p5.width - 40 * cellSizeX) / 2;
     for (let i = 0; i < grid.length; i++) {
       for (let j = 0; j < grid[i].length; j++) {
         grid[i][j] = new Cell(
           p5,
           i * cellSizeX + offSetX,
-          j * cellSizeY,
+          j * cellSizeY + offsetY,
           cellSizeX,
           cellSizeY,
           i,
@@ -241,6 +243,9 @@ const PathFinding = () => {
     }
     if (drawing) {
       p5.background(30);
+      p5.stroke(255, 30);
+      p5.noFill();
+      p5.rect(offSetX, offsetY, cellSizeX * 40, cellSizeY * 25, 7);
       //drawing backboard
       for (let i = 0; i < grid.length; i++) {
         for (let j = 0; j < grid[i].length; j++) {
@@ -333,7 +338,7 @@ const PathFinding = () => {
       return;
     }
     const mX = p5.floor((p5.mouseX - offSetX) / cellSizeX);
-    const mY = p5.floor(p5.mouseY / cellSizeY);
+    const mY = p5.floor((p5.mouseY - offsetY) / cellSizeY);
     if (mX < 0 || mX > 39 || mY < 0 || mY > 24) {
       return;
     }
@@ -369,7 +374,7 @@ const PathFinding = () => {
       return;
     }
     const mX = p5.floor((p5.mouseX - offSetX) / cellSizeX);
-    const mY = p5.floor(p5.mouseY / cellSizeY);
+    const mY = p5.floor((p5.mouseY - offsetY) / cellSizeY);
     if (mX < 0 || mX > 39 || mY < 0 || mY > 24) {
       return;
     }
@@ -396,7 +401,7 @@ const PathFinding = () => {
   const mouseMoved = (p5) => {
     if (!p5.mouseIsPressed && start !== undefined && goal !== undefined) {
       const mX = p5.floor((p5.mouseX - offSetX) / cellSizeX);
-      const mY = p5.floor(p5.mouseY / cellSizeY);
+      const mY = p5.floor((p5.mouseY - offsetY) / cellSizeY);
       if (
         (mX === start.i && mY === start.j) ||
         (mX === goal.i && mY === goal.j)
