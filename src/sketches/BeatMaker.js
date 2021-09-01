@@ -51,7 +51,6 @@ const BeatMaker = () => {
     p5.stroke(255);
     p5.line(linePos, 0, linePos, p5.height);
     linePos += w / (1000 / p5.deltaTime);
-    const prevBar = currentBar;
     currentBar = p5.floor((linePos - 50) / w);
     if (linePos > p5.width) {
       linePos = 50;

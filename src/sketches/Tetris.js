@@ -50,12 +50,13 @@ let board;
 let settledBlocks;
 let currBlock;
 let cellSize;
-let cellColors = [];
+let cellColors;
 let rotationCounter;
 let boardSize;
 let gameOver;
 let parentRef;
 let cnv;
+let bag;
 
 const Tetris = () => {
   const setup = (p5, canvasParentRef) => {
@@ -66,6 +67,15 @@ const Tetris = () => {
     cnv = p5.createCanvas(w, h).parent(parentRef);
     cnv.position(parentRef.clientWidth / 2 - p5.width / 2, 4);
     cellSize = p5.height / 20;
+    cellColors = [
+      p5.color(255, 50, 19),
+      p5.color(255, 151, 28),
+      p5.color(255, 213, 0),
+      p5.color(114, 203, 59),
+      p5.color(3, 65, 174),
+      p5.color(0, 200, 200),
+      p5.color(100, 0, 100),
+    ];
     restartGame(p5);
   };
 
@@ -117,7 +127,13 @@ const Tetris = () => {
     if (gameOver) {
       return;
     }
-    let block = p5.random(blocks);
+    if (bag.length === 0) {
+      bag = [0, 1, 2, 3, 4, 5, 6];
+    }
+    const ind = p5.random(bag);
+    bag.splice(bag.indexOf(ind), 1);
+    const block = blocks[ind];
+
     for (let i = 0; i < block.length; i++) {
       for (let j = 0; j < block[i].length; j++) {
         if (block[i][j] > 0) {
@@ -215,11 +231,11 @@ const Tetris = () => {
             checkLineCompletion(blockYArr);
             currBlock = [];
             spawnBlock(p5);
-            return;
+            return true;
           }
         }
         currBlock = movedBlock;
-        break;
+        return false;
       default:
         break;
     }
@@ -240,12 +256,15 @@ const Tetris = () => {
     }
 
     for (let settled of settledBlocks) {
-      if (settled.y < cLines[0]) {
-        const drop = cLines.length;
-        board[settled.x][settled.y]--;
-        board[settled.x][settled.y + drop]++;
-        settled.y += drop;
+      let drop = 0;
+      for (let y of cLines) {
+        if (settled.y < y) {
+          drop++;
+        }
       }
+      board[settled.x][settled.y]--;
+      board[settled.x][settled.y + drop]++;
+      settled.y += drop;
     }
   };
 
@@ -282,19 +301,11 @@ const Tetris = () => {
 
   const restartGame = (p5) => {
     board = setUpArray(boardSize[0], boardSize[1]);
-    cellColors = [
-      p5.color(255, 50, 19),
-      p5.color(255, 151, 28),
-      p5.color(255, 213, 0),
-      p5.color(114, 203, 59),
-      p5.color(3, 65, 174),
-      p5.color(0, 200, 200),
-      p5.color(100, 0, 100),
-    ];
     settledBlocks = [];
     currBlock = [];
     rotationCounter = 0;
     gameOver = false;
+    bag = [0, 1, 2, 3, 4, 5, 6];
     spawnBlock(p5);
   };
 
@@ -314,6 +325,12 @@ const Tetris = () => {
     }
     if (p5.keyCode === p5.UP_ARROW) {
       rotateBlock(p5);
+    }
+    if (p5.keyCode === 32) {
+      let stop = false;
+      while (!stop) {
+        stop = moveBlock(p5, 2);
+      }
     }
   };
 

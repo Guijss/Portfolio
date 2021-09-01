@@ -14,8 +14,16 @@ const DisplayWrapper = styled.div`
   justify-content: center;
 `;
 
+const PhantomSpacer = styled.div`
+  position: relative;
+  height: 30%;
+  width: 100%;
+  background: transparent;
+`;
+
 const Slider = styled.input`
-  height: 26px;
+  position: relative;
+  height: 30%;
   -webkit-appearance: none;
   width: 100%;
   background: transparent;
@@ -26,8 +34,8 @@ const Slider = styled.input`
     width: 100%;
     height: 5px;
     cursor: pointer;
-    box-shadow: 1px 1px 1px #282828;
-    background: #282828;
+    box-shadow: 1px 1px 1px #323232;
+    background: #323232;
     border-radius: 5px;
     border: 0px solid #000000;
   }
@@ -35,22 +43,23 @@ const Slider = styled.input`
     box-shadow: 0px 0px 0px #000000;
     border: 0px solid #000000;
     height: 10px;
-    width: 15px;
+    width: 20px;
+    margin-left: 1px;
     margin-top: -2px;
     border-radius: 12px;
-    background: #191919;
+    background: #0f0f0f;
     cursor: pointer;
     -webkit-appearance: none;
   }
   &:focus::-webkit-slider-runnable-track {
-    background: #282828;
+    background: #323232;
   }
   &::-moz-range-track {
     width: 100%;
     height: 5px;
     cursor: pointer;
-    box-shadow: 1px 1px 1px #282828;
-    background: #282828;
+    box-shadow: 1px 1px 1px #323232;
+    background: #323232;
     border-radius: 5px;
     border: 0px solid #000000;
   }
@@ -58,10 +67,11 @@ const Slider = styled.input`
     box-shadow: 0px 0px 0px #000000;
     border: 0px solid #000000;
     height: 10px;
-    width: 15px;
+    width: 20px;
+    margin-left: 1px;
     margin-top: -2px;
     border-radius: 12px;
-    background: #191919;
+    background: #0f0f0f;
     cursor: pointer;
   }
   &::-ms-track {
@@ -73,59 +83,53 @@ const Slider = styled.input`
     color: transparent;
   }
   &::-ms-fill-lower {
-    background: #282828;
+    background: #323232;
     border: 0px solid #000000;
     border-radius: 28px;
-    box-shadow: 1px 1px 1px #282828;
+    box-shadow: 1px 1px 1px #323232;
   }
   &::-ms-fill-upper {
-    background: #282828;
+    background: #323232;
     border: 0px solid #000000;
     border-radius: 28px;
-    box-shadow: 1px 1px 1px #282828;
+    box-shadow: 1px 1px 1px #323232;
   }
   &::-ms-thumb {
     box-shadow: 0px 0px 0px #000000;
     border: 0px solid #000000;
     height: 10px;
-    width: 15px;
+    width: 20px;
+    margin-left: 1px;
     margin-top: -2px;
     border-radius: 12px;
-    background: #191919;
+    background: #0f0f0f;
     cursor: pointer;
   }
   &:focus::-ms-fill-lower {
-    background: #282828;
+    background: #323232;
   }
   &:focus::-ms-fill-upper {
-    background: #282828;
+    background: #323232;
   }
 `;
 
 const BombDisplay = styled.div`
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 70%;
   border-radius: 1rem;
-  background-color: rgb(25, 25, 25);
+  background-color: rgb(50, 50, 50);
+  color: rgb(180, 180, 180);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 `;
 
 const BombC = styled(BombComponent)`
   position: relative;
   width: 40%;
-`;
-
-const DisplayText = styled.input`
-  position: relative;
-  width: 60%;
-  color: rgb(180, 180, 180);
-  font-family: 'Orbitron', sans-serif;
-  font-size: 2rem;
-  background-color: transparent;
-  border: hidden;
 `;
 
 let parentRef;
@@ -139,16 +143,11 @@ let bombsArr;
 let bombImg;
 
 const Minesweeper = () => {
+  const [running, setRunning] = useState(false);
   const [numBombs, setNumBombs] = useState(100);
 
   const handleChange = (e) => {
     setNumBombs(e.target.value);
-  };
-
-  const handleTextBlur = (e) => {
-    let n;
-    n = e.target.value < 30 ? 30 : e.target.value > 100 ? 100 : e.target.value;
-    setNumBombs(n);
   };
 
   const preload = (p5) => {
@@ -174,6 +173,7 @@ const Minesweeper = () => {
   };
 
   const restart = (p5) => {
+    let total = 0;
     grid = make2dArr(30, 16);
     let bombsPlacement = make2dArr(30, 16);
     bombsArr = [];
@@ -185,8 +185,10 @@ const Minesweeper = () => {
         continue;
       } else {
         bombsPlacement[row][col] = true;
+        total++;
       }
     }
+    console.log(total);
     for (let i = 0; i < grid.length; i++) {
       for (let j = 0; j < grid[0].length; j++) {
         grid[i][j] = new Cell(
@@ -300,6 +302,10 @@ const Minesweeper = () => {
       if (mX < 0 || mX > 39 || mY < 0 || mY > 19) {
         return;
       }
+      if (!running) {
+        restart(p5);
+        setRunning(true);
+      }
       if (p5.mouseButton === p5.LEFT) {
         grid[mX][mY].setOpened(true);
         grid[mX][mY].setFlag(false);
@@ -307,6 +313,7 @@ const Minesweeper = () => {
           gameOver = true;
           revealBombs();
           drawing = true;
+          setRunning(false);
           return;
         } else if (grid[mX][mY].bombsAround === 0) {
           floodOpen(mX, mY);
@@ -346,20 +353,18 @@ const Minesweeper = () => {
         <DisplayWrapper>
           <BombDisplay>
             <BombC />
-            <DisplayText
-              type="text"
+            <span style={{ marginRight: '10px' }}>{numBombs}</span>
+          </BombDisplay>
+          {running && <PhantomSpacer />}
+          {!running && (
+            <Slider
+              type="range"
+              min="30"
+              max="100"
               value={numBombs}
-              onBlur={handleTextBlur}
               onChange={handleChange}
             />
-          </BombDisplay>
-          <Slider
-            type="range"
-            min="30"
-            max="100"
-            value={numBombs}
-            onChange={handleChange}
-          />
+          )}
         </DisplayWrapper>
       </TopBar>
       <Sketch
