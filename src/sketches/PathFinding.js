@@ -21,20 +21,25 @@ export const TopBar = styled.div`
   width: 100%;
   height: 10%;
   min-height: 4rem;
-  border-bottom: 1px solid rgb(255, 255, 255, 0.1);
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
 `;
 
+export const Spacing = styled.div`
+  position: relative;
+  width: 100%;
+  height: 7%;
+`;
+
 const LabelWrapper = styled.div`
   position: relative;
   width: 50%;
   height: 80%;
+  margin-top: 1rem;
   min-height: 2rem;
   display: flex;
-  border: 1px solid rgb(15, 15, 15);
   border-radius: 1rem;
   justify-content: space-evenly;
   align-items: center;
@@ -85,6 +90,7 @@ const ButtonWrapper = styled.div`
   position: relative;
   width: 10%;
   min-width: 6rem;
+  margin-top: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -207,9 +213,8 @@ const PathFinding = () => {
     const h = p5.max(parentRef.clientHeight, 400);
     const w = p5.max(parentRef.clientWidth, 800);
     p5.createCanvas(w, h).parent(canvasParentRef);
-    //cellSizeX = p5.floor(p5.width / 40);
-    cellSizeY = p5.floor((p5.height - 50) / 25);
-    cellSizeX = cellSizeY * 1.4;
+    cellSizeY = p5.floor(p5.height / 25);
+    cellSizeX = cellSizeY * 1.54;
     grid = setUpGridArr(40, 25);
     offsetY = (p5.height - 25 * cellSizeY) / 2;
     offSetX = (p5.width - 40 * cellSizeX) / 2;
@@ -321,13 +326,17 @@ const PathFinding = () => {
     const h = p5.max(parentRef.clientHeight, 400);
     const w = p5.max(parentRef.clientWidth, 800);
     p5.resizeCanvas(w, h);
-    cellSizeX = p5.floor(p5.width / 40);
     cellSizeY = p5.floor(p5.height / 25);
+    cellSizeX = cellSizeY * 1.54;
+    offsetY = (p5.height - 25 * cellSizeY) / 2;
     offSetX = (p5.width - 40 * cellSizeX) / 2;
     for (let i = 0; i < grid.length; i++) {
       for (let j = 0; j < grid[i].length; j++) {
         grid[i][j].setSize(cellSizeX, cellSizeY);
-        grid[i][j].setPosition(i * cellSizeX + offSetX, j * cellSizeY);
+        grid[i][j].setPosition(
+          i * cellSizeX + offSetX,
+          j * cellSizeY + offsetY
+        );
       }
     }
     drawing = true;
@@ -415,6 +424,7 @@ const PathFinding = () => {
 
   return (
     <SketchWrapper>
+      <Spacing />
       <TopBar>
         <Dropdown
           content={content}
@@ -422,6 +432,7 @@ const PathFinding = () => {
           clickHandler={handleOnClick}
           selection={selection}
           selectionHandler={handleSelection}
+          customStyle={{ margin: '1rem 0 0 0' }}
         />
         <LabelWrapper>
           <HIconsWrapper>
@@ -456,11 +467,12 @@ const PathFinding = () => {
         style={{
           position: 'relative',
           width: '100%',
-          height: '90%',
+          height: '76%',
           display: 'flex',
           justifyContent: 'center',
         }}
       />
+      <Spacing />
     </SketchWrapper>
   );
 };

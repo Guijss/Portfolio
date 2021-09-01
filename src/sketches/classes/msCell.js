@@ -1,5 +1,5 @@
 export default class Cell {
-  constructor(p5, x, y, size, colors) {
+  constructor(p5, x, y, size, colors, isBomb) {
     this.p = p5;
     this.x = x;
     this.y = y;
@@ -7,20 +7,16 @@ export default class Cell {
     this.opened = false;
     this.flag = false;
     this.colors = colors;
-    if (this.p.random() < 0.15) {
-      this.bomb = true;
-      this.bombsAround = -1;
-    } else {
-      this.bomb = false;
-      this.bombsAround = 0;
-    }
+    this.bomb = isBomb[0];
+    this.bombImg = isBomb[1];
+    this.bombsAround = 0;
   }
 
   render() {
     this.p.stroke(255, 15);
     if (this.opened) {
       if (this.bomb) {
-        this.p.fill(50, 0, 20);
+        this.p.fill(40, 30, 30);
       } else {
         this.p.fill(50);
       }
@@ -30,12 +26,9 @@ export default class Cell {
     this.p.square(this.x, this.y, this.size, this.opened ? 0 : 7);
     if (this.opened) {
       if (this.bomb) {
-        this.p.push();
-        this.p.textAlign(this.p.CENTER, this.p.CENTER);
-        this.p.textSize(18);
-        this.p.fill(255, 255, 0);
-        this.p.text('B', this.x + this.size / 2, this.y + this.size / 2);
-        this.p.pop();
+        this.bombImg.width = this.size - 10;
+        this.bombImg.height = this.size - 10;
+        this.p.image(this.bombImg, this.x + 5, this.y + 5);
       } else if (this.bombsAround > 0) {
         let currColor;
         if (this.bombsAround > 4) {
@@ -63,6 +56,15 @@ export default class Cell {
       this.p.text('?', this.x + this.size / 2, 1 + this.y + this.size / 2);
       this.p.pop();
     }
+  }
+
+  setSize(newSize) {
+    this.size = newSize;
+  }
+
+  setPosition(newX, newY) {
+    this.x = newX;
+    this.y = newY;
   }
 
   setFlag(state) {

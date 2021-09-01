@@ -56,7 +56,7 @@ const DdItem = styled.ul`
 
 const Dropdown = (props) => {
   return (
-    <DdWrapper>
+    <DdWrapper style={props.customStyle}>
       <DdMain onClick={props.clickHandler}>
         <span>Algorithm</span>
         <MdArrowDropDown size={20} />

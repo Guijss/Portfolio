@@ -1,6 +1,132 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Sketch from 'react-p5';
 import Cell from './classes/msCell';
+import { SketchWrapper, TopBar, Spacing } from './PathFinding';
+import Bomb, { ReactComponent as BombComponent } from '../assets/bomb.svg';
+import styled from 'styled-components';
+
+const DisplayWrapper = styled.div`
+  position: relative;
+  height: 100%;
+  width: 8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+const Slider = styled.input`
+  height: 26px;
+  -webkit-appearance: none;
+  width: 100%;
+  background: transparent;
+  &:focus {
+    outline: none;
+  }
+  &::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 5px;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px #282828;
+    background: #282828;
+    border-radius: 5px;
+    border: 0px solid #000000;
+  }
+  &::-webkit-slider-thumb {
+    box-shadow: 0px 0px 0px #000000;
+    border: 0px solid #000000;
+    height: 10px;
+    width: 15px;
+    margin-top: -2px;
+    border-radius: 12px;
+    background: #191919;
+    cursor: pointer;
+    -webkit-appearance: none;
+  }
+  &:focus::-webkit-slider-runnable-track {
+    background: #282828;
+  }
+  &::-moz-range-track {
+    width: 100%;
+    height: 5px;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px #282828;
+    background: #282828;
+    border-radius: 5px;
+    border: 0px solid #000000;
+  }
+  &::-moz-range-thumb {
+    box-shadow: 0px 0px 0px #000000;
+    border: 0px solid #000000;
+    height: 10px;
+    width: 15px;
+    margin-top: -2px;
+    border-radius: 12px;
+    background: #191919;
+    cursor: pointer;
+  }
+  &::-ms-track {
+    width: 100%;
+    height: 5px;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+  }
+  &::-ms-fill-lower {
+    background: #282828;
+    border: 0px solid #000000;
+    border-radius: 28px;
+    box-shadow: 1px 1px 1px #282828;
+  }
+  &::-ms-fill-upper {
+    background: #282828;
+    border: 0px solid #000000;
+    border-radius: 28px;
+    box-shadow: 1px 1px 1px #282828;
+  }
+  &::-ms-thumb {
+    box-shadow: 0px 0px 0px #000000;
+    border: 0px solid #000000;
+    height: 10px;
+    width: 15px;
+    margin-top: -2px;
+    border-radius: 12px;
+    background: #191919;
+    cursor: pointer;
+  }
+  &:focus::-ms-fill-lower {
+    background: #282828;
+  }
+  &:focus::-ms-fill-upper {
+    background: #282828;
+  }
+`;
+
+const BombDisplay = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  background-color: rgb(25, 25, 25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const BombC = styled(BombComponent)`
+  position: relative;
+  width: 40%;
+`;
+
+const DisplayText = styled.input`
+  position: relative;
+  width: 60%;
+  color: rgb(180, 180, 180);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  background-color: transparent;
+  border: hidden;
+`;
 
 let parentRef;
 let grid;
@@ -10,17 +136,34 @@ let colors;
 let cellSize;
 let offsetX, offsetY;
 let bombsArr;
+let bombImg;
 
 const Minesweeper = () => {
+  const [numBombs, setNumBombs] = useState(100);
+
+  const handleChange = (e) => {
+    setNumBombs(e.target.value);
+  };
+
+  const handleTextBlur = (e) => {
+    let n;
+    n = e.target.value < 30 ? 30 : e.target.value > 100 ? 100 : e.target.value;
+    setNumBombs(n);
+  };
+
+  const preload = (p5) => {
+    bombImg = p5.loadImage(Bomb);
+  };
+
   const setup = (p5, canvasParentRef) => {
     parentRef = canvasParentRef;
     parentRef.addEventListener('contextmenu', (e) => e.preventDefault());
-    const h = parentRef.clientHeight;
-    const w = parentRef.clientWidth; //2 * h;
+    const h = p5.max(parentRef.clientHeight, 400);
+    const w = p5.max(parentRef.clientWidth, 800);
     p5.createCanvas(w, h).parent(canvasParentRef);
-    cellSize = (p5.height - 100) / 20;
-    offsetX = (p5.width - 40 * cellSize) / 2;
-    offsetY = (p5.height - 20 * cellSize) / 2;
+    cellSize = p5.height / 16;
+    offsetX = (p5.width - 30 * cellSize) / 2;
+    offsetY = (p5.height - 16 * cellSize) / 2;
     colors = [
       p5.color(0, 150, 0),
       p5.color(150, 150, 0),
@@ -31,8 +174,19 @@ const Minesweeper = () => {
   };
 
   const restart = (p5) => {
-    grid = make2dArr(40, 20);
+    grid = make2dArr(30, 16);
+    let bombsPlacement = make2dArr(30, 16);
     bombsArr = [];
+    for (let i = 0; i < numBombs; i++) {
+      const row = p5.floor(p5.random(bombsPlacement.length - 1));
+      const col = p5.floor(p5.random(bombsPlacement[0].length - 1));
+      if (bombsPlacement[row][col]) {
+        i--;
+        continue;
+      } else {
+        bombsPlacement[row][col] = true;
+      }
+    }
     for (let i = 0; i < grid.length; i++) {
       for (let j = 0; j < grid[0].length; j++) {
         grid[i][j] = new Cell(
@@ -40,17 +194,14 @@ const Minesweeper = () => {
           i * cellSize + offsetX,
           j * cellSize + offsetY,
           cellSize,
-          colors
+          colors,
+          bombsPlacement[i][j] ? [true, bombImg] : [false, null]
         );
         if (grid[i][j].bomb) {
           bombsArr.push(grid[i][j]);
-        }
-      }
-    }
-    for (let i = 0; i < grid.length; i++) {
-      for (let j = 0; j < grid[0].length; j++) {
-        if (!grid[i][j].bomb) {
-          tallyBombsAround(i, j);
+          grid[i][j].bombsAround = -1;
+        } else {
+          grid[i][j].bombsAround = tallyBombsAround(i, j, bombsPlacement);
         }
       }
     }
@@ -75,14 +226,16 @@ const Minesweeper = () => {
             }
           }
         }
-        p5.fill(50, 240);
-        p5.rect(offsetX, offsetY, 40 * cellSize, 20 * cellSize, 7);
-        p5.fill(150);
+        p5.stroke(110, 255 / 2);
+        p5.fill(30, 200);
+        p5.rect(offsetX, offsetY, 30 * cellSize, 16 * cellSize, 7);
+        p5.stroke(0);
+        p5.fill(200);
         p5.textSize(65);
         p5.textAlign(p5.CENTER, p5.CENTER);
         p5.textStyle(p5.BOLD);
         p5.text('GAME OVER', p5.width / 2, p5.height / 2);
-        p5.fill(0);
+        p5.fill(150);
         p5.textSize(22);
         p5.textAlign(p5.CENTER, p5.CENTER);
         p5.text('Click anywhere to restart!', p5.width / 2, 50 + p5.height / 2);
@@ -99,19 +252,21 @@ const Minesweeper = () => {
     return arr;
   };
 
-  const tallyBombsAround = (i, j) => {
+  const tallyBombsAround = (i, j, bArr) => {
+    let total = 0;
     for (let x = i - 1; x < i + 2; x++) {
       for (let y = j - 1; y < j + 2; y++) {
-        if (x >= 0 && x < grid.length && y >= 0 && y < grid[0].length) {
+        if (x >= 0 && x < bArr.length && y >= 0 && y < bArr[0].length) {
           if (x === i && y === j) {
             continue;
           }
-          if (grid[x][y].bomb) {
-            grid[i][j].bombsAround++;
+          if (bArr[x][y]) {
+            total++;
           }
         }
       }
     }
+    return total;
   };
 
   const floodOpen = (i, j) => {
@@ -165,21 +320,62 @@ const Minesweeper = () => {
     }
   };
 
-  const windowResized = (p5) => {};
+  const windowResized = (p5) => {
+    if (parentRef === undefined) {
+      return;
+    }
+    const h = p5.max(parentRef.clientHeight, 400);
+    const w = p5.max(parentRef.clientWidth, 800);
+    p5.resizeCanvas(w, h);
+    cellSize = p5.height / 16;
+    offsetX = (p5.width - 30 * cellSize) / 2;
+    offsetY = (p5.height - 16 * cellSize) / 2;
+    for (let i = 0; i < grid.length; i++) {
+      for (let j = 0; j < grid[0].length; j++) {
+        grid[i][j].setSize(cellSize);
+        grid[i][j].setPosition(i * cellSize + offsetX, j * cellSize + offsetY);
+      }
+    }
+    drawing = true;
+  };
 
   return (
-    <Sketch
-      setup={setup}
-      draw={draw}
-      mousePressed={mousePressed}
-      windowResized={windowResized}
-      style={{
-        position: 'absolute',
-        width: '100%',
-        height: '100%',
-        zIndex: '0',
-      }}
-    />
+    <SketchWrapper>
+      <Spacing />
+      <TopBar>
+        <DisplayWrapper>
+          <BombDisplay>
+            <BombC />
+            <DisplayText
+              type="text"
+              value={numBombs}
+              onBlur={handleTextBlur}
+              onChange={handleChange}
+            />
+          </BombDisplay>
+          <Slider
+            type="range"
+            min="30"
+            max="100"
+            value={numBombs}
+            onChange={handleChange}
+          />
+        </DisplayWrapper>
+      </TopBar>
+      <Sketch
+        preload={preload}
+        setup={setup}
+        draw={draw}
+        mousePressed={mousePressed}
+        windowResized={windowResized}
+        style={{
+          position: 'relative',
+          width: '100%',
+          height: '76%',
+        }}
+      />
+      <Spacing />
+    </SketchWrapper>
   );
 };
 
