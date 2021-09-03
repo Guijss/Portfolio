@@ -1,9 +1,10 @@
 export default class Pad {
-  constructor(p5, x, y, s) {
+  constructor(p5, x, y, s, col) {
     this.p = p5;
     this.x = x;
     this.y = y;
     this.s = s;
+    this.col = col;
     this.hovered = false;
     this.activated = false;
     this.mouseControl = false;
@@ -34,7 +35,7 @@ export default class Pad {
   render() {
     this.p.stroke(255, 15);
     if (this.activated) {
-      this.p.fill(200, 180, 0);
+      this.p.fill(this.col);
     } else if (this.hovered) {
       this.p.fill(50);
     } else {

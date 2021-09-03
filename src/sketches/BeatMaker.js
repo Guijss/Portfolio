@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Sketch from 'react-p5';
 import Pad from './classes/pad';
 //import styled from 'styled-components';
@@ -8,8 +8,11 @@ let parentRef;
 let pads;
 let linePos;
 let currentBar;
+let cols;
 
 const BeatMaker = () => {
+  const [bpm, setBpm] = useState(120);
+
   const setup = (p5, canvasParentRef) => {
     parentRef = canvasParentRef;
     parentRef.addEventListener('contextmenu', (e) => e.preventDefault());
@@ -19,13 +22,21 @@ const BeatMaker = () => {
     pads = make2dArr(10, 8 * 4); // 10 instruments, 4 beats per bar, 8 bars.
     const size = (p5.width - 50) / (8 * 4);
     const heightSpacing = p5.height - 10 * size;
+    cols = [];
+    p5.push();
+    p5.colorMode(p5.HSB);
+    for (let i = 0; i < pads.length; i++) {
+      cols.push(p5.color(i * (360 / pads.length), 70, 70));
+    }
+    p5.pop();
     for (let i = 0; i < pads.length; i++) {
       for (let j = 0; j < pads[i].length; j++) {
         pads[i][j] = new Pad(
           p5,
           j * size + 50,
           heightSpacing / 2 + i * size,
-          size
+          size,
+          cols[i]
         );
       }
     }
@@ -50,7 +61,7 @@ const BeatMaker = () => {
     }
     p5.stroke(255);
     p5.line(linePos, 0, linePos, p5.height);
-    linePos += w / (1000 / p5.deltaTime);
+    linePos += w / ((1000 * (60 / bpm)) / p5.deltaTime);
     currentBar = p5.floor((linePos - 50) / w);
     if (linePos > p5.width) {
       linePos = 50;
