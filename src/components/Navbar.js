@@ -1,12 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { ReactComponent as LogoImg } from '../assets/Logo.svg';
 import { navbarLinks } from '../appLinks';
 
 const NavbarWrapper = styled.div`
   position: relative;
-  background-color: rgb(26, 26, 26);
+  background-color: ${(props) => props.theme.navMain};
   z-index: 99;
   padding: 0;
   margin: 0;
@@ -41,7 +41,7 @@ const Item = styled(NavLink)`
   width: 7rem;
   height: 1rem;
   font-size: 1.2rem;
-  color: rgb(180, 180, 180);
+  color: ${(props) => props.theme.textMain};
   text-decoration: none;
   text-align: center;
 `;
@@ -57,20 +57,21 @@ const LogoWrapper = styled.div`
   color: white;
   display: flex;
   justify-content: center;
+  align-items: center;
 `;
 
 const Logo = styled(LogoImg)`
   position: relative;
-  margin-top: 10%;
-  height: 80%;
-  width: 80%;
+  height: 60%;
+  width: 60%;
 `;
 
-const Navbar = () => {
+const Navbar = (props) => {
+  const theme = useTheme();
   return (
     <NavbarWrapper>
       <LogoWrapper>
-        <Logo fill="rgb(157, 177, 186)" />
+        <Logo fill={theme.logoCol} />
       </LogoWrapper>
       <List>
         {navbarLinks.map((obj) => {
@@ -79,7 +80,8 @@ const Navbar = () => {
               key={obj.key}
               to={obj.to}
               exact={obj.exact}
-              activeStyle={obj.style}
+              activeStyle={{ color: theme.textHighlight }}
+              onClick={() => props.handleApp(obj.linkText)}
             >
               {obj.linkText}
             </Item>

@@ -1,12 +1,12 @@
 import React from 'react';
-import Space from '../sketches/Space';
 import styled from 'styled-components';
 
 const HomeWrapper = styled.div`
-  position: relative;
+  position: absolute;
   margin: 0;
   padding: 0;
-  background-color: rgb(30, 30, 30);
+  background-color: ${(props) => props.theme.bgMain};
+  top: 10vh;
   width: 100vw;
   height: 90vh;
   display: flex;
@@ -15,10 +15,18 @@ const HomeWrapper = styled.div`
   align-items: center;
 `;
 
+const Circle = styled.div`
+  position: relative;
+  width: 200px;
+  height: 200px;
+  background-color: teal;
+  border-radius: 50%;
+`;
+
 const Home = () => {
   return (
     <HomeWrapper>
-      <Space />
+      <Circle />
     </HomeWrapper>
   );
 };

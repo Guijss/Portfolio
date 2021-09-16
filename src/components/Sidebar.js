@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { sidebarLinks } from '../appLinks';
 
@@ -11,7 +11,7 @@ const SidebarWrapper = styled.div`
   min-width: 7rem;
   margin: 0;
   padding: 0;
-  background-color: rgb(20, 20, 20);
+  background-color: ${(prosp) => prosp.theme.navMain};
   display: flex;
   flex-direction: column;
   box-shadow: -1px 0px 1px 0px rgba(110, 110, 110, 0.5);
@@ -62,7 +62,7 @@ const LinkCont = styled.li`
 const NLink = styled(NavLink)`
   width: 100%;
   height: 100%;
-  color: rgb(180, 180, 180);
+  color: ${(props) => props.theme.textMain};
   align-items: center;
   padding-top: 0.7rem;
   font-size: 1rem;
@@ -70,14 +70,15 @@ const NLink = styled(NavLink)`
   text-align: center;
 `;
 
-const Sidebar = (props) => {
+const Sidebar = () => {
+  const theme = useTheme();
   return (
     <SidebarWrapper>
       <SideBarNav>
         {sidebarLinks.map((obj) => {
           return (
             <LinkCont key={obj.key}>
-              <NLink to={obj.to} activeStyle={obj.style}>
+              <NLink to={obj.to} activeStyle={{ color: theme.textHighlight }}>
                 {obj.linkText}
               </NLink>
             </LinkCont>

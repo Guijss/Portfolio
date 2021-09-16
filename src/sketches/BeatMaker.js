@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Sketch from 'react-p5';
 import Pad from './classes/pad';
-//import styled from 'styled-components';
 import { SketchWrapper, TopBar } from './PathFinding';
 
 let parentRef;

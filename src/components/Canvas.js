@@ -5,7 +5,6 @@ import { sidebarLinks } from '../appLinks';
 
 const CanvasWrapper = styled.div`
   position: relative;
-  background-color: rgb(30, 30, 30);
   padding: 0;
   margin: 0;
   width: 90%;
@@ -25,9 +24,10 @@ const Canvas = () => {
         {sidebarLinks.map((obj) => {
           return (
             <Route
+              exact
               key={obj.key}
               path={obj.path}
-              render={() => <obj.component />}
+              component={obj.component}
             />
           );
         })}

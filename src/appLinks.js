@@ -8,7 +8,6 @@ import Lightning from './sketches/Lightning';
 
 import Home from './components/Home';
 import Apps from './components/Apps';
-import Contact from './components/Contact';
 
 export const sidebarLinks = [
   {
@@ -17,9 +16,6 @@ export const sidebarLinks = [
     path: '/apps/pathfinding',
     to: '/apps/pathfinding',
     component: PathFinding,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
   },
   {
     key: 1,
@@ -27,9 +23,6 @@ export const sidebarLinks = [
     path: '/apps/tetris',
     to: '/apps/tetris',
     component: Tetris,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
   },
   {
     key: 2,
@@ -37,9 +30,6 @@ export const sidebarLinks = [
     path: '/apps/minesweeper',
     to: '/apps/minesweeper',
     component: Minesweeper,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
   },
   {
     key: 3,
@@ -47,9 +37,6 @@ export const sidebarLinks = [
     path: '/apps/beat',
     to: '/apps/beat',
     component: BeatMaker,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
   },
   {
     key: 4,
@@ -57,9 +44,6 @@ export const sidebarLinks = [
     path: '/apps/synth',
     to: '/apps/synth',
     component: Synth,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
   },
   {
     key: 5,
@@ -67,9 +51,6 @@ export const sidebarLinks = [
     path: '/apps/scale',
     to: '/apps/scale',
     component: Tetris,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
   },
   {
     key: 6,
@@ -77,9 +58,6 @@ export const sidebarLinks = [
     path: '/apps/lightning',
     to: '/apps/lightning',
     component: Lightning,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
   },
   {
     key: 7,
@@ -87,9 +65,6 @@ export const sidebarLinks = [
     path: '/apps/space',
     to: '/apps/space',
     component: Space,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
   },
 ];
 
@@ -112,17 +87,6 @@ export const navbarLinks = [
     to: '/apps',
     exact: false,
     component: Apps,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
-  },
-  {
-    key: 2,
-    linkText: 'Contact',
-    path: '/contact',
-    to: '/contact',
-    exact: false,
-    component: Contact,
     style: {
       color: 'rgb(93, 99, 116)',
     },
