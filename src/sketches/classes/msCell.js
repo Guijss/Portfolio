@@ -21,7 +21,7 @@ export default class Cell {
         this.p.fill(50);
       }
     } else {
-      this.p.fill(30);
+      this.p.fill(22, 22, 27);
     }
     this.p.square(this.x, this.y, this.size, this.opened ? 0 : 7);
     if (this.opened) {

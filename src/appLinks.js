@@ -2,12 +2,12 @@ import PathFinding from './sketches/PathFinding';
 import Tetris from './sketches/Tetris';
 import Minesweeper from './sketches/Minesweeper';
 import Space from './sketches/Space';
-import BeatMaker from './sketches/BeatMaker';
 import Synth from './sketches/Synth';
 import Lightning from './sketches/Lightning';
 
 import Home from './components/Home';
 import Apps from './components/Apps';
+import Contact from './components/Contact';
 
 export const sidebarLinks = [
   {
@@ -33,34 +33,27 @@ export const sidebarLinks = [
   },
   {
     key: 3,
-    linkText: 'Beat Maker',
-    path: '/apps/beat',
-    to: '/apps/beat',
-    component: BeatMaker,
-  },
-  {
-    key: 4,
     linkText: 'Synthesizer',
     path: '/apps/synth',
     to: '/apps/synth',
     component: Synth,
   },
   {
-    key: 5,
+    key: 4,
     linkText: 'Scale Viewer',
     path: '/apps/scale',
     to: '/apps/scale',
     component: Tetris,
   },
   {
-    key: 6,
+    key: 5,
     linkText: 'Lightning',
     path: '/apps/lightning',
     to: '/apps/lightning',
     component: Lightning,
   },
   {
-    key: 7,
+    key: 6,
     linkText: 'Space',
     path: '/apps/space',
     to: '/apps/space',
@@ -87,6 +80,17 @@ export const navbarLinks = [
     to: '/apps',
     exact: false,
     component: Apps,
+    style: {
+      color: 'rgb(93, 99, 116)',
+    },
+  },
+  {
+    key: 2,
+    linkText: 'Contact',
+    path: '/contact',
+    to: '/contact',
+    exact: false,
+    component: Contact,
     style: {
       color: 'rgb(93, 99, 116)',
     },

@@ -247,7 +247,7 @@ const PathFinding = () => {
       return;
     }
     if (drawing) {
-      p5.background(30);
+      p5.background(22, 22, 27);
       p5.stroke(255, 30);
       p5.noFill();
       p5.rect(offSetX, offsetY, cellSizeX * 40, cellSizeY * 25, 7);

@@ -7,9 +7,9 @@ const AppsWrapper = styled.div`
   position: absolute;
   margin: 0;
   padding: 0;
-  background-color: ${(props) => props.theme.navMain};
-  width: 100vw;
-  height: 90vh;
+  background-color: ${(props) => props.theme.bgMain};
+  width: 100%;
+  height: 90%;
   display: flex;
   flex-direction: row;
   z-index: 10;

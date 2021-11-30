@@ -82,7 +82,7 @@ const Tetris = () => {
   const draw = (p5) => {
     //p5.background(0);
     p5.stroke(110, 255 / 2);
-    p5.fill(30);
+    p5.fill(22, 22, 27);
     p5.rect(1, 1, p5.width - 2, p5.height - 2, cellSize / 4);
     // Block fall
     if (p5.frameCount % 30 === 0) {
@@ -101,7 +101,7 @@ const Tetris = () => {
     }
     if (gameOver) {
       p5.stroke(110, 255 / 2);
-      p5.fill(30, 230);
+      p5.fill(22, 22, 27, 230);
       p5.rect(1, 1, cellSize * 10 - 2, cellSize * 20 - 2, cellSize / 4);
       p5.fill(200);
       p5.stroke(0);

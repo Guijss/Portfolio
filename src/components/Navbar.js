@@ -11,7 +11,7 @@ const NavbarWrapper = styled.div`
   padding: 0;
   margin: 0;
   width: 100vw;
-  height: 10vh;
+  height: 10%;
   min-height: 3rem;
   display: flex;
   flex-direction: row;
@@ -81,7 +81,6 @@ const Navbar = (props) => {
               to={obj.to}
               exact={obj.exact}
               activeStyle={{ color: theme.textHighlight }}
-              onClick={() => props.handleApp(obj.linkText)}
             >
               {obj.linkText}
             </Item>

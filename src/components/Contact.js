@@ -2,14 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ContactWrapper = styled.div`
-  position: relative;
+  position: absolute;
   margin: 0;
   padding: 0;
-  background-color: rgb(30, 30, 30);
-  width: 100vw;
-  height: 90vh;
+  background-color: ${(props) => props.theme.bgMain};
+  top: 10vh;
+  width: 100%;
+  height: 90%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Contact = () => {

@@ -16,8 +16,8 @@ const Space = () => {
     const w = parentRef.clientWidth;
     const h = parentRef.clientHeight;
     p5.createCanvas(w, h).parent(parentRef);
-    starsX = 25;
-    starsY = 15;
+    starsX = 35;
+    starsY = 25;
     spacingX = p5.width / starsX;
     spacingY = p5.height / starsY;
     noiseOffset = 1;
@@ -26,7 +26,7 @@ const Space = () => {
   };
 
   const draw = (p5) => {
-    p5.background(30);
+    p5.background(22, 22, 27);
     p5.noStroke();
     for (let i = -1; i < starsX + 1; i++) {
       for (let j = -1; j < starsY + 1; j++) {
@@ -63,7 +63,12 @@ const Space = () => {
           spacingX * (2 * p5.noise(i * noiseOffset, j * noiseOffset, 100) - 1);
         let offsetY =
           spacingY * (2 * p5.noise(i * noiseOffset, j * noiseOffset, -100) - 1);
-        let r = offsetX > 0 ? 1 : offsetX > -spacingX / 2 ? 2 : 3;
+        let r =
+          offsetX > (-1 * spacingX) / 3
+            ? 1
+            : offsetX > (-2 * spacingX) / 3
+            ? 2
+            : 3;
         p5.fill(150, 100);
         p5.circle(adjustedX + offsetX, adjustedY + offsetY, r);
       }
@@ -72,8 +77,8 @@ const Space = () => {
       p5.createVector(p5.mouseX, p5.mouseY),
       p5.createVector(p5.width / 2, p5.height / 2)
     );
-    xStart -= ((2 * dirVec.x) / p5.width) * 0.01;
-    yStart -= ((2 * dirVec.y) / p5.height) * 0.01;
+    xStart -= ((2 * dirVec.x) / p5.width) * 0.02;
+    yStart -= ((2 * dirVec.y) / p5.height) * 0.02;
   };
 
   const windowResized = (p5) => {

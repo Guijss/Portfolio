@@ -52,7 +52,7 @@ const Synth = () => {
   };
 
   const draw = (p5) => {
-    p5.background(30);
+    p5.background(22, 22, 27);
     for (let i = 0; i < whiteKeys.length; i++) {
       whiteKeys[i].show(p5.width, p5.height);
     }

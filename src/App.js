@@ -1,14 +1,11 @@
-import { useState } from 'react';
 import Navbar from './components/Navbar';
 import styled, { ThemeProvider } from 'styled-components';
-import { Switch, Route, useLocation } from 'react-router-dom';
-import Home from './components/Home';
-import Apps from './components/Apps';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { Switch, Route } from 'react-router-dom';
+import { navbarLinks } from './appLinks';
 
 const theme = {
-  bgMain: 'rgb(30, 30, 30)',
-  navMain: 'rgb(26, 26, 26)',
+  bgMain: 'rgb(22, 22, 27)',
+  navMain: 'rgb(18, 19, 24)',
   textMain: 'rgb(180, 180, 180)',
   textHighlight: 'rgb(93, 99, 116)',
   logoCol: 'rgb(157, 177, 186)',
@@ -22,21 +19,22 @@ const PageWrapper = styled.div`
 `;
 
 function App() {
-  const location = useLocation();
-  const [inApp, setInApp] = useState(false);
-  const handleApp = (objName) => {
-    setInApp(objName === 'Apps');
-  };
-  const genKey = (path) => {
-    return path.includes('/apps') ? '/apps' : path;
-  };
-
   return (
     <ThemeProvider theme={theme}>
       <PageWrapper>
-        <Navbar handleApp={handleApp} />
-        <Route path="/" children={<Home />} />
-        <Route
+        <Navbar />
+        <div>
+          <Switch>
+            {navbarLinks.map((obj) => (
+              <Route
+                path={obj.path}
+                exact={obj.exact}
+                component={obj.component}
+              />
+            ))}
+          </Switch>
+        </div>
+        {/* <Route
           render={() => (
             <>
               <TransitionGroup>
@@ -54,7 +52,7 @@ function App() {
               </TransitionGroup>
             </>
           )}
-        />
+        /> */}
       </PageWrapper>
     </ThemeProvider>
   );

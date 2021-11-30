@@ -7,28 +7,16 @@ const HomeWrapper = styled.div`
   padding: 0;
   background-color: ${(props) => props.theme.bgMain};
   top: 10vh;
-  width: 100vw;
-  height: 90vh;
+  width: 100%;
+  height: 90%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
 
-const Circle = styled.div`
-  position: relative;
-  width: 200px;
-  height: 200px;
-  background-color: teal;
-  border-radius: 50%;
-`;
-
 const Home = () => {
-  return (
-    <HomeWrapper>
-      <Circle />
-    </HomeWrapper>
-  );
+  return <HomeWrapper></HomeWrapper>;
 };
 
 export default Home;

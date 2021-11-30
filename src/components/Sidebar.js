@@ -42,31 +42,34 @@ const SideBarNav = styled.ul`
   width: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   margin: 0;
   padding: 0;
 `;
 
-const LinkCont = styled.li`
+const LinkCont = styled(NavLink)`
   list-style: none;
   width: 100%;
-  height: 3vh;
+  height: 10vh;
   min-height: 3rem;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
   border: 1px solid transparent;
   &:hover {
     backdrop-filter: brightness(1.2);
+    cursor: pointer;
   }
 `;
 
-const NLink = styled(NavLink)`
+const NLink = styled.div`
   width: 100%;
-  height: 100%;
+  height: 45%;
   color: ${(props) => props.theme.textMain};
   align-items: center;
   padding-top: 0.7rem;
   font-size: 1rem;
-  text-decoration: none;
   text-align: center;
 `;
 
@@ -77,10 +80,12 @@ const Sidebar = () => {
       <SideBarNav>
         {sidebarLinks.map((obj) => {
           return (
-            <LinkCont key={obj.key}>
-              <NLink to={obj.to} activeStyle={{ color: theme.textHighlight }}>
-                {obj.linkText}
-              </NLink>
+            <LinkCont
+              key={obj.key}
+              to={obj.to}
+              activeStyle={{ color: theme.textHighlight }}
+            >
+              <NLink>{obj.linkText}</NLink>
             </LinkCont>
           );
         })}

@@ -31,7 +31,7 @@ export default class Cell {
     } else if (this.open) {
       this.p.fill(90, 90, 150, 40);
     } else {
-      this.p.fill(30);
+      this.p.fill(22, 22, 27);
     }
     this.p.rect(this.x, this.y, this.sizeX, this.sizeY, 7);
   }

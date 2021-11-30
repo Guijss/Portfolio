@@ -138,7 +138,7 @@ let gameOver;
 let drawing;
 let colors;
 let cellSize;
-let offsetX, offsetY;
+let offsetX, offsetY, numCellX, numCellY;
 let bombsArr;
 let bombImg;
 
@@ -156,13 +156,17 @@ const Minesweeper = () => {
 
   const setup = (p5, canvasParentRef) => {
     parentRef = canvasParentRef;
-    parentRef.addEventListener('contextmenu', (e) => e.preventDefault());
+    document.oncontextmenu = function () {
+      return false;
+    };
     const h = p5.max(parentRef.clientHeight, 400);
     const w = p5.max(parentRef.clientWidth, 800);
     p5.createCanvas(w, h).parent(canvasParentRef);
     cellSize = p5.height / 16;
-    offsetX = (p5.width - 30 * cellSize) / 2;
-    offsetY = (p5.height - 16 * cellSize) / 2;
+    numCellX = 30;
+    numCellY = 16;
+    offsetX = (p5.width - numCellX * cellSize) / 2;
+    offsetY = (p5.height - numCellY * cellSize) / 2;
     colors = [
       p5.color(0, 150, 0),
       p5.color(150, 150, 0),
@@ -213,7 +217,7 @@ const Minesweeper = () => {
 
   const draw = (p5) => {
     if (drawing) {
-      p5.background(30);
+      p5.background(22, 22, 27);
       for (let i = 0; i < grid.length; i++) {
         for (let j = 0; j < grid[0].length; j++) {
           grid[i][j].render();
@@ -229,7 +233,7 @@ const Minesweeper = () => {
           }
         }
         p5.stroke(110, 255 / 2);
-        p5.fill(30, 200);
+        p5.fill(22, 22, 27, 230);
         p5.rect(offsetX, offsetY, 30 * cellSize, 16 * cellSize, 7);
         p5.stroke(0);
         p5.fill(200);
@@ -299,7 +303,7 @@ const Minesweeper = () => {
     if (!gameOver) {
       const mX = p5.floor((p5.mouseX - offsetX) / cellSize);
       const mY = p5.floor((p5.mouseY - offsetY) / cellSize);
-      if (mX < 0 || mX > 39 || mY < 0 || mY > 19) {
+      if (mX < 0 || mX >= numCellX || mY < 0 || mY >= numCellY) {
         return;
       }
       if (!running) {
