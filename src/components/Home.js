@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Puzzle15 from '../sketches/Puzzle15';
 
 const HomeWrapper = styled.div`
   position: absolute;
@@ -15,8 +16,21 @@ const HomeWrapper = styled.div`
   align-items: center;
 `;
 
+const FrontGround = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: ${(props) => props.theme.bgMain};
+  opacity: 0.6;
+`;
+
 const Home = () => {
-  return <HomeWrapper></HomeWrapper>;
+  return (
+    <HomeWrapper>
+      <Puzzle15 />
+      <FrontGround />
+    </HomeWrapper>
+  );
 };
 
 export default Home;

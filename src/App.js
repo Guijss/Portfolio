@@ -5,6 +5,7 @@ import { navbarLinks } from './appLinks';
 
 const theme = {
   bgMain: 'rgb(22, 22, 27)',
+  bgMainAlpha: 'rgba(22, 22, 27, 50)',
   navMain: 'rgb(18, 19, 24)',
   textMain: 'rgb(180, 180, 180)',
   textHighlight: 'rgb(93, 99, 116)',
