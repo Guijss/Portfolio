@@ -28,6 +28,7 @@ function App() {
           <Switch>
             {navbarLinks.map((obj) => (
               <Route
+                key={obj.key}
                 path={obj.path}
                 exact={obj.exact}
                 component={obj.component}
