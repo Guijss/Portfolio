@@ -1,4 +1,5 @@
 import Sketch from 'react-p5';
+import BetterCamera from './classes/betterCamera';
 
 import mercury from '../assets/images/mercury.jpg';
 import venus from '../assets/images/venus.jpg';
@@ -14,68 +15,62 @@ import stars from '../assets/images/stars.jpg';
 import saturnRingObj from '../assets/models/saturnRing.obj';
 import skyBox from '../assets/models/skyBox.obj';
 
+let parentRef;
+let d;
+let planetIds = [
+  'mercure',
+  'venus',
+  'terre',
+  'mars',
+  'jupiter',
+  'saturne',
+  'uranus',
+  'neptune',
+];
+let planets = new Array(planetIds.length).fill({});
+let loading;
+let cam, camChanged;
+let sunRadius;
+let days;
+let textures = [];
+let models = [];
 const SolarSystem = () => {
-  let parentRef;
-  let d;
-  let planetIds = [
-    'mercure',
-    'venus',
-    'terre',
-    'mars',
-    'jupiter',
-    'saturne',
-    'uranus',
-    'neptune',
-  ];
-  let planets = new Array(planetIds.length).fill({});
-  let loading;
-  let cam, camPos, camChanged;
-  let pitch, yaw, distance, maxDistance, minDistance;
-  let sunRadius;
-  let days;
-  let textures = [];
-  let models = [];
   const setup = (p5, canvasParentRef) => {
     parentRef = canvasParentRef;
     p5.setAttributes('antialias', true);
     const w = parentRef.clientWidth;
     const h = parentRef.clientHeight;
     p5.createCanvas(w, h, p5.WEBGL).parent(parentRef);
-    cam = p5.createCamera();
-    cam.perspective(p5.PI / 3, p5.width / p5.height, 0, 20000);
+    cam = new BetterCamera(
+      p5,
+      [-0.9595179717511547, 0.218394918478944, 0.17784521772914136],
+      [
+        0.5998432678775825, -0.5011531578321564, -0.39990361780094846,
+        0.4786550562216109,
+      ],
+      [-0.17341010444129995, 0.039469699096688515, -0.9840584731258983],
+      [1.3110000000000004, -1.3740000000000014, 0],
+      2800
+    );
+    cam.cam.perspective(p5.PI / 3, p5.width / p5.height, 0, 20000);
     p5.angleMode(p5.DEGREES);
     document.oncontextmenu = () => false; //Prevent contextmenu on right click.
     loading = true;
     const epoch = new Date('2000-01-01');
     days = getDaysDiff(epoch);
-    pitch = 0;
-    yaw = 0;
-    distance = 1000;
-    maxDistance = 4900;
-    minDistance = 500;
-    camChanged = false;
-    camPos = camParamsToVector(pitch, yaw, distance, p5);
-    cam.setPosition(camPos.x, camPos.y, camPos.z);
-    cam.lookAt(0, 0, 0);
+    camChanged = 0;
     getData(p5);
   };
 
   const draw = (p5) => {
     p5.background(0);
     p5.lights();
-    // if (cam.getDistance() > 1000) {
-    //   strokeWeight(0.5);
-    // } else if (cam.getDistance() > 500) {
-    //   strokeWeight(0.4);
-    // } else {
-    //   strokeWeight(0.3);
-    // }
-
     if (loading) {
-      p5.fill(255);
-      p5.sphere(200);
+      // p5.fill(255);
+      // p5.sphere(200);
     } else {
-      cameraControl(p5);
+      cam.updateCamera(camChanged); //performs all the camera controls based on mouse events.
+      camChanged = 0;
       p5.push();
       p5.rotateX(-90);
       p5.noStroke();
@@ -99,6 +94,7 @@ const SolarSystem = () => {
         const p = getScaledDist(planet.perihelion, p5);
         const t = planet.sideralOrbit;
 
+        //https://en.wikipedia.org/wiki/Orbital_elements#Euler_angle_transformations
         const x1 = p5.cos(o) * p5.cos(w) - p5.sin(o) * p5.cos(i) * p5.sin(w);
         const x2 = p5.sin(o) * p5.cos(w) + p5.cos(o) * p5.cos(i) * p5.sin(w);
         const x3 = p5.sin(i) * p5.sin(w);
@@ -198,53 +194,26 @@ const SolarSystem = () => {
     return -1 * p5.map(days % t, 0, t - 1, 0, 359); //transforming days since periapsis to degrees in orbit.
   };
 
-  const cameraControl = (p5) => {
-    const center = p5.createVector(cam.centerX, cam.centerY, cam.centerZ);
-    if (p5.mouseIsPressed) {
-      if (p5.mouseButton === p5.RIGHT) {
-        yaw += p5.movedX * 0.3;
-        pitch -= p5.movedY * 0.3;
-        if (pitch > 89) {
-          pitch = 89;
-        }
-        if (pitch < -89) {
-          pitch = -89;
-        }
-      }
-      camChanged = true;
+  const mouseDragged = (p5) => {
+    if (p5.mouseButton === p5.LEFT) {
+      return;
     }
-    if (camChanged) {
-      camPos = camParamsToVector(pitch, yaw, distance, p5);
-      cam.setPosition(camPos.x, camPos.y, camPos.z);
-      cam.lookAt(center.x, center.y, center.z);
-      camChanged = false;
-    }
+    const btn = p5.mouseButton === p5.RIGHT ? 3 : 2;
+    camChanged = btn;
   };
 
-  const camParamsToVector = (p, y, d, p5) => {
-    let vec = p5.createVector();
-    vec.x = p5.cos(p) * p5.cos(y);
-    vec.y = p5.sin(p);
-    vec.z = p5.cos(p) * p5.sin(y);
-    vec.setMag(d);
-    return vec;
-  };
-
-  const mouseWheel = (p5, event) => {
-    distance += event.delta;
-    if (distance > maxDistance) {
-      distance = maxDistance;
+  const mouseWheel = (p5, e) => {
+    if (camChanged > 1) {
+      return;
     }
-    if (distance < minDistance) {
-      distance = minDistance;
-    }
-    camChanged = true;
+    camChanged = Math.sign(e.delta);
   };
 
   return (
     <Sketch
       setup={setup}
       draw={draw}
+      mouseDragged={mouseDragged}
       mouseWheel={mouseWheel}
       style={{
         position: 'absolute',
