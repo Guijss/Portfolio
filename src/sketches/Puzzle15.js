@@ -2,12 +2,12 @@ import React from 'react';
 import Sketch from 'react-p5';
 import Piece from './classes/piece';
 
+let parentRef;
+let numX, numY, size;
+let grid;
+let empty, slider;
+let animating, dir, magRatio;
 const Puzzle15 = () => {
-  let parentRef;
-  let numX, numY, size;
-  let grid;
-  let empty, slider;
-  let animating, dir, magRatio;
   const setup = (p5, canvasParentRef) => {
     parentRef = canvasParentRef;
     const w = parentRef.clientWidth;
