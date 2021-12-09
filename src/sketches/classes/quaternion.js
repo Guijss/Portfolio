@@ -1,6 +1,5 @@
 export default class Quaternion {
   //en.wikipedia.org/wiki/Quaternion for further information on quaternion mathematics.
-
   static identity() {
     return [1, 0, 0, 0];
   }
@@ -22,6 +21,7 @@ export default class Quaternion {
   }
 
   static rotateVec(vec, rot) {
+    //rotate a vector by a quatternion rotation.
     //https://www.xarg.org/proof/vector-rotation-using-quaternions/
     let t = [0, 0, 0];
     t[0] = 2 * (rot[2] * vec[2] - rot[3] * vec[1]);
@@ -35,7 +35,8 @@ export default class Quaternion {
   }
 
   static hamiltonProduct(a, b) {
-    //https://en.wikipedia.org/wiki/Quaternion#Hamilton_product. Combination of two rotations.
+    //multiplication of two quaternions. Acts as a combination of two rotations.
+    //https://en.wikipedia.org/wiki/Quaternion#Hamilton_product.
     let q = [0, 0, 0, 0];
     q[0] = a[0] * b[0] - a[1] * b[1] - a[2] * b[2] - a[3] * b[3];
     q[1] = a[0] * b[1] + a[1] * b[0] + a[2] * b[3] - a[3] * b[2];

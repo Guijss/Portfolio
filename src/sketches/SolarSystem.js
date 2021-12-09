@@ -14,6 +14,7 @@ import sun from '../assets/images/sun.jpg';
 import stars from '../assets/images/stars.jpg';
 import saturnRingObj from '../assets/models/saturnRing.obj';
 import skyBox from '../assets/models/skyBox.obj';
+import Sun from '../assets/models/sun.obj';
 
 let parentRef;
 let d;
@@ -41,19 +42,9 @@ const SolarSystem = () => {
     const w = parentRef.clientWidth;
     const h = parentRef.clientHeight;
     p5.createCanvas(w, h, p5.WEBGL).parent(parentRef);
-    cam = new BetterCamera(
-      p5,
-      [-0.9595179717511547, 0.218394918478944, 0.17784521772914136],
-      [
-        0.5998432678775825, -0.5011531578321564, -0.39990361780094846,
-        0.4786550562216109,
-      ],
-      [-0.17341010444129995, 0.039469699096688515, -0.9840584731258983],
-      [1.3110000000000004, -1.3740000000000014, 0],
-      2800
-    );
-    cam.cam.perspective(p5.PI / 3, p5.width / p5.height, 0, 20000);
+    cam = new BetterCamera(p5);
     p5.angleMode(p5.DEGREES);
+    p5.rectMode(p5.CENTER);
     document.oncontextmenu = () => false; //Prevent contextmenu on right click.
     loading = true;
     const epoch = new Date('2000-01-01');
@@ -63,11 +54,22 @@ const SolarSystem = () => {
   };
 
   const draw = (p5) => {
-    p5.background(0);
     p5.lights();
     if (loading) {
-      // p5.fill(255);
-      // p5.sphere(200);
+      const r = 50;
+      p5.push();
+      const mult = p5.ceil(p5.frameCount / 5);
+      p5.rotateZ((mult * 360) / 8);
+      for (let i = 0; i < 360; i += 360 / 8) {
+        p5.push();
+        p5.noStroke();
+        p5.fill(255, (200 * (i + 360 / 8)) / 360);
+        p5.translate(p5.cos(i) * r, p5.sin(i) * r, 0);
+        p5.rotateZ(i);
+        p5.rect(0, 0, 20, 10);
+        p5.pop();
+      }
+      p5.pop();
     } else {
       cam.updateCamera(camChanged); //performs all the camera controls based on mouse events.
       camChanged = 0;
@@ -75,7 +77,10 @@ const SolarSystem = () => {
       p5.rotateX(-90);
       p5.noStroke();
       p5.texture(textures[10]);
-      p5.sphere(sunRadius);
+      p5.push();
+      p5.scale(sunRadius);
+      p5.model(models[2]);
+      p5.pop();
       p5.scale(5000);
       p5.texture(textures[9]);
       p5.model(models[1]);
@@ -169,7 +174,6 @@ const SolarSystem = () => {
       }
     }
     sunRadius = 10 * getScaledDiameter(planets[4].equaRadius, p5);
-    textures[0] = p5.loadImage(mercury);
     textures[1] = p5.loadImage(venus);
     textures[2] = p5.loadImage(earth);
     textures[3] = p5.loadImage(mars);
@@ -182,7 +186,23 @@ const SolarSystem = () => {
     textures[10] = p5.loadImage(sun);
     models[0] = p5.loadModel(saturnRingObj);
     models[1] = p5.loadModel(skyBox);
-    loading = false;
+    models[2] = p5.loadModel(Sun);
+
+    textures[0] = p5.loadImage(mercury, () => {
+      //These are the parameters for an arbitraty camera position/orientation that I picked to be the initial position after playing around with it.
+      cam.pos = [-0.9595179717511547, 0.218394918478944, 0.17784521772914136];
+      cam.rot = [
+        0.5998432678775825, -0.5011531578321564, -0.39990361780094846,
+        0.4786550562216109,
+      ];
+      cam.up = [
+        -0.17341010444129995, 0.039469699096688515, -0.9840584731258983,
+      ];
+      cam.eulerAngles = [1.3110000000000004, -1.3740000000000014, 0];
+      cam.distance = 2800;
+      cam.forceUpdate();
+      loading = false;
+    }); //Mercury texture is the largest file, so we load it last and control the loading variable through it.
   };
 
   const getDaysDiff = (date) => {
