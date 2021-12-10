@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ContactWrapper = styled.div`
+const AboutWrapper = styled.div`
   position: relative;
   margin: 0;
   padding: 0;
@@ -14,8 +14,8 @@ const ContactWrapper = styled.div`
   align-items: center;
 `;
 
-const Contact = (props) => {
-  return <ContactWrapper ref={props.fRef} />;
+const About = (props) => {
+  return <AboutWrapper ref={props.fRef} />;
 };
 
-export default Contact;
+export default About;

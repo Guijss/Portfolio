@@ -31,10 +31,10 @@ const DdMain = styled.div`
 const DdSecBox = styled.li`
   position: absolute;
   width: 8rem;
-  top: calc(50% + 0.8rem);
+  top: calc(50% + 1rem);
   border-radius: 0.5rem;
   border: 1px solid rgba(70, 70, 70);
-  background-color: rgb(30, 30, 30);
+  background-color: ${(props) => props.theme.navMain};
   display: flex;
   flex-direction: column;
 `;

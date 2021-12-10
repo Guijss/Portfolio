@@ -8,7 +8,6 @@ import Lightning from './sketches/Lightning';
 
 import Home from './components/Home';
 import Apps from './components/Apps';
-import Contact from './components/Contact';
 
 export const sidebarLinks = [
   {
@@ -69,10 +68,9 @@ export const sidebarLinks = [
   },
 ];
 
-export const navbarLinks = [
+export const routes = [
   {
     key: 0,
-    linkText: 'Home',
     path: '/',
     to: '/',
     exact: true,
@@ -81,35 +79,12 @@ export const navbarLinks = [
       color: 'rgb(93, 99, 116)',
     },
   },
-  // {
-  //   key: 1,
-  //   linkText: 'About',
-  //   path: '/about',
-  //   to: '/about',
-  //   exact: false,
-  //   component: About,
-  //   style: {
-  //     color: 'rgb(93, 99, 116)',
-  //   },
-  // },
   {
-    key: 2,
-    linkText: 'Projects',
+    key: 1,
     path: '/projects',
     to: '/projects',
     exact: false,
     component: Apps,
-    style: {
-      color: 'rgb(93, 99, 116)',
-    },
-  },
-  {
-    key: 3,
-    linkText: 'Contact',
-    path: '/contact',
-    to: '/contact',
-    exact: false,
-    component: Contact,
     style: {
       color: 'rgb(93, 99, 116)',
     },

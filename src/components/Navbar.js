@@ -1,49 +1,34 @@
 import React from 'react';
 import styled, { useTheme } from 'styled-components';
-import { NavLink } from 'react-router-dom';
 import { ReactComponent as LogoImg } from '../assets/Logo.svg';
-import { navbarLinks } from '../appLinks';
 
-const NavbarWrapper = styled.div`
+const List = styled.ol`
   position: relative;
-  background-color: ${(props) => props.theme.navMain};
-  z-index: 99;
-  padding: 0;
-  margin: 0;
-  width: 100vw;
-  height: 10%;
-  min-height: 3rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 1);
-  -webkit-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 1);
-  -moz-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 1);
-`;
-
-const List = styled.li`
-  position: relative;
-  margin-left: 1rem;
-  width: 30%;
+  margin-right: 5rem;
+  margin-top: 0;
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: flex-end;
   align-items: center;
 `;
 
-const Item = styled(NavLink)`
+const Item = styled.li`
   position: relative;
-  margin: 0;
-  padding-bottom: 1rem;
-  padding-left: 0;
-  position: relative;
-  width: 7rem;
-  height: 1rem;
+  width: 10rem;
+  height: 100%;
   font-size: 1.2rem;
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: ${(props) => props.theme.textMain};
   text-decoration: none;
   text-align: center;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const LogoWrapper = styled.div`
@@ -51,7 +36,7 @@ const LogoWrapper = styled.div`
   left: 0;
   width: 10vh;
   min-width: 3rem;
-  height: 10vh;
+  height: 100%;
   min-height: 3rem;
   background-color: transparent;
   color: white;
@@ -69,25 +54,20 @@ const Logo = styled(LogoImg)`
 const Navbar = (props) => {
   const theme = useTheme();
   return (
-    <NavbarWrapper>
+    <>
       <LogoWrapper>
         <Logo fill={theme.logoCol} />
       </LogoWrapper>
       <List>
-        {navbarLinks.map((obj) => {
+        {props.navData.map((obj) => {
           return (
-            <Item
-              key={obj.key}
-              to={obj.to}
-              exact={obj.exact}
-              activeStyle={{ color: theme.textHighlight }}
-            >
-              {obj.linkText}
+            <Item key={obj.key} onClick={() => props.scrollToComp(obj.ref)}>
+              <span>{obj.name}</span>
             </Item>
           );
         })}
       </List>
-    </NavbarWrapper>
+    </>
   );
 };
 

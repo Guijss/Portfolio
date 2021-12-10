@@ -1,7 +1,6 @@
-import Navbar from './components/Navbar';
-import styled, { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
-import { navbarLinks } from './appLinks';
+import { routes } from './appLinks';
 
 const theme = {
   bgMain: 'rgb(22, 22, 27)',
@@ -12,50 +11,19 @@ const theme = {
   logoCol: 'rgb(157, 177, 186)',
 };
 
-const PageWrapper = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-`;
-
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <PageWrapper>
-        <Navbar />
-        <div>
-          <Switch>
-            {navbarLinks.map((obj) => (
-              <Route
-                key={obj.key}
-                path={obj.path}
-                exact={obj.exact}
-                component={obj.component}
-              />
-            ))}
-          </Switch>
-        </div>
-        {/* <Route
-          render={() => (
-            <>
-              <TransitionGroup>
-                <CSSTransition
-                  in={inApp}
-                  key={genKey(location.pathname)} //IMPORTANT!!
-                  timeout={1500}
-                  classNames="app"
-                  unmountOnExit
-                >
-                  <Switch location={location}>
-                    <Route path="/apps" children={<Apps />} />
-                  </Switch>
-                </CSSTransition>
-              </TransitionGroup>
-            </>
-          )}
-        /> */}
-      </PageWrapper>
+      <Switch>
+        {routes.map((obj) => (
+          <Route
+            key={obj.key}
+            path={obj.path}
+            exact={obj.exact}
+            component={obj.component}
+          />
+        ))}
+      </Switch>
     </ThemeProvider>
   );
 }

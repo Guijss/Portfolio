@@ -56,6 +56,8 @@ const LinkCont = styled(NavLink)`
   justify-content: center;
   align-items: center;
   text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
   border: 1px solid transparent;
   &:hover {
     backdrop-filter: brightness(1.2);
