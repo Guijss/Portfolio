@@ -24,15 +24,32 @@ const MainWeapper = styled.div`
   position: relative;
   background-color: ${(props) => props.theme.bgMain};
   width: 100vw;
-  height: calc(300vh - 12rem);
+  height: calc(100vh - 4rem);
   top: 4rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  overflow-y: scroll;
+  & {
+    scrollbar-width: auto;
+    scrollbar-color: ${(props) => props.theme.thumbCol}
+      ${(props) => props.theme.scrollCol};
+  }
+  &::-webkit-scrollbar {
+    width: 16px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: ${(props) => props.theme.scrollCol};
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: ${(props) => props.theme.thumbCol};
+    border: 3px solid ${(props) => props.theme.scrollCol};
+    border-radius: 10px;
+    &:hover {
+      background-color: ${(props) => props.theme.thumbHovCol};
+    }
+  }
 `;
 
 const Home = () => {
+  const mainRef = useRef(null);
   const homeRef = useRef(null);
   const aboutRef = useRef(null);
   const contactRef = useRef(null);
@@ -54,7 +71,7 @@ const Home = () => {
     },
   ];
   const scrollToComp = (ref) => {
-    window.scrollTo({
+    mainRef.current.scrollTo({
       top: ref.current.offsetTop,
       left: 0,
       behavior: 'smooth',
@@ -65,7 +82,7 @@ const Home = () => {
       <NavbarWrapper>
         <Navbar navData={navData} scrollToComp={scrollToComp} />
       </NavbarWrapper>
-      <MainWeapper>
+      <MainWeapper ref={mainRef}>
         <Hero fRef={homeRef} />
         <About fRef={aboutRef} />
         <Contact fRef={contactRef} />

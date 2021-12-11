@@ -15,7 +15,7 @@ const AboutWrapper = styled.div`
 `;
 
 const About = (props) => {
-  return <AboutWrapper ref={props.fRef} />;
+  return <AboutWrapper ref={props.fRef}></AboutWrapper>;
 };
 
 export default About;

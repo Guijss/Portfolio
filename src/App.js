@@ -6,9 +6,12 @@ const theme = {
   bgMain: 'rgb(22, 22, 27)',
   bgMainAlpha: 'rgba(22, 22, 27, 50)',
   navMain: 'rgb(18, 19, 24)',
-  textMain: 'rgb(180, 180, 180)',
-  textHighlight: 'rgb(93, 99, 116)',
-  logoCol: 'rgb(157, 177, 186)',
+  textMain: 'rgb(147, 152, 159)',
+  textHighlight: 'rgb(120, 135, 180)',
+  logoCol: 'rgb(150, 170, 200)',
+  scrollCol: 'rgb(9, 10, 15)',
+  thumbCol: 'rgb(70, 71, 76)',
+  thumbHovCol: 'rgb(50, 51, 56)',
 };
 
 function App() {

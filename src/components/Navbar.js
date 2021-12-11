@@ -20,13 +20,16 @@ const Item = styled.li`
   height: 100%;
   font-size: 1.2rem;
   font-family: 'Roboto', sans-serif;
+  font-weight: bold;
   display: flex;
   justify-content: center;
   align-items: center;
   color: ${(props) => props.theme.textMain};
   text-decoration: none;
   text-align: center;
+  transition: color 0.2s ease;
   &:hover {
+    color: ${(props) => props.theme.textHighlight};
     cursor: pointer;
   }
 `;

@@ -15,7 +15,7 @@ const ContactWrapper = styled.div`
 `;
 
 const Contact = (props) => {
-  return <ContactWrapper ref={props.fRef} />;
+  return <ContactWrapper ref={props.fRef}></ContactWrapper>;
 };
 
 export default Contact;

@@ -11,7 +11,7 @@ const SidebarWrapper = styled.div`
   min-width: 7rem;
   margin: 0;
   padding: 0;
-  background-color: ${(prosp) => prosp.theme.navMain};
+  background-color: ${(prosp) => prosp.theme.bgMain};
   display: flex;
   flex-direction: column;
   box-shadow: -1px 0px 1px 0px rgba(110, 110, 110, 0.5);
@@ -22,7 +22,6 @@ const SidebarWrapper = styled.div`
   @media (max-width: 800px) {
     width: 20%;
   }
-
   &::-webkit-scrollbar {
     width: 0.5em;
     height: 0.5em;
