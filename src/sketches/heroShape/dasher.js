@@ -24,6 +24,8 @@ export default class Dasher {
   }
 
   render() {
+    this.p5.push();
+    this.p5.colorMode(this.p5.HSB);
     for (let i = 0; i < this.segments.length - 1; i++) {
       const d = this.p5.map(
         this.p5.dist(
@@ -33,15 +35,15 @@ export default class Dasher {
           this.p5.height / 2
         ),
         0,
-        2 * this.p5.width,
+        this.p5.width,
         100,
         0
       );
-      let alpha = this.p5.map(d, 100, 0, 0.7, 0.1);
-      if (alpha > 0.7) {
-        alpha = 0.7;
-      } else if (alpha < 0.1) {
-        alpha = 0.1;
+      let alpha = this.p5.map(d, 100, 0, 0.3, 0.01);
+      if (alpha > 0.3) {
+        alpha = 0.3;
+      } else if (alpha < 0.01) {
+        alpha = 0.01;
       }
 
       this.p5.stroke(i, d, 100, alpha);
@@ -53,6 +55,7 @@ export default class Dasher {
         this.pos.y + this.segments[i + 1].y
       );
     }
+    this.p5.pop();
   }
 
   setPos(x, y) {

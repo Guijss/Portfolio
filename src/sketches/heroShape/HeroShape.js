@@ -13,8 +13,7 @@ const HeroShape = () => {
     p5.createCanvas(s, s).parent(canvasParentRef);
     col = p5.color(22, 22, 27);
     p5.angleMode(p5.DEGREES);
-    p5.colorMode(p5.HSB);
-    d = new Dasher(p5, s / 2.6, p5.width / 2, p5.height / 2 + 20);
+    d = new Dasher(p5, s / 2.6, p5.width / 2, p5.height / 2);
   };
 
   const draw = (p5) => {
@@ -30,7 +29,7 @@ const HeroShape = () => {
     const h = p5.max(parentRef.clientHeight, 100);
     const w = p5.max(parentRef.clientWidth, 100);
     const s = p5.min(w, h);
-    d = new Dasher(p5, s / 2.6, p5.width / 2, p5.height / 2 + 20);
+    d = new Dasher(p5, s / 2.6, p5.width / 2, p5.height / 2);
     p5.resizeCanvas(s, s);
   };
 
