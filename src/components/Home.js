@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import Navbar from './Navbar';
@@ -26,6 +26,7 @@ const MainWeapper = styled.div`
   width: 100vw;
   height: calc(100vh - 4rem);
   top: 4rem;
+  overflow-x: hidden;
   overflow-y: scroll;
   & {
     scrollbar-width: auto;
@@ -53,6 +54,28 @@ const Home = () => {
   const homeRef = useRef(null);
   const aboutRef = useRef(null);
   const contactRef = useRef(null);
+  const [activePage, setActivePage] = useState(0);
+
+  useEffect(() => {
+    const mainDOM = mainRef.current;
+    mainDOM.addEventListener('scroll', handleScroll);
+    return () => mainDOM.removeEventListener('scroll', handleScroll);
+  });
+
+  const handleScroll = () => {
+    const currentPos = mainRef.current.scrollTop;
+    if (currentPos < aboutRef.current.offsetTop) {
+      setActivePage(0);
+    } else if (
+      currentPos >= aboutRef.current.offsetTop &&
+      currentPos < contactRef.current.offsetTop
+    ) {
+      setActivePage(1);
+    } else if (currentPos >= contactRef.current.offsetTop) {
+      setActivePage(2);
+    }
+  };
+
   const navData = [
     {
       key: 0,
@@ -70,6 +93,7 @@ const Home = () => {
       ref: contactRef,
     },
   ];
+
   const scrollToComp = (ref) => {
     mainRef.current.scrollTo({
       top: ref.current.offsetTop,
@@ -77,10 +101,15 @@ const Home = () => {
       behavior: 'smooth',
     });
   };
+
   return (
     <>
       <NavbarWrapper>
-        <Navbar navData={navData} scrollToComp={scrollToComp} />
+        <Navbar
+          navData={navData}
+          scrollToComp={scrollToComp}
+          activePage={activePage}
+        />
       </NavbarWrapper>
       <MainWeapper ref={mainRef}>
         <Hero fRef={homeRef} />

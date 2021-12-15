@@ -1,4 +1,3 @@
-import React from 'react';
 import styled, { useTheme } from 'styled-components';
 import { ReactComponent as LogoImg } from '../assets/Logo.svg';
 
@@ -12,6 +11,9 @@ const List = styled.ol`
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
+  @media (max-width: 800px) {
+    visibility: hidden;
+  }
 `;
 
 const Item = styled.li`
@@ -32,6 +34,15 @@ const Item = styled.li`
     color: ${(props) => props.theme.textHighlight};
     cursor: pointer;
   }
+`;
+
+const Deco = styled.div`
+  position: relative;
+  margin-right: 0.5rem;
+  width: 0.3rem;
+  height: 0.2rem;
+  background-color: ${(props) => props.col};
+  transition: background-color 0.3s ease;
 `;
 
 const LogoWrapper = styled.div`
@@ -56,6 +67,14 @@ const Logo = styled(LogoImg)`
 
 const Navbar = (props) => {
   const theme = useTheme();
+
+  const setDecoCol = (page, obj) => {
+    if (page === obj.key) {
+      return 'rgba(120, 135, 180, 1)';
+    }
+    return 'rgba(120, 135, 180, 0.2)';
+  };
+
   return (
     <>
       <LogoWrapper>
@@ -65,6 +84,7 @@ const Navbar = (props) => {
         {props.navData.map((obj) => {
           return (
             <Item key={obj.key} onClick={() => props.scrollToComp(obj.ref)}>
+              <Deco col={() => setDecoCol(props.activePage, obj)} />
               <span>{obj.name}</span>
             </Item>
           );
