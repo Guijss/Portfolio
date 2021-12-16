@@ -5,6 +5,8 @@ import Navbar from './Navbar';
 import Hero from './Hero';
 import About from './About';
 import Contact from './Contact';
+import Banner from './Banner';
+import Button from './Button';
 
 const NavbarWrapper = styled.div`
   position: fixed;
@@ -27,12 +29,7 @@ const MainWeapper = styled.div`
   height: calc(100vh - 4rem);
   top: 4rem;
   overflow-x: hidden;
-  overflow-y: scroll;
-  & {
-    scrollbar-width: auto;
-    scrollbar-color: ${(props) => props.theme.thumbCol}
-      ${(props) => props.theme.scrollCol};
-  }
+  overflow-y: auto;
   &::-webkit-scrollbar {
     width: 16px;
   }
@@ -102,6 +99,13 @@ const Home = () => {
     });
   };
 
+  const cardTranslator = () => {
+    if (activePage > 0) {
+      return 0;
+    }
+    return '-9.5rem';
+  };
+
   return (
     <>
       <NavbarWrapper>
@@ -112,7 +116,31 @@ const Home = () => {
         />
       </NavbarWrapper>
       <MainWeapper ref={mainRef}>
-        <Hero fRef={homeRef} />
+        <Banner
+          cardTranslator={cardTranslator}
+          sty={{
+            top: '4rem',
+            left: '80%',
+            width: '15rem',
+            height: '6rem',
+            diagWidth: '10rem',
+            diagHeight: '2rem',
+          }}
+        >
+          <Button
+            sty={{
+              btnText: 'Projects',
+              width: '8rem',
+              height: '4rem',
+              left: '3.5rem',
+              top: '2rem',
+              hoverCol: 'rgba(120, 135, 180, 0.3)',
+              rotation: '0',
+            }}
+            to="/projects"
+          />
+        </Banner>
+        <Hero fRef={homeRef} activePage={activePage} />
         <About fRef={aboutRef} />
         <Contact fRef={contactRef} />
       </MainWeapper>

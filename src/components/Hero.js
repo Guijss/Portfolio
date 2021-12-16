@@ -1,6 +1,7 @@
-import React from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import HeroShape from '../sketches/heroShape/HeroShape';
+import Button from './Button';
 
 const HeroWrapper = styled.div`
   position: relative;
@@ -14,8 +15,9 @@ const HeroWrapper = styled.div`
 `;
 
 const HeroCentered = styled.div`
-  width: 60%;
+  width: 45%;
   height: 70%;
+  font-family: 'Alata', sans-serif;
   display: grid;
   grid-template-rows: 0.5fr 0.2fr 0.4fr 0.4fr 1.1fr 0.5fr;
   grid-template-areas:
@@ -25,8 +27,8 @@ const HeroCentered = styled.div`
     'h2'
     'p'
     'p';
-  font-family: 'Alata', sans-serif;
-  z-index: 1;
+
+  z-index: 2;
 `;
 
 const Hello = styled.h1`
@@ -70,14 +72,18 @@ const Para = styled.div`
   font-weight: lighter;
   grid-area: p;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas: 'txt btn';
+  grid-template-rows: 1fr 1.5fr;
+  grid-template-areas:
+    'txt'
+    'btn';
 `;
 
 const ParaText = styled.p`
   grid-area: txt;
+  padding-right: 50%;
   color: ${(props) => props.theme.textMain};
   font-size: 1rem;
+  min-width: 200px;
   @media (max-width: 1400px) {
     font-size: max(1vw, 0.7rem);
   }
@@ -85,11 +91,15 @@ const ParaText = styled.p`
 
 const ParaButton = styled.div`
   grid-area: btn;
+  padding-left: 35%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
 `;
 
-const Canv = styled.div`
+const CanvContainer = styled.div`
   position: absolute;
-  width: 550px;
+  width: 600px;
   height: 550px;
   right: 10%;
   top: 15%;
@@ -97,30 +107,44 @@ const Canv = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 0;
-  @media (max-width: 1100px), (max-height: 600px) {
+  @media (max-width: 1400px), (max-height: 600px) {
     visibility: hidden;
   }
 `;
 
 const Hero = (props) => {
+  const [sliderPos, setSliderPos] = useState(1);
   return (
     <HeroWrapper ref={props.fRef}>
       <HeroCentered>
         <Hello>Hello, my name is</Hello>
         <Name>Gui Silva.</Name>
-        <Desc>Front end developer.</Desc>
+        <Desc>Front-end developer.</Desc>
         <Para>
           <ParaText>
             I am based in Seattle, WA and I enjoy making cool things for the
             web. I build functional and fun websites and aplications. Make sure
             to take a look at my creative coding projects!
           </ParaText>
-          <ParaButton />
+          <ParaButton>
+            <Button
+              sty={{
+                btnText: 'Projects',
+                width: '130px',
+                height: '75px',
+                hoverCol: 'rgba(120, 135, 180, 0.3)',
+                rotation: '0',
+              }}
+              to="/projects"
+            />
+          </ParaButton>
         </Para>
       </HeroCentered>
-      <Canv>
-        <HeroShape />
-      </Canv>
+      <CanvContainer>
+        {props.activePage === 0 && (
+          <HeroShape sliderPos={sliderPos} setSliderPos={setSliderPos} />
+        )}
+      </CanvContainer>
     </HeroWrapper>
   );
 };

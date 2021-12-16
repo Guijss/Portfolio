@@ -21,7 +21,7 @@ const Item = styled.li`
   width: 10rem;
   height: 100%;
   font-size: 1.2rem;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Alata', sans-serif;
   font-weight: bold;
   display: flex;
   justify-content: center;
@@ -39,6 +39,7 @@ const Item = styled.li`
 const Deco = styled.div`
   position: relative;
   margin-right: 0.5rem;
+  margin-top: 0.2rem;
   width: 0.3rem;
   height: 0.2rem;
   background-color: ${(props) => props.col};
