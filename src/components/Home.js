@@ -120,9 +120,9 @@ const Home = () => {
           cardTranslator={cardTranslator}
           sty={{
             top: '4rem',
-            left: '80%',
-            width: '15rem',
-            height: '6rem',
+            left: 'calc(100vw - 15rem)',
+            width: '10rem',
+            height: '5rem',
             diagWidth: '10rem',
             diagHeight: '2rem',
           }}
@@ -132,9 +132,9 @@ const Home = () => {
               btnText: 'Projects',
               width: '8rem',
               height: '4rem',
-              left: '3.5rem',
-              top: '2rem',
-              hoverCol: 'rgba(120, 135, 180, 0.3)',
+              left: '1rem',
+              top: '1rem',
+              hoverCol: 'rgba(36, 44, 66)',
               rotation: '0',
             }}
             to="/projects"

@@ -132,7 +132,7 @@ const Hero = (props) => {
                 btnText: 'Projects',
                 width: '130px',
                 height: '75px',
-                hoverCol: 'rgba(120, 135, 180, 0.3)',
+                hoverCol: 'rgba(36, 44, 66)',
                 rotation: '0',
               }}
               to="/projects"
