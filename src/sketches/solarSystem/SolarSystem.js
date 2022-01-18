@@ -1,20 +1,20 @@
 import Sketch from 'react-p5';
-import BetterCamera from './classes/betterCamera';
+import BetterCamera from './betterCamera';
 
-import mercury from '../assets/images/mercury.jpg';
-import venus from '../assets/images/venus.jpg';
-import earth from '../assets/images/earth.jpg';
-import mars from '../assets/images/mars.jpg';
-import jupiter from '../assets/images/jupiter.jpg';
-import saturn from '../assets/images/saturn.jpg';
-import saturnRingTex from '../assets/images/saturn_ring.png';
-import uranus from '../assets/images/uranus.jpg';
-import neptune from '../assets/images/neptune.jpg';
-import sun from '../assets/images/sun.jpg';
-import stars from '../assets/images/stars.jpg';
-import saturnRingObj from '../assets/models/saturnRing.obj';
-import skyBox from '../assets/models/skyBox.obj';
-import Sun from '../assets/models/sun.obj';
+import mercury from '../../assets/images/mercury.jpg';
+import venus from '../../assets/images/venus.jpg';
+import earth from '../../assets/images/earth.jpg';
+import mars from '../../assets/images/mars.jpg';
+import jupiter from '../../assets/images/jupiter.jpg';
+import saturn from '../../assets/images/saturn.jpg';
+import saturnRingTex from '../../assets/images/saturn_ring.png';
+import uranus from '../../assets/images/uranus.jpg';
+import neptune from '../../assets/images/neptune.jpg';
+import sun from '../../assets/images/sun.jpg';
+import stars from '../../assets/images/stars.jpg';
+import saturnRingObj from '../../assets/models/saturnRing.obj';
+import skyBox from '../../assets/models/skyBox.obj';
+import Sun from '../../assets/models/sun.obj';
 
 let parentRef;
 let d;
@@ -108,6 +108,7 @@ const SolarSystem = () => {
         const y2 = -p5.sin(o) * p5.sin(w) + p5.cos(o) * p5.cos(i) * p5.cos(w);
         const y3 = p5.sin(i) * p5.cos(w);
 
+        //We don't really need to compute the z since everything will sit in the orbital ellipse (XY plane), no z translations.
         // const z1 = sin(i) * sin(o);
         // const z2 = -sin(i) * cos(o);
         // const z3 = cos(i);

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import Sketch from 'react-p5';
-import Cell from './classes/pfCell';
+import Cell from './pfCell';
 import styled from 'styled-components';
-import Dropdown from '../components/Dropdown';
+import Dropdown from '../../components/Dropdown';
 import { FaPlay } from 'react-icons/fa';
-import { a_star, dij } from './utils/pathFind';
-import { ReactComponent as Mouse } from '../assets/mouse.svg';
-import { ReactComponent as Drag } from '../assets/drag.svg';
+import { a_star, dij } from './pathFind';
+import { ReactComponent as Mouse } from '../../assets/mouse.svg';
+import { ReactComponent as Drag } from '../../assets/drag.svg';
 
 export const SketchWrapper = styled.div`
   position: relative;

@@ -12,7 +12,7 @@ const Btn = styled(Link)`
   top: ${(props) => props.sty.top};
   color: ${(props) => props.theme.textMain};
   border: 1px solid ${(props) => props.theme.textHighlight};
-  border-radius: 10%;
+  border-radius: 0.5rem;
   background-color: ${(props) => props.theme.bgMain};
   display: flex;
   justify-content: center;
@@ -22,7 +22,7 @@ const Btn = styled(Link)`
   transition: transform 0.2s ease;
   &:hover {
     background-color: ${(props) => props.sty.hoverCol};
-    transform: rotate(${(props) => props.sty.rotation}) translate(3px, -3px);
+    //transform: rotate(${(props) => props.sty.rotation}) translate(2px, -2px);
   }
 `;
 
@@ -44,7 +44,7 @@ const Button = (props) => {
       <Btn sty={props.sty} to={props.to}>
         <span>{props.sty.btnText}</span>
       </Btn>
-      <BtnBg sty={props.sty} />
+      {/* <BtnBg sty={props.sty} /> */}
     </>
   );
 };

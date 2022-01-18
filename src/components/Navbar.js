@@ -3,7 +3,7 @@ import { ReactComponent as LogoImg } from '../assets/Logo.svg';
 
 const List = styled.ol`
   position: relative;
-  margin-right: 5rem;
+  margin-right: 10rem;
   margin-top: 0;
   width: 100%;
   height: 100%;
@@ -18,7 +18,7 @@ const List = styled.ol`
 
 const Item = styled.li`
   position: relative;
-  width: 10rem;
+  width: 7rem;
   height: 100%;
   font-size: 1.2rem;
   font-family: 'Alata', sans-serif;

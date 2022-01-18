@@ -1,11 +1,14 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 import HeroShape from '../sketches/heroShape/HeroShape';
 import Button from './Button';
 
 const HeroWrapper = styled.div`
   position: relative;
-  background-color: ${(props) => props.theme.bgMain};
+  background: linear-gradient(
+    90deg,
+    ${(props) => props.theme.bgMain} 20%,
+    ${(props) => props.theme.navMain} 80%
+  );
   width: 100%;
   height: calc(100vh - 4rem);
   display: flex;
@@ -113,7 +116,6 @@ const CanvContainer = styled.div`
 `;
 
 const Hero = (props) => {
-  const [sliderPos, setSliderPos] = useState(1);
   return (
     <HeroWrapper ref={props.fRef}>
       <HeroCentered>
@@ -131,8 +133,8 @@ const Hero = (props) => {
               sty={{
                 btnText: 'Projects',
                 width: '130px',
-                height: '75px',
-                hoverCol: 'rgba(36, 44, 66)',
+                height: '60px',
+                hoverCol: 'rgba(36, 44, 66, 0.2)',
                 rotation: '0',
               }}
               to="/projects"
@@ -140,11 +142,7 @@ const Hero = (props) => {
           </ParaButton>
         </Para>
       </HeroCentered>
-      <CanvContainer>
-        {props.activePage === 0 && (
-          <HeroShape sliderPos={sliderPos} setSliderPos={setSliderPos} />
-        )}
-      </CanvContainer>
+      <CanvContainer>{props.activePage === 0 && <HeroShape />}</CanvContainer>
     </HeroWrapper>
   );
 };

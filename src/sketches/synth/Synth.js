@@ -1,7 +1,7 @@
 import React from 'react';
 import Sketch from 'react-p5';
 import 'p5/lib/addons/p5.sound';
-import BoardKey from './classes/boardKeys';
+import BoardKey from './boardKeys';
 
 let freqs;
 let whiteText = ['a', 's', 'd', 'f', 'g', 'h', 'j'];

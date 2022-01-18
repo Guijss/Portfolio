@@ -1,10 +1,10 @@
-import SolarSystem from './sketches/SolarSystem';
-import PathFinding from './sketches/PathFinding';
-import Tetris from './sketches/Tetris';
-import Minesweeper from './sketches/Minesweeper';
-import Space from './sketches/Space';
-import Synth from './sketches/Synth';
-import Lightning from './sketches/Lightning';
+import SolarSystem from './sketches/solarSystem/SolarSystem';
+import PathFinding from './sketches/pathfinding/PathFinding';
+import Tetris from './sketches/tetris/Tetris';
+import Minesweeper from './sketches/minesweeper/Minesweeper';
+import Space from './sketches/space/Space';
+import Synth from './sketches/synth/Synth';
+import Lightning from './sketches/lightning/Lightning';
 
 import Home from './components/Home';
 import Apps from './components/Apps';

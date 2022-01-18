@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Sketch from 'react-p5';
-import Cell from './classes/msCell';
-import { SketchWrapper, TopBar, Spacing } from './PathFinding';
-import Bomb, { ReactComponent as BombComponent } from '../assets/bomb.svg';
+import Cell from './msCell';
+import { SketchWrapper, TopBar, Spacing } from '../pathfinding/PathFinding';
+import Bomb, { ReactComponent as BombComponent } from '../../assets/bomb.svg';
 import styled from 'styled-components';
 
 const DisplayWrapper = styled.div`
