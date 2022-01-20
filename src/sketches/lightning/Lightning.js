@@ -3,10 +3,10 @@ import Drop from './drop';
 
 let drops = [];
 let numDrops = 200;
-let animating = false;
-let animFrame = 0;
-let bolt1, bolt2, bolt3;
-let bolt1Alpha, bolt2Alpha, bolt3Alpha;
+// let animating = false;
+// let animFrame = 0;
+// let bolt1, bolt2, bolt3;
+// let bolt1Alpha, bolt2Alpha, bolt3Alpha;
 let parentRef;
 let cnv;
 
