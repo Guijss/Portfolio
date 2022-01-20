@@ -8,7 +8,7 @@ let numDrops = 200;
 // let bolt1, bolt2, bolt3;
 // let bolt1Alpha, bolt2Alpha, bolt3Alpha;
 let parentRef;
-let cnv;
+//let cnv;
 
 const Lightning = () => {
   const setup = (p5, canvasParentRef) => {
