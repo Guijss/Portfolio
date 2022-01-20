@@ -1,7 +1,8 @@
 import React from 'react';
 import styled, { useTheme } from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { sidebarLinks } from '../appLinks';
+import { IoIosArrowDropleft } from 'react-icons/io';
 
 const SidebarWrapper = styled.div`
   position: relative;
@@ -9,14 +10,14 @@ const SidebarWrapper = styled.div`
   height: 100%;
   width: 10%;
   min-width: 7rem;
-  margin: 0;
-  padding: 0;
-  background-color: ${(prosp) => prosp.theme.bgMain};
+  background-color: ${(prosp) => prosp.theme.navMain};
   display: flex;
   flex-direction: column;
-  box-shadow: -1px 0px 1px 0px rgba(110, 110, 110, 0.5);
-  -webkit-box-shadow: -1px 0px 1px 0px rgba(110, 110, 110, 0.5);
-  -moz-box-shadow: -1px 0px 1px 0px rgba(110, 110, 110, 0.5);
+  justify-content: center;
+  align-items: center;
+  box-shadow: 1px 0px 3px 0px rgba(0, 0, 0, 0.6);
+  -webkit-box-shadow: 1px 0px 3px 0px rgba(0, 0, 0, 0.6);
+  -moz-box-shadow: 1px 0px 3px 0px rgba(0, 0, 0, 0.6);
   overflow-y: scroll;
   overflow-x: hidden;
   @media (max-width: 800px) {
@@ -32,6 +33,23 @@ const SidebarWrapper = styled.div`
     &:hover {
       background-color: rgba(255, 255, 255, 0.2);
     }
+  }
+`;
+
+const BackBtn = styled(Link)`
+  position: relative;
+  color: ${(props) => props.theme.textHighlight};
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.5rem;
+  transform: translate(0, 0);
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: translate(1px, -1px);
   }
 `;
 
@@ -56,8 +74,7 @@ const LinkCont = styled(NavLink)`
   align-items: center;
   text-decoration: none;
   font-family: 'Roboto', sans-serif;
-  font-weight: 300;
-  border: 1px solid transparent;
+  font-size: 1rem;
   &:hover {
     backdrop-filter: brightness(1.2);
     cursor: pointer;
@@ -70,7 +87,7 @@ const NLink = styled.div`
   color: ${(props) => props.theme.textMain};
   align-items: center;
   padding-top: 0.7rem;
-  font-size: 1rem;
+
   text-align: center;
 `;
 
@@ -78,6 +95,10 @@ const Sidebar = () => {
   const theme = useTheme();
   return (
     <SidebarWrapper>
+      <BackBtn to="/">
+        <IoIosArrowDropleft size={40} />
+        <span style={{ marginLeft: '0.5rem' }}>Home</span>
+      </BackBtn>
       <SideBarNav>
         {sidebarLinks.map((obj) => {
           return (

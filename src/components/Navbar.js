@@ -1,9 +1,10 @@
 import styled, { useTheme } from 'styled-components';
 import { ReactComponent as LogoImg } from '../assets/Logo.svg';
+import Button from './Button';
 
 const List = styled.ol`
   position: relative;
-  margin-right: 10rem;
+  margin-right: 3rem;
   margin-top: 0;
   width: 100%;
   height: 100%;
@@ -46,6 +47,16 @@ const Deco = styled.div`
   transition: background-color 0.3s ease;
 `;
 
+const ButtonWrapper = styled.div`
+  position: relative;
+  margin-right: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: ${(props) => props.vis};
+  transition: opacity 0.5s ease-in-out;
+`;
+
 const LogoWrapper = styled.div`
   position: relative;
   left: 0;
@@ -54,7 +65,6 @@ const LogoWrapper = styled.div`
   height: 100%;
   min-height: 3rem;
   background-color: transparent;
-  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -91,6 +101,20 @@ const Navbar = (props) => {
           );
         })}
       </List>
+      <ButtonWrapper vis={props.buttonVisibility}>
+        <Button
+          sty={{
+            btnText: 'Projects',
+            width: '100px',
+            height: '40px',
+            fontSize: '1.1rem',
+            hoverCol: 'rgba(36, 44, 66, 0.4)',
+            rotation: '0',
+            pEvents: props.isClickable,
+          }}
+          to="/projects"
+        />
+      </ButtonWrapper>
     </>
   );
 };

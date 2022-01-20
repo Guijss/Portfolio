@@ -1,15 +1,17 @@
+import { Vector } from 'p5';
+
 export default class Drop {
   constructor(p5) {
     this.p5 = p5;
     this.pos = p5.createVector(p5.random(0, p5.width + 100), 0);
-    this.head = p5.Vector.fromAngle((1.2 * p5.PI) / 2, p5.random(5, 9));
+    this.head = Vector.fromAngle((1.2 * p5.PI) / 2, p5.random(5, 9));
     this.a = 255;
     this.s = p5.random(0.5, 0.9);
     this.started = false;
   }
 
   update() {
-    let speed = this.p5.Vector.mult(this.head, this.s);
+    let speed = Vector.mult(this.head, this.s);
     this.pos.add(speed);
     this.a = this.p5.map(this.pos.y, 0, this.p5.height, 255, 0);
 
@@ -18,7 +20,7 @@ export default class Drop {
         this.p5.random(0, this.p5.width + 100),
         0
       );
-      this.head = this.p5.Vector.fromAngle(
+      this.head = Vector.fromAngle(
         (1.2 * this.p5.PI) / 2,
         this.p5.random(this.p5.height / 100, this.p5.height / 60)
       );

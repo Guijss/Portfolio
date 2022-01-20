@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Canvas from './Canvas';
 import Sidebar from './Sidebar';
@@ -28,8 +28,8 @@ const Apps = () => {
   }, [posX, divX]);
   return (
     <AppsWrapper ref={myRef} posX={posX}>
-      <Canvas />
       <Sidebar />
+      <Canvas />
     </AppsWrapper>
   );
 };

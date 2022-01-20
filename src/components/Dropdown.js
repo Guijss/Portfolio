@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import { MdArrowDropDown } from 'react-icons/md';
 import { CgCheck } from 'react-icons/cg';

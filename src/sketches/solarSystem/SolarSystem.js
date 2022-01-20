@@ -108,7 +108,7 @@ const SolarSystem = () => {
         const y2 = -p5.sin(o) * p5.sin(w) + p5.cos(o) * p5.cos(i) * p5.cos(w);
         const y3 = p5.sin(i) * p5.cos(w);
 
-        //We don't really need to compute the z since everything will sit in the orbital ellipse (XY plane), no z translations.
+        //We don't really need to compute z since everything will sit on the orbital ellipse (XY plane). No z translations.
         // const z1 = sin(i) * sin(o);
         // const z2 = -sin(i) * cos(o);
         // const z3 = cos(i);
