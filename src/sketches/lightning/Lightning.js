@@ -15,7 +15,7 @@ const Lightning = () => {
     parentRef = canvasParentRef;
     const h = parentRef.clientHeight;
     const w = parentRef.clientWidth;
-    cnv = p5.createCanvas(w, h).parent(parentRef);
+    p5.createCanvas(w, h).parent(parentRef);
     for (let d = 0; d < numDrops; d++) {
       drops[d] = new Drop(p5);
     }
