@@ -134,8 +134,10 @@ const Hero = (props) => {
                 btnText: 'Projects',
                 width: '130px',
                 height: '60px',
+                fontSize: '1.3rem',
                 hoverCol: 'rgba(36, 44, 66, 0.2)',
                 rotation: '0',
+                pEvents: 'auto',
               }}
               to="/projects"
             />

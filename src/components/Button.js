@@ -5,7 +5,7 @@ const Btn = styled(Link)`
   position: relative;
   text-decoration: none;
   font-family: 'Alata', sans-serif;
-  font-size: 1.3rem;
+  font-size: ${(props) => props.sty.fontSize};
   width: ${(props) => props.sty.width};
   height: ${(props) => props.sty.height};
   left: ${(props) => props.sty.left};
@@ -20,22 +20,10 @@ const Btn = styled(Link)`
   z-index: 3;
   transform: rotate(${(props) => props.sty.rotation}) translate(0, 0);
   transition: transform 0.2s ease;
+  pointer-events: ${(props) => props.sty.pEvents};
   &:hover {
     background-color: ${(props) => props.sty.hoverCol};
-    //transform: rotate(${(props) => props.sty.rotation}) translate(2px, -2px);
   }
-`;
-
-const BtnBg = styled.div`
-  position: absolute;
-  width: ${(props) => props.sty.width};
-  height: ${(props) => props.sty.height};
-  left: ${(props) => props.sty.left};
-  top: ${(props) => props.sty.top};
-  border: 1px solid ${(props) => props.theme.textHighlight};
-  border-radius: 10%;
-  z-index: 2;
-  background-color: ${(props) => props.theme.textHighlight};
 `;
 
 const Button = (props) => {
@@ -44,7 +32,6 @@ const Button = (props) => {
       <Btn sty={props.sty} to={props.to}>
         <span>{props.sty.btnText}</span>
       </Btn>
-      {/* <BtnBg sty={props.sty} /> */}
     </>
   );
 };

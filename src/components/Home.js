@@ -5,8 +5,6 @@ import Navbar from './Navbar';
 import Hero from './Hero';
 import About from './About';
 import Contact from './Contact';
-import Banner from './Banner';
-import Button from './Button';
 
 const NavbarWrapper = styled.div`
   position: fixed;
@@ -52,6 +50,8 @@ const Home = () => {
   const aboutRef = useRef(null);
   const contactRef = useRef(null);
   const [activePage, setActivePage] = useState(0);
+  const [buttonVisibility, setButtonVisibility] = useState(0);
+  const [isClickable, setIsClickable] = useState('none');
 
   useEffect(() => {
     const mainDOM = mainRef.current;
@@ -63,13 +63,19 @@ const Home = () => {
     const currentPos = mainRef.current.scrollTop;
     if (currentPos < aboutRef.current.offsetTop) {
       setActivePage(0);
+      setButtonVisibility(0);
+      setIsClickable('none');
     } else if (
       currentPos >= aboutRef.current.offsetTop &&
       currentPos < contactRef.current.offsetTop
     ) {
       setActivePage(1);
+      setButtonVisibility(1);
+      setIsClickable('auto');
     } else if (currentPos >= contactRef.current.offsetTop) {
       setActivePage(2);
+      setButtonVisibility(1);
+      setIsClickable('auto');
     }
   };
 
@@ -99,13 +105,6 @@ const Home = () => {
     });
   };
 
-  const cardTranslator = () => {
-    if (activePage > 0) {
-      return 0;
-    }
-    return '-9.5rem';
-  };
-
   return (
     <>
       <NavbarWrapper>
@@ -113,33 +112,11 @@ const Home = () => {
           navData={navData}
           scrollToComp={scrollToComp}
           activePage={activePage}
+          buttonVisibility={buttonVisibility}
+          isClickable={isClickable}
         />
       </NavbarWrapper>
       <MainWeapper ref={mainRef}>
-        <Banner
-          cardTranslator={cardTranslator}
-          sty={{
-            top: '4rem',
-            left: 'calc(100vw - 15rem)',
-            width: '10rem',
-            height: '5rem',
-            diagWidth: '10rem',
-            diagHeight: '2rem',
-          }}
-        >
-          <Button
-            sty={{
-              btnText: 'Projects',
-              width: '8rem',
-              height: '4rem',
-              left: '1rem',
-              top: '1rem',
-              hoverCol: 'rgba(36, 44, 66)',
-              rotation: '0',
-            }}
-            to="/projects"
-          />
-        </Banner>
         <Hero fRef={homeRef} activePage={activePage} />
         <About fRef={aboutRef} />
         <Contact fRef={contactRef} />
