@@ -18,7 +18,7 @@ export const PageWrapper = styled.div`
 `;
 
 export const PageCentered = styled.div`
-  width: 70%;
+  width: 50%;
   height: 70%;
   font-family: 'Alata', sans-serif;
   display: flex;

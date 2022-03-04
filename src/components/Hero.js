@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import HeroShape from '../sketches/heroShape/HeroShape';
+import Fifteen from '../sketches/fifteen/Fifteen';
 import Button from './Button';
 
 const HeroWrapper = styled.div`
@@ -100,15 +101,30 @@ const ParaButton = styled.div`
   align-items: flex-start;
 `;
 
-const CanvContainer = styled.div`
+const DasherContainer = styled.div`
   position: absolute;
-  width: 600px;
-  height: 550px;
-  right: 10%;
-  top: 15%;
+  width: 1000px;
+  height: 1000px;
+  left: -2%;
   display: flex;
   justify-content: center;
   align-items: center;
+  opacity: 0.5;
+  z-index: 0;
+  @media (max-width: 1400px), (max-height: 600px) {
+    visibility: hidden;
+  }
+`;
+
+const FifteenContainer = styled.div`
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  display: flex;
+  right: 7%;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.8;
   z-index: 0;
   @media (max-width: 1400px), (max-height: 600px) {
     visibility: hidden;
@@ -144,7 +160,12 @@ const Hero = (props) => {
           </ParaButton>
         </Para>
       </HeroCentered>
-      <CanvContainer>{props.activePage === 0 && <HeroShape />}</CanvContainer>
+      <DasherContainer>
+        {props.activePage === 0 && <HeroShape />}
+      </DasherContainer>
+      <FifteenContainer>
+        <Fifteen />
+      </FifteenContainer>
     </HeroWrapper>
   );
 };
