@@ -1,29 +1,18 @@
 import Sketch from 'react-p5';
 import Cell from './cell';
+import { BsArrowCounterclockwise } from 'react-icons/bs';
+import { Reset } from '../../components/commonStyledComponents';
 
 let grid = [];
 let win;
+let p;
 const Fifteen = () => {
   const setup = (p5, canvasParentRef) => {
+    p = p5;
     const w = canvasParentRef.clientWidth;
     const h = canvasParentRef.clientHeight;
     p5.createCanvas(w, h).parent(canvasParentRef);
-    const size = p5.width / 5.5;
-    const spacing = 1.2;
-    const gap = p5.width - size * 4 - (size * spacing - size) * 3;
-    for (let i = 0; i < 16; i++) {
-      grid.push(
-        new Cell(
-          p5,
-          i,
-          spacing * size * (i % 4) + gap / 2,
-          spacing * size * p5.floor(i / 4) + gap / 2,
-          size,
-          i === 15
-        )
-      );
-    }
-    scramble(p5, grid[15]);
+    reset();
   };
 
   const draw = (p5) => {
@@ -36,13 +25,37 @@ const Fifteen = () => {
       }
     }
     if (win) {
-      p5.stroke(32, 56, 42);
+      p5.stroke(120, 135, 180);
       p5.noLoop();
     } else {
       p5.stroke(32, 35, 42);
     }
     p5.noFill();
+    p5.strokeWeight(4);
     p5.rect(10, 10, p5.width - 20, p5.height - 20, 20);
+  };
+
+  const reset = () => {
+    grid = [];
+    const size = p.width / 5.5;
+    const spacing = 1.2;
+    const gap = p.width - size * 4 - (size * spacing - size) * 3;
+    for (let i = 0; i < 16; i++) {
+      grid.push(
+        new Cell(
+          p,
+          i,
+          spacing * size * (i % 4) + gap / 2,
+          spacing * size * p.floor(i / 4) + gap / 2,
+          size,
+          i === 15
+        )
+      );
+    }
+    scramble(p, grid[15]);
+    if (win) {
+      p.loop();
+    }
   };
 
   const mousePressed = (p5) => {
@@ -111,7 +124,7 @@ const Fifteen = () => {
     let blank = blankCell;
     let moves = [];
     let pick;
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 30; i++) {
       if (blank.i % 4 < 3) {
         if (grid[blank.i + 1] !== pick) {
           moves.push(grid[blank.i + 1]);
@@ -139,16 +152,21 @@ const Fifteen = () => {
   };
 
   return (
-    <Sketch
-      setup={setup}
-      draw={draw}
-      mousePressed={mousePressed}
-      style={{
-        position: 'relative',
-        width: '100%',
-        height: '100%',
-      }}
-    />
+    <>
+      <Sketch
+        setup={setup}
+        draw={draw}
+        mousePressed={mousePressed}
+        style={{
+          position: 'relative',
+          width: '400px',
+          height: '400px',
+        }}
+      />
+      <Reset onClick={reset}>
+        <BsArrowCounterclockwise size={30} color="rgb(32, 35, 42)" />
+      </Reset>
+    </>
   );
 };
 

@@ -105,7 +105,7 @@ const DasherContainer = styled.div`
   position: absolute;
   width: 1000px;
   height: 1000px;
-  left: -2%;
+  left: -7%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -118,13 +118,14 @@ const DasherContainer = styled.div`
 
 const FifteenContainer = styled.div`
   position: absolute;
-  width: 400px;
+  width: 430px;
   height: 400px;
-  display: flex;
   right: 7%;
+  display: flex;
+  flex-direction: row;
   justify-content: center;
-  align-items: center;
-  opacity: 0.8;
+  align-items: start;
+  opacity: 0.5;
   z-index: 0;
   @media (max-width: 1400px), (max-height: 600px) {
     visibility: hidden;
