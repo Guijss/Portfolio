@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import LightsOut from '../sketches/lightsOut/LightsOut';
 import {
   PageWrapper,
   PageCentered,
@@ -7,31 +8,29 @@ import {
   Separator,
 } from './commonStyledComponents';
 
-const InfoWrapper = styled.div`
-  position: relative;
-  width: 60%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-`;
-
-const CornerBorder = styled.div`
+const InfoText = styled.div`
   position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 7rem;
-  height: 7rem;
-  background: transparent;
-  border-bottom: 1px solid rgba(147, 152, 159, 0.1);
-  border-right: 1px solid rgba(147, 152, 159, 0.1);
+  width: 40rem;
+  right: 25%;
+  font-family: 'Alata', sans-serif;
+  color: ${(props) => props.theme.textMain};
+  z-index: 1;
 `;
 
-const PicWrapper = styled.div`
-  position: relative;
-  width: 40%;
-  height: 100%;
+const LightsOutContainer = styled.div`
+  position: absolute;
+  width: 430px;
+  height: 400px;
+  left: 7%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: start;
+  opacity: 0.5;
+  z-index: 0;
+  @media (max-width: 1400px), (max-height: 600px) {
+    visibility: hidden;
+  }
 `;
 
 const About = (props) => {
@@ -42,10 +41,19 @@ const About = (props) => {
         <Separator />
       </TitleWrapper>
       <PageCentered>
-        <InfoWrapper>
-          <CornerBorder />
-        </InfoWrapper>
-        <PicWrapper></PicWrapper>
+        <InfoText>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque at
+          aliquid sed laborum quisquam hic explicabo rerum recusandae libero
+          voluptatum voluptatem, voluptatibus, alias blanditiis incidunt cum
+          minima nihil inventore, harum odio non voluptates perspiciatis eveniet
+          autem. Possimus ullam neque est eum? Ipsum quam, ut, enim ea, sit
+          fugiat quisquam inventore veniam ducimus dolor quaerat vero suscipit
+          itaque voluptates! Obcaecati dignissimos eveniet quisquam dolores
+          maxime sunt molestiae labore! Eaque, culpa ipsum!
+        </InfoText>
+        <LightsOutContainer>
+          <LightsOut />
+        </LightsOutContainer>
       </PageCentered>
     </PageWrapper>
   );

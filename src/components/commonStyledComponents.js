@@ -19,7 +19,7 @@ export const PageWrapper = styled.div`
 
 export const PageCentered = styled.div`
   width: 50%;
-  height: 70%;
+  height: 100%;
   font-family: 'Alata', sans-serif;
   display: flex;
   justify-content: center;
@@ -54,4 +54,14 @@ export const Separator = styled.div`
   height: 1px;
   background-color: ${(props) => props.theme.textMain};
   opacity: 0.3;
+`;
+
+export const Reset = styled.div`
+  position: relative;
+  width: 30px;
+  height: 30px;
+  top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
