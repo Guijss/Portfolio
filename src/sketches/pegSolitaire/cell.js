@@ -13,18 +13,22 @@ export default class Cell {
 
   render() {
     if (this.p) {
+      //draw empty spots.
+      this.p5.noFill();
       this.p5.strokeWeight(2);
       if (this.sel) {
         this.p5.stroke(120, 135, 180);
       } else {
         this.p5.stroke(32, 35, 42);
       }
-      if (this.e) {
-        this.p5.noFill();
-      } else {
-        this.p5.fill(40, 43, 47);
-      }
       this.p5.circle(this.x, this.y, this.s);
+      if (!this.e) {
+        //draw pieces.
+        this.p5.noFill();
+        this.p5.fill(40, 43, 47);
+        this.p5.stroke(32, 35, 42);
+        this.p5.circle(this.x, this.y, this.s / 1.5);
+      }
     }
   }
 }

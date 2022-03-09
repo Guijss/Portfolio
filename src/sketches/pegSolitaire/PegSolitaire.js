@@ -150,7 +150,7 @@ const PegSolitaire = () => {
         }}
       />
       <Reset onClick={reset}>
-        <BsArrowCounterclockwise size={30} color="rgb(32, 35, 42)" />
+        <BsArrowCounterclockwise size={30} color="rgb(70, 71, 76)" />
       </Reset>
     </>
   );

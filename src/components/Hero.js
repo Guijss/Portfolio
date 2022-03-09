@@ -52,6 +52,7 @@ const Name = styled.h3`
   margin: 0;
   grid-area: h3;
   font-size: 5rem;
+  font-family: 'Roboto Slab', serif;
   font-weight: bold;
   color: ${(props) => props.theme.textMain};
   @media (max-width: 600px) {
@@ -109,8 +110,6 @@ const DasherContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: 0.5;
-  z-index: 0;
   @media (max-width: 1400px), (max-height: 600px) {
     visibility: hidden;
   }
@@ -125,8 +124,7 @@ const FifteenContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: start;
-  opacity: 0.5;
-  z-index: 0;
+  opacity: 0.7;
   @media (max-width: 1400px), (max-height: 600px) {
     visibility: hidden;
   }
