@@ -82,6 +82,7 @@ const Contact = (props) => {
             pEvents: true,
           }}
           to="#"
+          hasHandler={true}
           clickHandler={clickHandler}
         />
       </ContactCont>

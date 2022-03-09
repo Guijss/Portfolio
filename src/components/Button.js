@@ -29,7 +29,11 @@ const Btn = styled(Link)`
 const Button = (props) => {
   return (
     <>
-      <Btn sty={props.sty} to={props.to} onClick={(e) => props.clickHandler(e)}>
+      <Btn
+        sty={props.sty}
+        to={props.to}
+        onClick={props.hasHandler ? (e) => props.clickHandler(e) : undefined}
+      >
         <span>{props.sty.btnText}</span>
       </Btn>
     </>
