@@ -1,8 +1,7 @@
-import React from 'react';
+import Button from './Button';
 import styled, { useTheme } from 'styled-components';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { sidebarLinks } from '../appLinks';
-import { IoIosArrowDropleft } from 'react-icons/io';
 
 const SidebarWrapper = styled.div`
   position: relative;
@@ -33,23 +32,6 @@ const SidebarWrapper = styled.div`
     &:hover {
       background-color: rgba(255, 255, 255, 0.2);
     }
-  }
-`;
-
-const BackBtn = styled(Link)`
-  position: relative;
-  color: ${(props) => props.theme.textHighlight};
-  margin-top: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  font-family: 'Roboto', sans-serif;
-  font-size: 1.5rem;
-  transform: translate(0, 0);
-  transition: transform 0.3s ease;
-  &:hover {
-    transform: translate(1px, -1px);
   }
 `;
 
@@ -91,14 +73,36 @@ const NLink = styled.div`
   text-align: center;
 `;
 
+const BackBtnCont = styled.div`
+  position: relative;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const Sidebar = () => {
   const theme = useTheme();
   return (
     <SidebarWrapper>
-      <BackBtn to="/">
+      {/* <BackBtn to="/">
         <IoIosArrowDropleft size={40} />
         <span style={{ marginLeft: '0.5rem' }}>Home</span>
-      </BackBtn>
+      </BackBtn> */}
+      <BackBtnCont>
+        <Button
+          sty={{
+            btnText: 'Home',
+            width: '6.5rem',
+            height: '3rem',
+            fontSize: '1.1rem',
+            hoverCol: 'rgba(36, 44, 66, 0.4)',
+            rotation: '0',
+            pEvents: true,
+          }}
+          to="/"
+        />
+      </BackBtnCont>
       <SideBarNav>
         {sidebarLinks.map((obj) => {
           return (
