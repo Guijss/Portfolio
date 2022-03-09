@@ -18,7 +18,7 @@ export const PageWrapper = styled.div`
 `;
 
 export const PageCentered = styled.div`
-  width: 50%;
+  width: 100%;
   height: 100%;
   font-family: 'Alata', sans-serif;
   display: flex;
@@ -29,7 +29,9 @@ export const PageCentered = styled.div`
 export const TitleWrapper = styled.header`
   position: relative;
   margin-left: 10%;
+  top: 0;
   font-family: 'Alata', sans-serif;
+  font-size: 1.6rem;
   width: 100%;
   height: 5rem;
   display: flex;
@@ -43,7 +45,6 @@ export const Title = styled.span`
   height: auto;
   min-width: 220px;
   color: ${(props) => props.theme.textHighlight};
-  font-size: 2rem;
 `;
 
 export const Separator = styled.div`
