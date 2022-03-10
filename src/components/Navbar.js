@@ -22,7 +22,7 @@ const Item = styled.li`
   width: 7rem;
   height: 100%;
   font-size: 1.2rem;
-  font-family: 'Alata', sans-serif;
+  font-family: 'Fredoka', sans-serif;
   font-weight: bold;
   display: flex;
   justify-content: center;

@@ -6,7 +6,7 @@ const AboutCont = styled.div`
   position: absolute;
   width: 40rem;
   right: 20%;
-  font-family: 'Alata', sans-serif;
+  font-family: 'Fredoka', sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: center;

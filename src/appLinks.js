@@ -4,7 +4,9 @@ import Tetris from './sketches/tetris/Tetris';
 import Minesweeper from './sketches/minesweeper/Minesweeper';
 import Space from './sketches/space/Space';
 import Synth from './sketches/synth/Synth';
-import Lightning from './sketches/lightning/Lightning';
+import Fifteen from './sketches/fifteen/Fifteen';
+import LightsOut from './sketches/lightsOut/LightsOut';
+import PegSolitaire from './sketches/pegSolitaire/PegSolitaire';
 
 import Home from './components/Home';
 import Apps from './components/Apps';
@@ -15,6 +17,7 @@ export const sidebarLinks = [
     linkText: 'Solar System',
     path: '/projects/solar',
     to: '/projects/solar',
+    source: 'solarSystem',
     component: SolarSystem,
   },
   {
@@ -22,6 +25,7 @@ export const sidebarLinks = [
     linkText: 'PathFinding',
     path: '/projects/pathfinding',
     to: '/projects/pathfinding',
+    source: 'pathfinding',
     component: PathFinding,
   },
   {
@@ -29,6 +33,7 @@ export const sidebarLinks = [
     linkText: 'Tetris',
     path: '/projects/tetris',
     to: '/projects/tetris',
+    source: 'tetris',
     component: Tetris,
   },
   {
@@ -36,6 +41,7 @@ export const sidebarLinks = [
     linkText: 'Minesweeper',
     path: '/projects/minesweeper',
     to: '/projects/minesweeper',
+    source: 'minesweeper',
     component: Minesweeper,
   },
   {
@@ -43,6 +49,7 @@ export const sidebarLinks = [
     linkText: 'Synthesizer',
     path: '/projects/synth',
     to: '/projects/synth',
+    source: 'synth',
     component: Synth,
   },
   {
@@ -50,21 +57,40 @@ export const sidebarLinks = [
     linkText: 'Scale Viewer',
     path: '/projects/scale',
     to: '/projects/scale',
+    source: 'solarSystem',
     component: Tetris,
   },
   {
     key: 6,
-    linkText: 'Lightning',
-    path: '/projects/lightning',
-    to: '/projects/lightning',
-    component: Lightning,
-  },
-  {
-    key: 7,
     linkText: 'Space',
     path: '/projects/space',
     to: '/projects/space',
+    source: 'space',
     component: Space,
+  },
+  {
+    key: 7,
+    linkText: 'Fifteen Slide',
+    path: '/projects/fifteen',
+    to: '/projects/fifteen',
+    source: 'fifteen',
+    component: Fifteen,
+  },
+  {
+    key: 8,
+    linkText: 'Peg Solitaire',
+    path: '/projects/peg',
+    to: '/projects/peg',
+    source: 'pegSolitaire',
+    component: PegSolitaire,
+  },
+  {
+    key: 9,
+    linkText: 'Lights Out',
+    path: '/projects/lightsout',
+    to: '/projects/lightsout',
+    source: 'lightsOut',
+    component: LightsOut,
   },
 ];
 

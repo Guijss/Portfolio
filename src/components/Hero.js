@@ -21,7 +21,7 @@ const HeroWrapper = styled.div`
 const HeroCentered = styled.div`
   width: 45%;
   height: 70%;
-  font-family: 'Alata', sans-serif;
+  font-family: 'Fredoka', sans-serif;
   display: grid;
   grid-template-rows: 0.5fr 0.2fr 0.4fr 0.4fr 1.1fr 0.5fr;
   grid-template-areas:

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Btn = styled(Link)`
   position: relative;
   text-decoration: none;
-  font-family: 'Alata', sans-serif;
+  font-family: 'Fredoka', sans-serif;
   font-size: ${(props) => props.sty.fontSize};
   width: ${(props) => props.sty.width};
   height: ${(props) => props.sty.height};

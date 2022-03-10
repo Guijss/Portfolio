@@ -177,7 +177,7 @@ const Minesweeper = () => {
   };
 
   const restart = (p5) => {
-    let total = 0;
+    //let total = 0;
     grid = make2dArr(30, 16);
     let bombsPlacement = make2dArr(30, 16);
     bombsArr = [];
@@ -189,10 +189,9 @@ const Minesweeper = () => {
         continue;
       } else {
         bombsPlacement[row][col] = true;
-        total++;
+        //total++;
       }
     }
-    console.log(total);
     for (let i = 0; i < grid.length; i++) {
       for (let j = 0; j < grid[0].length; j++) {
         grid[i][j] = new Cell(

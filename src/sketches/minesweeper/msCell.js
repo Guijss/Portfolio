@@ -52,7 +52,7 @@ export default class Cell {
       this.p.textAlign(this.p.CENTER, this.p.CENTER);
       this.p.textStyle(this.p.BOLD);
       this.p.textSize(20);
-      this.p.fill(0);
+      this.p.fill(170);
       this.p.text('?', this.x + this.size / 2, 1 + this.y + this.size / 2);
       this.p.pop();
     }

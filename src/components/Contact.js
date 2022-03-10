@@ -7,7 +7,7 @@ const ContactCont = styled.div`
   position: absolute;
   width: 40rem;
   left: 20%;
-  font-family: 'Alata', sans-serif;
+  font-family: 'Fredoka', sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -56,6 +56,16 @@ const PegSolitaireContainer = styled.div`
   }
 `;
 
+const BaseBoard = styled.a`
+  position: absolute;
+  font-family: 'Alata', sans-serif;
+  color: ${(props) => props.theme.textMain};
+  font-size: 0.7rem;
+  font-weight: lighter;
+  text-decoration: none;
+  bottom: 1rem;
+`;
+
 const clickHandler = (e) => {
   window.location.href = 'mailto:guijsilva4@gmail.com';
   e.preventDefault();
@@ -76,7 +86,7 @@ const Contact = (props) => {
             btnText: 'Contact Me!',
             width: '15rem',
             height: '5rem',
-            fontSize: '1.1rem',
+            fontSize: '1.5rem',
             hoverCol: 'rgba(36, 44, 66, 0.4)',
             rotation: '0',
             pEvents: true,
@@ -89,6 +99,9 @@ const Contact = (props) => {
       <PegSolitaireContainer>
         <PegSolitaire />
       </PegSolitaireContainer>
+      <BaseBoard href="https://github.com/Guijss/Portfolio" target="_blank">
+        <span>Designed and coded by Gui Silva.</span>
+      </BaseBoard>
     </PageWrapper>
   );
 };

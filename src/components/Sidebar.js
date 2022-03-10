@@ -49,7 +49,7 @@ const SideBarNav = styled.ul`
 const LinkCont = styled(NavLink)`
   list-style: none;
   width: 100%;
-  height: 10vh;
+  height: 5rem;
   min-height: 3rem;
   display: flex;
   justify-content: center;
@@ -75,7 +75,7 @@ const NLink = styled.div`
 
 const BackBtnCont = styled.div`
   position: relative;
-  margin-top: 2rem;
+  height: 7rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -85,10 +85,6 @@ const Sidebar = () => {
   const theme = useTheme();
   return (
     <SidebarWrapper>
-      {/* <BackBtn to="/">
-        <IoIosArrowDropleft size={40} />
-        <span style={{ marginLeft: '0.5rem' }}>Home</span>
-      </BackBtn> */}
       <BackBtnCont>
         <Button
           sty={{

@@ -1,6 +1,9 @@
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Switch, Route } from 'react-router';
 import { sidebarLinks } from '../appLinks';
+import { VscFileCode } from 'react-icons/vsc';
+import { useLocation } from 'react-router-dom';
 
 const CanvasWrapper = styled.div`
   position: relative;
@@ -16,9 +19,37 @@ const CanvasWrapper = styled.div`
   }
 `;
 
+const GHLink = styled.a`
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  z-index: 10;
+`;
+
 const Canvas = () => {
+  const location = useLocation();
+  const [source, setSource] = useState('');
+  useEffect(() => {
+    sidebarLinks.map((obj) => {
+      if (obj.path === location.pathname) {
+        setSource(obj.source);
+      }
+      return '';
+    });
+  }, [location]);
   return (
     <CanvasWrapper>
+      {location.pathname !== '/projects' && (
+        <GHLink
+          href={
+            'https://github.com/Guijss/Portfolio/tree/master/src/sketches/' +
+            source
+          }
+          target="_blank"
+        >
+          <VscFileCode size={50} color="rgb(70, 71, 76)" />
+        </GHLink>
+      )}
       <Switch>
         {sidebarLinks.map((obj) => {
           return (
