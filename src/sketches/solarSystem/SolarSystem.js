@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import Sketch from 'react-p5';
 import BetterCamera from './betterCamera';
+import DatePicker from 'react-datepicker';
 
 import mercury from '../../assets/images/mercury.jpg';
 import venus from '../../assets/images/venus.jpg';
@@ -15,6 +17,17 @@ import stars from '../../assets/images/stars.jpg';
 import saturnRingObj from '../../assets/models/saturnRing.obj';
 import skyBox from '../../assets/models/skyBox.obj';
 import Sun from '../../assets/models/sun.obj';
+
+import 'react-datepicker/dist/react-datepicker.css';
+import './solar.css';
+
+import styled from 'styled-components';
+
+const DatePickerContainer = styled.div`
+  position: absolute;
+  z-index: 10;
+  bottom: 5%;
+`;
 
 let parentRef;
 let d;
@@ -47,8 +60,7 @@ const SolarSystem = () => {
     p5.rectMode(p5.CENTER);
     document.oncontextmenu = () => false; //Prevent contextmenu on right click.
     loading = true;
-    const epoch = new Date('2000-01-01');
-    days = getDaysDiff(epoch);
+    days = getDaysDiff(startDate);
     camChanged = 0;
     getData(p5);
   };
@@ -207,8 +219,8 @@ const SolarSystem = () => {
   };
 
   const getDaysDiff = (date) => {
-    const mDate = Date.parse(date);
-    return (Date.now() - mDate) / (1000 * 60 * 60 * 24);
+    const epoch = new Date('2000-01-01');
+    return (Date.parse(date) - Date.parse(epoch)) / (1000 * 60 * 60 * 24);
   };
 
   const getCorrectedAnomaly = (t, p5) => {
@@ -230,19 +242,38 @@ const SolarSystem = () => {
     camChanged = Math.sign(e.delta);
   };
 
+  const handleChange = (date) => {
+    setStartDate(date);
+    //reposition planets to new date.
+    days = getDaysDiff(date);
+  };
+
+  const [startDate, setStartDate] = useState(new Date());
+
   return (
-    <Sketch
-      setup={setup}
-      draw={draw}
-      mouseDragged={mouseDragged}
-      mouseWheel={mouseWheel}
-      style={{
-        position: 'absolute',
-        width: '100%',
-        height: '100%',
-        zIndex: '0',
-      }}
-    />
+    <>
+      <DatePickerContainer>
+        <DatePicker
+          selected={startDate}
+          onChange={(date) => handleChange(date)}
+          showYearDropdown={true}
+          calendarClassName="cal"
+          className="datePicker"
+        />
+      </DatePickerContainer>
+      <Sketch
+        setup={setup}
+        draw={draw}
+        mouseDragged={mouseDragged}
+        mouseWheel={mouseWheel}
+        style={{
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          zIndex: '0',
+        }}
+      />
+    </>
   );
 };
 
