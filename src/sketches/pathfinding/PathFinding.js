@@ -159,7 +159,7 @@ const PathFinding = () => {
   const handleOnClick = () => {
     setIsOpen(!isOpen);
   };
-  const content = ['A*', 'Dijkstra', 'Breadth-first', 'Depth-first'];
+  const content = ['A*', 'Dijkstra'];
   const [selection, setSelection] = useState(content[0]);
   const handleSelection = (sel) => {
     setSelection(sel);
@@ -296,12 +296,6 @@ const PathFinding = () => {
               closedList,
               goal
             );
-            break;
-          case 'Breadth-first':
-            searching = false;
-            break;
-          case 'Depth-first':
-            searching = false;
             break;
           default:
             searching = false;

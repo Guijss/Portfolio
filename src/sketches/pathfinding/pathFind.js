@@ -66,10 +66,6 @@ export const dij = (p5, grid, openList, closedList, goal) => {
   }
 };
 
-export const breadth_f = (p5, grid, openList, closedList, goal) => {};
-
-export const depth_f = (p5, grid, openList, closedList, goal) => {};
-
 const getNeighbors = (c, grid) => {
   let nArr = [];
   const ci = c.i;
