@@ -10,12 +10,12 @@ export default class Cell {
   }
 
   render() {
-    this.p5.stroke(32, 35, 42);
+    this.p5.stroke(40, 43, 47);
     this.p5.strokeWeight(4);
     if (this.e) {
       this.p5.noFill();
     } else {
-      this.p5.fill(40, 43, 47);
+      this.p5.fill(70, 71, 76);
     }
 
     this.p5.square(this.x, this.y, this.s, 10);

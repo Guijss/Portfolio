@@ -49,7 +49,6 @@ const PegSolitaireContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: start;
-  opacity: 0.7;
   z-index: 0;
   @media (max-width: 1550px), (max-height: 600px) {
     visibility: hidden;

@@ -37,7 +37,7 @@ const SidebarWrapper = styled.div`
 
 const SideBarNav = styled.ul`
   position: relative;
-  height: 100%;
+  height: calc(100% - 7rem);
   width: 100%;
   display: flex;
   flex-direction: column;

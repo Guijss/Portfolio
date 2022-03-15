@@ -12,12 +12,12 @@ export default class Cell {
   render() {
     if (!this.b) {
       //rect
-      this.p5.stroke(32, 35, 42);
+      this.p5.stroke(70, 71, 76);
       this.p5.strokeWeight(4);
       this.p5.noFill();
       this.p5.square(this.x, this.y, this.s, 20);
       //text
-      this.p5.fill(40, 43, 47);
+      this.p5.fill(70, 71, 76);
       this.p5.noStroke();
       this.p5.textAlign(this.p5.CENTER, this.p5.CENTER);
       this.p5.textSize(36);

@@ -31,7 +31,8 @@ const AboutTitle = styled.span`
 const AboutText = styled.span`
   position: relative;
   padding-bottom: 5rem;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
+  text-align: center;
   color: ${(props) => props.theme.textMain};
   @media (max-width: 850px) {
     font-size: 1rem;
@@ -47,7 +48,6 @@ const LightsOutContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: start;
-  opacity: 0.7;
   z-index: 0;
   @media (max-width: 1550px), (max-height: 600px) {
     visibility: hidden;

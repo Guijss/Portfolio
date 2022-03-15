@@ -124,7 +124,6 @@ const FifteenContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: start;
-  opacity: 0.7;
   @media (max-width: 1400px), (max-height: 600px) {
     visibility: hidden;
   }
