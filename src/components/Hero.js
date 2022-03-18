@@ -5,11 +5,7 @@ import Button from './Button';
 
 const HeroWrapper = styled.div`
   position: relative;
-  background: linear-gradient(
-    90deg,
-    ${(props) => props.theme.bgMain} 20%,
-    ${(props) => props.theme.navMain} 80%
-  );
+  background-color: ${(props) => props.theme.bgMain};
   width: 100%;
   height: calc(100vh - 4rem);
   display: flex;
@@ -31,7 +27,6 @@ const HeroCentered = styled.div`
     'h2'
     'p'
     'p';
-
   z-index: 2;
 `;
 
