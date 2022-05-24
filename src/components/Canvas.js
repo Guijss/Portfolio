@@ -12,6 +12,7 @@ const CanvasWrapper = styled.div`
   width: 90%;
   height: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   @media (max-width: 800px) {
