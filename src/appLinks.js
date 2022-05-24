@@ -2,6 +2,7 @@ import SolarSystem from './sketches/solarSystem/SolarSystem';
 import PathFinding from './sketches/pathfinding/PathFinding';
 import Tetris from './sketches/tetris/Tetris';
 import Minesweeper from './sketches/minesweeper/Minesweeper';
+import Scale from './sketches/scale/Scale';
 import Space from './sketches/space/Space';
 import Synth from './sketches/synth/Synth';
 import Fifteen from './sketches/fifteen/Fifteen';
@@ -57,8 +58,8 @@ export const sidebarLinks = [
     linkText: 'Scale Viewer',
     path: '/projects/scale',
     to: '/projects/scale',
-    source: 'solarSystem',
-    component: Tetris,
+    source: 'scale',
+    component: Scale,
   },
   {
     key: 6,
