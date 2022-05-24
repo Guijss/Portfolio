@@ -83,6 +83,7 @@ const WallIcon = styled.div`
   width: 2.5rem;
   height: 1.5rem;
   background-color: rgb(15, 15, 15);
+  border: 1px solid rgb(70, 70, 70);
   border-radius: 0.5rem;
 `;
 
@@ -247,7 +248,7 @@ const PathFinding = () => {
       return;
     }
     if (drawing) {
-      p5.background(22, 22, 27);
+      p5.background(18, 19, 24);
       p5.stroke(255, 30);
       p5.noFill();
       p5.rect(offSetX, offsetY, cellSizeX * 40, cellSizeY * 25, 7);
