@@ -144,7 +144,7 @@ let bombImg;
 
 const Minesweeper = () => {
   const [running, setRunning] = useState(false);
-  const [numBombs, setNumBombs] = useState(100);
+  const [numBombs, setNumBombs] = useState(30);
 
   const handleChange = (e) => {
     setNumBombs(e.target.value);
@@ -216,7 +216,7 @@ const Minesweeper = () => {
 
   const draw = (p5) => {
     if (drawing) {
-      p5.background(22, 22, 27);
+      p5.background(18, 19, 24);
       for (let i = 0; i < grid.length; i++) {
         for (let j = 0; j < grid[0].length; j++) {
           grid[i][j].render();

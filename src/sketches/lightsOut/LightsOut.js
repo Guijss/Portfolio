@@ -117,9 +117,6 @@ const LightsOut = () => {
 
   return (
     <>
-      <Reset onClick={reset}>
-        <BsArrowCounterclockwise size={30} color="rgb(70, 71, 76)" />
-      </Reset>
       <Sketch
         setup={setup}
         draw={draw}
@@ -130,6 +127,9 @@ const LightsOut = () => {
           height: '400px',
         }}
       />
+      <Reset onClick={reset}>
+        <BsArrowCounterclockwise size={30} color="rgb(70, 71, 76)" />
+      </Reset>
     </>
   );
 };
