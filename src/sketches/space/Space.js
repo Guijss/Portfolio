@@ -2,15 +2,14 @@ import React from 'react';
 import Sketch from 'react-p5';
 import { Vector } from 'p5';
 
+let parentRef;
+let starsX;
+let starsY;
+let spacingX, spacingY;
+let noiseOffset;
+let xStart;
+let yStart;
 const Space = () => {
-  let parentRef;
-  let starsX;
-  let starsY;
-  let spacingX, spacingY;
-  let noiseOffset;
-  let xStart;
-  let yStart;
-
   const setup = (p5, canvasParentRef) => {
     parentRef = canvasParentRef;
     const w = parentRef.clientWidth;
@@ -96,7 +95,7 @@ const Space = () => {
       draw={draw}
       windowResized={windowResized}
       style={{
-        position: 'absolute',
+        position: 'relative',
         width: '100%',
         height: '100%',
       }}
