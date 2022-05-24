@@ -9,13 +9,16 @@ export default class Cell {
     this.p5 = p5;
   }
 
-  render() {
+  render(contrast) {
+    let r = 70 * contrast;
+    let g = 71 * contrast;
+    let b = 76 * contrast;
     this.p5.stroke(40, 43, 47);
     this.p5.strokeWeight(4);
     if (this.e) {
       this.p5.noFill();
     } else {
-      this.p5.fill(70, 71, 76);
+      this.p5.fill(r, g, b);
     }
 
     this.p5.square(this.x, this.y, this.s, 10);

@@ -9,7 +9,7 @@ let curr;
 let numPegs;
 let size;
 let p;
-const PegSolitaire = () => {
+const PegSolitaire = (props) => {
   const setup = (p5, canvasParentRef) => {
     p = p5;
     const w = canvasParentRef.clientWidth;
@@ -20,17 +20,18 @@ const PegSolitaire = () => {
 
   const draw = (p5) => {
     p5.clear();
+    const lowerContrast = p5.map(props.contrast, 1, 3, 1, 1.5);
     if (numPegs < 2) {
       p5.stroke(120, 135, 180);
     } else {
-      p5.stroke(32, 35, 42);
+      p5.stroke(32 * lowerContrast, 35 * lowerContrast, 42 * lowerContrast);
     }
     p5.noFill();
     p5.strokeWeight(4);
     p5.rect(10, 10, p5.width - 20, p5.height - 20, 20);
     for (let j = 0; j < grid.length; j++) {
       for (let i = 0; i < grid[j].length; i++) {
-        grid[i][j].render();
+        grid[i][j].render(props.contrast);
       }
     }
   };
@@ -150,7 +151,12 @@ const PegSolitaire = () => {
         }}
       />
       <Reset onClick={reset}>
-        <BsArrowCounterclockwise size={30} color="rgb(70, 71, 76)" />
+        <BsArrowCounterclockwise
+          size={30}
+          color={`rgb(${70 * props.contrast}, ${71 * props.contrast}, ${
+            76 * props.contrast
+          })`}
+        />
       </Reset>
     </>
   );

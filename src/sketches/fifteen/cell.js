@@ -9,15 +9,18 @@ export default class Cell {
     this.p5 = p5;
   }
 
-  render() {
+  render(contrast) {
     if (!this.b) {
+      let r = 70 * contrast;
+      let g = 71 * contrast;
+      let b = 76 * contrast;
       //rect
-      this.p5.stroke(70, 71, 76);
+      this.p5.stroke(r, g, b);
       this.p5.strokeWeight(4);
       this.p5.noFill();
       this.p5.square(this.x, this.y, this.s, 20);
       //text
-      this.p5.fill(70, 71, 76);
+      this.p5.fill(r, g, b);
       this.p5.noStroke();
       this.p5.textAlign(this.p5.CENTER, this.p5.CENTER);
       this.p5.textSize(36);

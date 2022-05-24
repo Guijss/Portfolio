@@ -96,7 +96,7 @@ const Contact = (props) => {
         />
       </ContactCont>
       <PegSolitaireContainer>
-        <PegSolitaire />
+        <PegSolitaire contrast={props.contrast} />
       </PegSolitaireContainer>
       <BaseBoard href="https://github.com/Guijss/Portfolio" target="_blank">
         <span>Designed and coded by Gui Silva.</span>

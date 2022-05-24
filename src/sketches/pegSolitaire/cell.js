@@ -11,7 +11,10 @@ export default class Cell {
     this.p5 = p5;
   }
 
-  render() {
+  render(contrast) {
+    let r = 70 * contrast;
+    let g = 71 * contrast;
+    let b = 76 * contrast;
     if (this.p) {
       //draw empty spots.
       this.p5.noFill();
@@ -24,9 +27,8 @@ export default class Cell {
       this.p5.circle(this.x, this.y, this.s);
       if (!this.e) {
         //draw pieces.
-        this.p5.noFill();
-        this.p5.fill(70, 71, 76);
-        this.p5.stroke(70, 71, 76);
+        this.p5.fill(r, g, b);
+        //this.p5.stroke(70, 71, 76);
         this.p5.circle(this.x, this.y, this.s / 1.5);
       }
     }

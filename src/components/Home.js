@@ -5,6 +5,7 @@ import Navbar from './Navbar';
 import Hero from './Hero';
 import About from './About';
 import Contact from './Contact';
+import { ImBrightnessContrast } from 'react-icons/im';
 
 const NavbarWrapper = styled.div`
   position: fixed;
@@ -44,6 +45,102 @@ const MainWeapper = styled.div`
   }
 `;
 
+const ContrastCont = styled.div`
+  position: absolute;
+  width: 15vw;
+  right: 10%;
+  top: 5vh;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+`;
+
+const ContrastIcon = styled.div`
+  position: relative;
+  width: 15%;
+  height: auto;
+  margin-top: 7px;
+`;
+
+const ContrastSlider = styled.input`
+  position: relative;
+  -webkit-appearance: none;
+  width: 80%;
+  background: transparent;
+  &:focus {
+    outline: none;
+  }
+  &::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 10px;
+    background-color: ${(props) => props.theme.scrollCol};
+    border-radius: 5px;
+    border: 0px solid ${(props) => props.theme.scrollCol};
+  }
+  &::-webkit-slider-thumb {
+    box-shadow: 0px 0px 0px #000000;
+    border: 0px solid #000000;
+    height: 25px;
+    width: 25px;
+    margin-left: 1px;
+    margin-top: -6px;
+    border-radius: 12px;
+    background-color: ${(props) => props.theme.thumbCol};
+    cursor: pointer;
+    -webkit-appearance: none;
+  }
+  &::-moz-range-track {
+    width: 100%;
+    height: 10px;
+    background-color: ${(props) => props.theme.scrollCol};
+    border-radius: 5px;
+    border: 0px solid ${(props) => props.theme.scrollCol};
+  }
+  &::-moz-range-thumb {
+    box-shadow: 0px 0px 0px #000000;
+    border: 0px solid #000000;
+    height: 25px;
+    width: 25px;
+    margin-left: 1px;
+    margin-top: -6px;
+    border-radius: 12px;
+    background-color: ${(props) => props.theme.thumbCol};
+    cursor: pointer;
+  }
+  &::-ms-track {
+    width: 100%;
+    height: 10px;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+  }
+  &::-ms-fill-lower {
+    background: ${(props) => props.theme.scrollCol};
+    border: 0px solid #000000;
+    border-radius: 28px;
+    box-shadow: 1px 1px 1px ${(props) => props.theme.scrollCol};
+  }
+  &::-ms-fill-upper {
+    background: ${(props) => props.theme.scrollCol};
+    border: 0px solid #000000;
+    border-radius: 28px;
+    box-shadow: 1px 1px 1px ${(props) => props.theme.scrollCol};
+  }
+  &::-ms-thumb {
+    box-shadow: 0px 0px 0px #000000;
+    border: 0px solid #000000;
+    height: 10px;
+    width: 20px;
+    margin-left: 1px;
+    margin-top: -2px;
+    border-radius: 12px;
+    background: ${(props) => props.theme.thumbCol};
+    cursor: pointer;
+  }
+`;
+
 const Home = () => {
   const mainRef = useRef(null);
   const homeRef = useRef(null);
@@ -52,6 +149,7 @@ const Home = () => {
   const [activePage, setActivePage] = useState(0);
   const [buttonVisibility, setButtonVisibility] = useState(0);
   const [isClickable, setIsClickable] = useState('none');
+  const [contrast, setContrast] = useState(1);
 
   useEffect(() => {
     const mainDOM = mainRef.current;
@@ -105,6 +203,10 @@ const Home = () => {
     });
   };
 
+  const handleChange = (e) => {
+    setContrast(e.target.value);
+  };
+
   return (
     <>
       <NavbarWrapper>
@@ -117,9 +219,22 @@ const Home = () => {
         />
       </NavbarWrapper>
       <MainWeapper ref={mainRef}>
-        <Hero fRef={homeRef} activePage={activePage} />
-        <About fRef={aboutRef} />
-        <Contact fRef={contactRef} />
+        <ContrastCont>
+          <ContrastIcon>
+            <ImBrightnessContrast size={25} color="rgb(120, 120, 120)" />
+          </ContrastIcon>
+          <ContrastSlider
+            type="range"
+            min="1"
+            max="2"
+            step="0.01"
+            value={contrast}
+            onChange={handleChange}
+          />
+        </ContrastCont>
+        <Hero fRef={homeRef} activePage={activePage} contrast={contrast} />
+        <About fRef={aboutRef} contrast={contrast} />
+        <Contact fRef={contactRef} contrast={contrast} />
       </MainWeapper>
       ;
     </>

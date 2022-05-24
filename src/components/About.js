@@ -74,7 +74,7 @@ const About = (props) => {
       </AboutCont>
 
       <LightsOutContainer>
-        <LightsOut />
+        <LightsOut contrast={props.contrast} />
       </LightsOutContainer>
     </PageWrapper>
   );

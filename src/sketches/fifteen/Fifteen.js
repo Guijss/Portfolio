@@ -6,7 +6,7 @@ import { Reset } from '../../components/commonStyledComponents';
 let grid = [];
 let win;
 let p;
-const Fifteen = () => {
+const Fifteen = (props) => {
   const setup = (p5, canvasParentRef) => {
     p = p5;
     const w = canvasParentRef.clientWidth;
@@ -19,16 +19,17 @@ const Fifteen = () => {
     p5.clear();
     win = true;
     for (let i = 0; i < grid.length; i++) {
-      grid[i].render();
+      grid[i].render(props.contrast);
       if (grid[i].t !== i) {
         win = false;
       }
     }
+    const lowerContrast = p5.map(props.contrast, 1, 3, 1, 1.5);
     if (win) {
       p5.stroke(120, 135, 180);
       p5.noLoop();
     } else {
-      p5.stroke(32, 35, 42);
+      p5.stroke(32 * lowerContrast, 35 * lowerContrast, 42 * lowerContrast);
     }
     p5.noFill();
     p5.strokeWeight(4);
@@ -164,7 +165,12 @@ const Fifteen = () => {
         }}
       />
       <Reset onClick={reset}>
-        <BsArrowCounterclockwise size={30} color="rgb(70, 71, 76)" />
+        <BsArrowCounterclockwise
+          size={30}
+          color={`rgb(${70 * props.contrast}, ${71 * props.contrast}, ${
+            76 * props.contrast
+          })`}
+        />
       </Reset>
     </>
   );
