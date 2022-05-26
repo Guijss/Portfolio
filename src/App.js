@@ -4,7 +4,6 @@ import { routes } from './appLinks';
 
 const theme = {
   bgMain: 'rgb(18, 19, 24)',
-  bgMainAlpha: 'rgba(22, 22, 27, 50)',
   navMain: 'rgb(17, 17, 22)',
   textMain: 'rgb(147, 152, 159)',
   textHighlight: 'rgb(120, 135, 180)',
