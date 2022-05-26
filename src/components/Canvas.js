@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import HelpModal from './HelpModal';
 import { Switch, Route } from 'react-router';
 import { sidebarLinks } from '../appLinks';
 import { VscFileCode } from 'react-icons/vsc';
@@ -25,6 +26,9 @@ const GHLink = styled.a`
   top: 2rem;
   left: 2rem;
   z-index: 10;
+  @media (max-height: 650px) {
+    visibility: hidden;
+  }
 `;
 
 const Canvas = () => {
@@ -40,16 +44,19 @@ const Canvas = () => {
   }, [location]);
   return (
     <CanvasWrapper>
-      {location.pathname !== '/projects' && (
-        <GHLink
-          href={
-            'https://github.com/Guijss/Portfolio/tree/master/src/sketches/' +
-            source
-          }
-          target="_blank"
-        >
-          <VscFileCode size={50} color="rgb(70, 71, 76)" />
-        </GHLink>
+      {location.pathname !== '/projects' && location.pathname !== '/projects/' && (
+        <>
+          <GHLink
+            href={
+              'https://github.com/Guijss/Portfolio/tree/master/src/sketches/' +
+              source
+            }
+            target="_blank"
+          >
+            <VscFileCode size={50} color="rgb(70, 71, 76)" />
+          </GHLink>
+          <HelpModal />
+        </>
       )}
       <Switch>
         {sidebarLinks.map((obj) => {

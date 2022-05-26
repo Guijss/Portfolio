@@ -76,8 +76,8 @@ const Space = () => {
       p5.createVector(p5.mouseX, p5.mouseY),
       p5.createVector(p5.width / 2, p5.height / 2)
     );
-    xStart -= ((2 * dirVec.x) / p5.width) * 0.02;
-    yStart -= ((2 * dirVec.y) / p5.height) * 0.02;
+    xStart -= ((2 * dirVec.x) / p5.width) * 0.05;
+    yStart -= ((2 * dirVec.y) / p5.height) * 0.05;
   };
 
   const windowResized = (p5) => {

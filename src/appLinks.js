@@ -31,6 +31,14 @@ export const sidebarLinks = [
   },
   {
     key: 2,
+    linkText: 'Scale Viewer',
+    path: '/projects/scale',
+    to: '/projects/scale',
+    source: 'scale',
+    component: Scale,
+  },
+  {
+    key: 3,
     linkText: 'Tetris',
     path: '/projects/tetris',
     to: '/projects/tetris',
@@ -38,7 +46,7 @@ export const sidebarLinks = [
     component: Tetris,
   },
   {
-    key: 3,
+    key: 4,
     linkText: 'Minesweeper',
     path: '/projects/minesweeper',
     to: '/projects/minesweeper',
@@ -46,20 +54,12 @@ export const sidebarLinks = [
     component: Minesweeper,
   },
   {
-    key: 4,
+    key: 5,
     linkText: 'Synthesizer',
     path: '/projects/synth',
     to: '/projects/synth',
     source: 'synth',
     component: Synth,
-  },
-  {
-    key: 5,
-    linkText: 'Scale Viewer',
-    path: '/projects/scale',
-    to: '/projects/scale',
-    source: 'scale',
-    component: Scale,
   },
   {
     key: 6,
