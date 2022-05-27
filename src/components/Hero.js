@@ -157,7 +157,7 @@ const Hero = (props) => {
         {props.activePage === 0 && <HeroShape />}
       </DasherContainer>
       <FifteenContainer>
-        <Fifteen contrast={props.contrast} />
+        <Fifteen contrast={props.contrast} mainPage={true} />
       </FifteenContainer>
     </HeroWrapper>
   );

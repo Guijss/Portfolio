@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import Navbar from './Navbar';
@@ -55,6 +55,9 @@ const ContrastCont = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 99;
+  @media (max-width: 800px) {
+    width: 10rem;
+  }
 `;
 
 const ContrastIcon = styled.div`
@@ -74,7 +77,7 @@ const ContrastSlider = styled.input`
   }
   &::-webkit-slider-runnable-track {
     width: 100%;
-    height: 10px;
+    height: 5px;
     background-color: ${(props) => props.theme.scrollCol};
     border-radius: 5px;
     border: 0px solid ${(props) => props.theme.scrollCol};
@@ -82,10 +85,10 @@ const ContrastSlider = styled.input`
   &::-webkit-slider-thumb {
     box-shadow: 0px 0px 0px #000000;
     border: 0px solid #000000;
-    height: 25px;
-    width: 25px;
+    height: 20px;
+    width: 20px;
     margin-left: 1px;
-    margin-top: -6px;
+    margin-top: -7px;
     border-radius: 12px;
     background-color: ${(props) => props.theme.thumbCol};
     cursor: pointer;
@@ -216,12 +219,13 @@ const Home = () => {
           activePage={activePage}
           buttonVisibility={buttonVisibility}
           isClickable={isClickable}
+          contrast={contrast}
         />
       </NavbarWrapper>
       <MainWeapper ref={mainRef}>
         <ContrastCont>
           <ContrastIcon>
-            <ImBrightnessContrast size={25} color="rgb(120, 120, 120)" />
+            <ImBrightnessContrast size={20} color="rgb(120, 120, 120)" />
           </ContrastIcon>
           <ContrastSlider
             type="range"
@@ -236,7 +240,6 @@ const Home = () => {
         <About fRef={aboutRef} contrast={contrast} />
         <Contact fRef={contactRef} contrast={contrast} />
       </MainWeapper>
-      ;
     </>
   );
 };

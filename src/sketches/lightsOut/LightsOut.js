@@ -20,13 +20,15 @@ const LightsOut = (props) => {
     win = true;
     for (let j = 0; j < grid.length; j++) {
       for (let i = 0; i < grid[j].length; i++) {
-        grid[i][j].render(props.contrast);
+        grid[i][j].render((props) => (props.mainPage ? props.contrast : 1));
         if (!grid[i][j].e) {
           win = false;
         }
       }
     }
-    const lowerContrast = p5.map(props.contrast, 1, 3, 1, 1.5);
+    const lowerContrast = props.mainPage
+      ? p5.map(props.contrast, 1, 3, 1, 1.5)
+      : 1;
     if (win) {
       p5.stroke(120, 135, 180);
       p5.noLoop();
@@ -131,9 +133,9 @@ const LightsOut = (props) => {
       <Reset onClick={reset}>
         <BsArrowCounterclockwise
           size={30}
-          color={`rgb(${70 * props.contrast}, ${71 * props.contrast}, ${
-            76 * props.contrast
-          })`}
+          color={`rgb(${70 * (props.mainPage ? props.contrast : 1)}, ${
+            71 * (props.mainPage ? props.contrast : 1)
+          }, ${76 * (props.mainPage ? props.contrast : 1)})`}
         />
       </Reset>
     </>

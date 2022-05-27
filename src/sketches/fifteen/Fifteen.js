@@ -19,12 +19,14 @@ const Fifteen = (props) => {
     p5.clear();
     win = true;
     for (let i = 0; i < grid.length; i++) {
-      grid[i].render(props.contrast);
+      grid[i].render((props) => (props.mainPage ? props.contrast : 1));
       if (grid[i].t !== i) {
         win = false;
       }
     }
-    const lowerContrast = p5.map(props.contrast, 1, 3, 1, 1.5);
+    const lowerContrast = props.mainPage
+      ? p5.map(props.contrast, 1, 3, 1, 1.5)
+      : 1;
     if (win) {
       p5.stroke(120, 135, 180);
       p5.noLoop();
@@ -167,9 +169,9 @@ const Fifteen = (props) => {
       <Reset onClick={reset}>
         <BsArrowCounterclockwise
           size={30}
-          color={`rgb(${70 * props.contrast}, ${71 * props.contrast}, ${
-            76 * props.contrast
-          })`}
+          color={`rgb(${70 * (props.mainPage ? props.contrast : 1)}, ${
+            71 * (props.mainPage ? props.contrast : 1)
+          }, ${76 * (props.mainPage ? props.contrast : 1)})`}
         />
       </Reset>
     </>
