@@ -142,11 +142,11 @@ const About = (props) => {
               >
                 <ImageName>
                   {e.name}
-                  <GHLink href={e.ghUrl}>
+                  <GHLink href={e.ghUrl} target="_blank">
                     <GoMarkGithub size={20} />
                   </GHLink>
                 </ImageName>
-                <ImageBackdrop href={e.url}>
+                <ImageBackdrop href={e.url} target="_blank">
                   <Image src={e.source} />
                 </ImageBackdrop>
                 <ImageDesc>{e.desc}</ImageDesc>
