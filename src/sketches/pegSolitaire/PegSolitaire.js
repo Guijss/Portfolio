@@ -148,8 +148,8 @@ const PegSolitaire = (props) => {
         mousePressed={mousePressed}
         style={{
           position: 'relative',
-          width: '400px',
-          height: '400px',
+          width: '250px',
+          height: '250px',
         }}
       />
       <Reset onClick={reset}>

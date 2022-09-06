@@ -1,56 +1,126 @@
 import styled from 'styled-components';
-import LightsOut from '../sketches/lightsOut/LightsOut';
 import { PageWrapper } from './commonStyledComponents';
+import { images } from '../appLinks';
+import { GoMarkGithub } from 'react-icons/go';
 
 const AboutCont = styled.div`
   position: absolute;
-  width: 40rem;
-  right: 20%;
-  font-family: 'Fredoka', sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  @media (max-width: 850px) {
-    width: 20rem;
-  }
+  width: 100%;
+  height: 100%;
+
+  font-family: 'Roboto', serif;
+  display: grid;
+  grid-template-areas:
+    'proj title'
+    'proj title';
+  grid-template-columns: 1.5fr 0.2fr;
+  grid-template-rows: 1fr 1fr;
 `;
 
-const AboutTitle = styled.span`
+const PageTitle = styled.div`
   position: relative;
-  padding: 2rem;
-  font-size: 4rem;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
   font-family: 'Roboto Slab', serif;
   font-weight: bold;
   color: ${(props) => props.theme.textHighlight};
-  @media (max-width: 850px) {
-    font-size: 2rem;
+  font-size: 10rem;
+  border-left: 3px solid ${(props) => props.theme.textMain};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-area: title;
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+  //border: 1px solid white;
+  right: 0;
+  @media only screen and (max-width: 1700px), (max-height: 700px) {
+    display: none;
   }
 `;
 
-const AboutText = styled.span`
+const Images = styled.div`
   position: relative;
-  padding-bottom: 5rem;
-  font-size: 1.2rem;
-  text-align: center;
-  color: ${(props) => props.theme.textMain};
-  @media (max-width: 850px) {
+  grid-area: proj;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+`;
+
+const ImageContainer = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  grid-area: ${(props) => props.area};
+  min-width: 10rem;
+  min-height: calc(10rem / 1.66);
+`;
+
+const ImageName = styled.span`
+  position: absolute;
+  width: 100%;
+  color: ${(props) => props.theme.textHighlight};
+  font-size: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: -4rem;
+  @media only screen and (max-width: 1700px) {
     font-size: 1rem;
   }
 `;
 
-const LightsOutContainer = styled.div`
+const ImageDesc = styled.span`
   position: absolute;
-  width: 430px;
-  height: 400px;
-  left: 10%;
+  color: ${(props) => props.theme.textMain};
+  font-size: 1rem;
+  margin-top: 0.3rem;
+  bottom: -3rem;
+  @media only screen and (max-width: 1500px) {
+    display: none;
+  }
+`;
+
+const ImageBackdrop = styled.a`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: ${(props) => props.theme.textMain};
+  border-radius: 1rem;
   display: flex;
-  flex-direction: row;
   justify-content: center;
-  align-items: start;
-  z-index: 0;
-  @media (max-width: 1550px), (max-height: 600px) {
-    visibility: hidden;
+  align-items: center;
+`;
+
+const Image = styled.img`
+  position: absolute;
+  width: 100%; //calc(1345px * 0.3);
+  height: 100%; //calc(810px * 0.3);
+  border-radius: 1rem;
+  filter: grayscale(0.8);
+  transform: translate(0, 0);
+  transition: filter ease-in-out 0.5s, transform ease-in-out 0.5s;
+  &:hover {
+    filter: grayscale(0);
+    transform: translate(3px, -3px);
+    cursor: pointer;
+  }
+`;
+
+const GHLink = styled.a`
+  position: absolute;
+  right: 1rem;
+  color: ${(props) => props.theme.textMain};
+  transition: filter ease-in-out 0.5s;
+  &:hover {
+    cursor: pointer;
+    filter: brightness(2);
+  }
+  @media only screen and (max-width: 1500px) {
+    display: none;
   }
 `;
 
@@ -58,6 +128,35 @@ const About = (props) => {
   return (
     <PageWrapper ref={props.fRef}>
       <AboutCont>
+        <Images>
+          {images.map((e, i) => {
+            return (
+              <ImageContainer
+                key={i}
+                area={e.area}
+                style={{
+                  width: props.screenSize.w / 5,
+                  height: props.screenSize.w / (5 * 1.66),
+                  margin: '2rem',
+                }}
+              >
+                <ImageName>
+                  {e.name}
+                  <GHLink href={e.ghUrl}>
+                    <GoMarkGithub size={20} />
+                  </GHLink>
+                </ImageName>
+                <ImageBackdrop href={e.url}>
+                  <Image src={e.source} />
+                </ImageBackdrop>
+                <ImageDesc>{e.desc}</ImageDesc>
+              </ImageContainer>
+            );
+          })}
+        </Images>
+        <PageTitle>Projects</PageTitle>
+
+        {/* <AboutCont>
         <AboutTitle>About</AboutTitle>
         <AboutText>
           Hello! My name is Guilherme Silva. I am a mechanical engineer that
@@ -75,7 +174,8 @@ const About = (props) => {
 
       <LightsOutContainer>
         <LightsOut contrast={props.contrast} />
-      </LightsOutContainer>
+      </LightsOutContainer> */}
+      </AboutCont>
     </PageWrapper>
   );
 };

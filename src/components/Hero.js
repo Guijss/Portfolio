@@ -12,12 +12,12 @@ const HeroWrapper = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  font-family: 'roboto', sans-serif;
 `;
 
 const HeroCentered = styled.div`
   width: 45%;
   height: 70%;
-  font-family: 'Fredoka', sans-serif;
   display: grid;
   grid-template-rows: 0.5fr 0.2fr 0.4fr 0.4fr 1.1fr 0.5fr;
   grid-template-areas:
@@ -95,6 +95,9 @@ const ParaButton = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
+  @media only screen and (max-width: 1700px), (max-height: 700px) {
+    display: none;
+  }
 `;
 
 const DasherContainer = styled.div`
@@ -119,6 +122,9 @@ const FifteenContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: start;
+  &:hover {
+    cursor: pointer;
+  }
   @media (max-width: 1400px), (max-height: 600px) {
     visibility: hidden;
   }
@@ -148,7 +154,8 @@ const Hero = (props) => {
                 rotation: '0',
                 pEvents: 'auto',
               }}
-              to="/projects"
+              hasHandler={true}
+              clickHandler={() => props.scrollToComp(props.aboutRef)}
             />
           </ParaButton>
         </Para>

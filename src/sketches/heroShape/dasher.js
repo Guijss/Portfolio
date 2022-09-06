@@ -79,7 +79,7 @@ export default class Dasher {
     this.p5.push();
     for (let i = 0; i < this.segments.length - 1; i++) {
       this.p5.colorMode(this.p5.HSB);
-      this.p5.stroke((i * 5) % 360, 100, 100, 0.1);
+      this.p5.stroke((i * 5) % 360, 100, 100, 0.15);
       this.p5.line(
         this.pos.x + this.segments[i].x,
         this.pos.y + this.segments[i].y,

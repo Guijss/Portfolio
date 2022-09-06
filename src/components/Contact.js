@@ -1,57 +1,105 @@
 import PegSolitaire from '../sketches/pegSolitaire/PegSolitaire';
 import styled from 'styled-components';
-import Button from './Button';
 import { PageWrapper } from './commonStyledComponents';
+import { Link } from 'react-router-dom';
+import LightsOut from '../sketches/lightsOut/LightsOut';
 
 const ContactCont = styled.div`
   position: absolute;
-  width: 40rem;
-  left: 20%;
-  font-family: 'Fredoka', sans-serif;
+  width: 100%;
+  height: 100%;
+  font-family: 'Roboto', serif;
+  display: grid;
+  grid-template-areas:
+    'title text'
+    'title text';
+  grid-template-columns: 0.2fr 1.5fr;
+  grid-template-rows: 1fr 1fr;
+`;
+
+const PageTitle = styled.div`
+  position: relative;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-family: 'Roboto Slab', serif;
+  font-weight: bold;
+  color: ${(props) => props.theme.textHighlight};
+  font-size: 8rem;
+  border-right: 3px solid ${(props) => props.theme.textMain};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-area: title;
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+  white-space: nowrap;
+  right: 0;
+  @media only screen and (max-width: 1700px), (max-height: 700px) {
+    display: none;
+  }
+`;
+
+const TextContainer = styled.div`
+  position: relative;
+  grid-area: text;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  @media (max-width: 850px) {
-    width: 20rem;
-  }
-`;
-
-const GetInTouch = styled.span`
-  position: relative;
-  padding: 2rem;
-  font-size: 4rem;
-  font-family: 'Roboto Slab', serif;
-  font-weight: bold;
-  color: ${(props) => props.theme.textHighlight};
-  @media (max-width: 850px) {
-    font-size: 2rem;
+  margin-right: 15rem;
+  z-index: 1;
+  pointer-events: none;
+  @media (max-width: 1550px), (max-height: 600px) {
+    margin-right: 0;
   }
 `;
 
 const ContactText = styled.span`
   position: relative;
-  padding-bottom: 5rem;
-  font-size: 1.3rem;
+  width: 30rem;
+  font-size: 1.7rem;
   text-align: center;
   color: ${(props) => props.theme.textMain};
+  grid-area: text;
   @media (max-width: 850px) {
     font-size: 1rem;
   }
 `;
 
-const PegSolitaireContainer = styled.div`
+const Btn = styled(Link)`
+  position: relative;
+  text-decoration: none;
+  width: 20rem;
+  height: 5rem;
+  margin-top: 3rem;
+  color: ${(props) => props.theme.textMain};
+  border: 1px solid ${(props) => props.theme.textHighlight};
+  border-radius: 0.5rem;
+  background-color: ${(props) => props.theme.bgMain};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: filter 0.2s ease;
+  pointer-events: auto;
+  &:hover {
+    filter: brightness(2);
+  }
+`;
+
+const GameContainer = styled.div`
   position: absolute;
-  width: 430px;
-  height: 400px;
-  right: 10%;
+  width: 280px;
+  height: 250px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: start;
   z-index: 0;
-  @media (max-width: 1550px), (max-height: 600px) {
-    visibility: hidden;
+  &:hover {
+    cursor: pointer;
+  }
+  @media (max-width: 1550px), (max-height: 900px) {
+    display: none;
   }
 `;
 
@@ -74,30 +122,24 @@ const Contact = (props) => {
   return (
     <PageWrapper ref={props.fRef}>
       <ContactCont>
-        <GetInTouch>Get In Touch!</GetInTouch>
-        <ContactText>
-          I would love to hear what you think! Don't hesitate to ask me any
-          questions you might have or perhaps send some good advice. Good jokes
-          are also welcome.
-        </ContactText>
-        <Button
-          sty={{
-            btnText: 'Contact Me!',
-            width: '15rem',
-            height: '5rem',
-            fontSize: '1.5rem',
-            hoverCol: 'rgba(36, 44, 66, 0.4)',
-            rotation: '0',
-            pEvents: true,
-          }}
-          to="#"
-          hasHandler={true}
-          clickHandler={clickHandler}
-        />
+        <PageTitle>Get In Touch!</PageTitle>
+        <TextContainer>
+          <ContactText>
+            I would love to hear what you think! Don't hesitate to contact me
+            with any questions you might have or perhaps send me some good
+            advice! Good jokes are always welcome.
+          </ContactText>
+          <Btn to="#" hasHandler={true} onClick={(e) => clickHandler(e)}>
+            Contact Me!
+          </Btn>
+        </TextContainer>
       </ContactCont>
-      <PegSolitaireContainer>
+      <GameContainer style={{ top: '10%', right: '10%' }}>
         <PegSolitaire contrast={props.contrast} mainPage={true} />
-      </PegSolitaireContainer>
+      </GameContainer>
+      <GameContainer style={{ bottom: '10%', right: '10%' }}>
+        <LightsOut contrast={props.contrast} mainPage={true} />
+      </GameContainer>
       <BaseBoard href="https://github.com/Guijss/Portfolio" target="_blank">
         <span>Designed and coded by Gui Silva.</span>
       </BaseBoard>

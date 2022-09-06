@@ -58,6 +58,9 @@ const ContrastCont = styled.div`
   @media (max-width: 800px) {
     width: 10rem;
   }
+  @media only screen and (max-width: 1700px), (max-height: 700px) {
+    display: none;
+  }
 `;
 
 const ContrastIcon = styled.div`
@@ -150,9 +153,19 @@ const Home = () => {
   const aboutRef = useRef(null);
   const contactRef = useRef(null);
   const [activePage, setActivePage] = useState(0);
-  const [buttonVisibility, setButtonVisibility] = useState(0);
-  const [isClickable, setIsClickable] = useState('none');
   const [contrast, setContrast] = useState(1);
+  const [screenSize, setScreenSize] = useState({ w: 0, h: 0 });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenSize({ w: window.innerWidth, h: window.innerHeight });
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     const mainDOM = mainRef.current;
@@ -164,19 +177,13 @@ const Home = () => {
     const currentPos = mainRef.current.scrollTop;
     if (currentPos < aboutRef.current.offsetTop) {
       setActivePage(0);
-      setButtonVisibility(0);
-      setIsClickable('none');
     } else if (
       currentPos >= aboutRef.current.offsetTop &&
       currentPos < contactRef.current.offsetTop
     ) {
       setActivePage(1);
-      setButtonVisibility(1);
-      setIsClickable('auto');
     } else if (currentPos >= contactRef.current.offsetTop) {
       setActivePage(2);
-      setButtonVisibility(1);
-      setIsClickable('auto');
     }
   };
 
@@ -188,7 +195,7 @@ const Home = () => {
     },
     {
       key: 1,
-      name: 'About',
+      name: 'Projects',
       ref: aboutRef,
     },
     {
@@ -217,9 +224,6 @@ const Home = () => {
           navData={navData}
           scrollToComp={scrollToComp}
           activePage={activePage}
-          buttonVisibility={buttonVisibility}
-          isClickable={isClickable}
-          contrast={contrast}
         />
       </NavbarWrapper>
       <MainWeapper ref={mainRef}>
@@ -230,14 +234,20 @@ const Home = () => {
           <ContrastSlider
             type="range"
             min="1"
-            max="2"
+            max="3"
             step="0.01"
             value={contrast}
             onChange={handleChange}
           />
         </ContrastCont>
-        <Hero fRef={homeRef} activePage={activePage} contrast={contrast} />
-        <About fRef={aboutRef} contrast={contrast} />
+        <Hero
+          fRef={homeRef}
+          activePage={activePage}
+          contrast={contrast}
+          scrollToComp={scrollToComp}
+          aboutRef={aboutRef}
+        />
+        <About fRef={aboutRef} contrast={contrast} screenSize={screenSize} />
         <Contact fRef={contactRef} contrast={contrast} />
       </MainWeapper>
     </>

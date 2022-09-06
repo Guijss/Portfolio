@@ -1,12 +1,11 @@
 import { ThemeProvider } from 'styled-components';
-import { Switch, Route } from 'react-router-dom';
-import { routes } from './appLinks';
+import Home from './components/Home';
 
 const theme = {
   bgMain: 'rgb(18, 19, 24)',
   navMain: 'rgb(17, 17, 22)',
   textMain: 'rgb(147, 152, 159)',
-  textHighlight: 'rgb(120, 135, 180)',
+  textHighlight: 'rgb(140, 155, 210)',
   logoCol: 'rgb(150, 170, 200)',
   scrollCol: 'rgb(9, 10, 15)',
   thumbCol: 'rgb(70, 71, 76)',
@@ -16,16 +15,7 @@ const theme = {
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Switch>
-        {routes.map((obj) => (
-          <Route
-            key={obj.key}
-            path={obj.path}
-            exact={obj.exact}
-            component={obj.component}
-          />
-        ))}
-      </Switch>
+      <Home />
     </ThemeProvider>
   );
 }
