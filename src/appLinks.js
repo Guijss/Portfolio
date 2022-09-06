@@ -24,7 +24,7 @@ export const images = [
     source: solar,
     desc: 'A collection of some of my creative coding projects.',
     area: 'solar',
-    url: 'https://github.com/Guijss/my-sketches',
+    url: 'https://guijss.github.io/my-sketches/',
     ghUrl: 'https://github.com/Guijss/my-sketches',
   },
 ];
