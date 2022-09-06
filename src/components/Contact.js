@@ -1,7 +1,6 @@
 import PegSolitaire from '../sketches/pegSolitaire/PegSolitaire';
 import styled from 'styled-components';
 import { PageWrapper } from './commonStyledComponents';
-import { Link } from 'react-router-dom';
 import LightsOut from '../sketches/lightsOut/LightsOut';
 
 const ContactCont = styled.div`
@@ -66,7 +65,7 @@ const ContactText = styled.span`
   }
 `;
 
-const Btn = styled(Link)`
+const Btn = styled.div`
   position: relative;
   text-decoration: none;
   width: 20rem;
@@ -82,6 +81,7 @@ const Btn = styled(Link)`
   transition: filter 0.2s ease;
   pointer-events: auto;
   &:hover {
+    cursor: pointer;
     filter: brightness(2);
   }
 `;
@@ -129,9 +129,7 @@ const Contact = (props) => {
             with any questions you might have or perhaps send me some good
             advice! Good jokes are always welcome.
           </ContactText>
-          <Btn to="#" hasHandler={true} onClick={(e) => clickHandler(e)}>
-            Contact Me!
-          </Btn>
+          <Btn onClick={(e) => clickHandler(e)}>Contact Me!</Btn>
         </TextContainer>
       </ContactCont>
       <GameContainer style={{ top: '10%', right: '10%' }}>

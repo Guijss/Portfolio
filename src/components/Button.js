@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
-const Btn = styled(Link)`
+const Btn = styled.div`
   position: relative;
   text-decoration: none;
   font-family: 'Fredoka', sans-serif;
@@ -22,6 +21,7 @@ const Btn = styled(Link)`
   transition: transform 0.2s ease;
   pointer-events: ${(props) => props.sty.pEvents};
   &:hover {
+    cursor: pointer;
     background-color: ${(props) => props.sty.hoverCol};
   }
 `;
@@ -31,7 +31,6 @@ const Button = (props) => {
     <>
       <Btn
         sty={props.sty}
-        to={props.to}
         onClick={props.hasHandler ? (e) => props.clickHandler(e) : undefined}
       >
         <span>{props.sty.btnText}</span>
