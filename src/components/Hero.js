@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import HeroShape from '../sketches/heroShape/HeroShape';
 import Fifteen from '../sketches/fifteen/Fifteen';
@@ -38,6 +39,11 @@ const Hello = styled.h1`
   font-weight: lighter;
   letter-spacing: 0.1rem;
   color: ${(props) => props.theme.textHighlight};
+  transform: translate(
+    ${(props) => (props.animTimeOuts.first ? 0 : '-130%')},
+    0
+  );
+  transition: transform ease-in 0.7s;
   @media (max-width: 1400px) {
     font-size: max(1vw, 0.7rem);
   }
@@ -50,6 +56,11 @@ const Name = styled.h3`
   font-family: 'Roboto Slab', serif;
   font-weight: bold;
   color: ${(props) => props.theme.textMain};
+  transform: translate(
+    ${(props) => (props.animTimeOuts.first ? 0 : '-130%')},
+    0
+  );
+  transition: transform ease-in 0.7s;
   @media (max-width: 600px) {
     font-size: 10vw;
   }
@@ -62,6 +73,11 @@ const Desc = styled.h2`
   font-weight: lighter;
   color: ${(props) => props.theme.textHighlight};
   filter: brightness(1.3);
+  transform: translate(
+    ${(props) => (props.animTimeOuts.first ? 0 : '-140%')},
+    0
+  );
+  transition: transform ease-in 0.7s;
   @media (max-width: 1400px) {
     font-size: 4.5vw;
   }
@@ -76,6 +92,11 @@ const Para = styled.div`
   grid-template-areas:
     'txt'
     'btn';
+  transform: translate(
+    0,
+    ${(props) => (props.animTimeOuts.second ? 0 : '200%')}
+  );
+  transition: transform ease-in 0.7s;
 `;
 
 const ParaText = styled.p`
@@ -122,6 +143,11 @@ const FifteenContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: start;
+  transform: translate(
+    ${(props) => (props.animTimeOuts.third ? 0 : '180%')},
+    0
+  );
+  transition: transform ease-in 0.5s;
   &:hover {
     cursor: pointer;
   }
@@ -131,13 +157,40 @@ const FifteenContainer = styled.div`
 `;
 
 const Hero = (props) => {
+  const [animTimeOuts, setAnimTimeOuts] = useState({
+    first: false,
+    second: false,
+    third: false,
+  });
+
+  useEffect(() => {
+    const first = () => {
+      setAnimTimeOuts({ first: true, second: false, third: false });
+    };
+    const second = () => {
+      setAnimTimeOuts({ first: true, second: true, third: false });
+    };
+    const third = () => {
+      setAnimTimeOuts({ first: true, second: true, third: true });
+    };
+    setTimeout(() => {
+      first();
+    }, 300);
+    setTimeout(() => {
+      second();
+    }, 600);
+    setTimeout(() => {
+      third();
+    }, 1000);
+  }, []);
+
   return (
     <HeroWrapper ref={props.fRef}>
       <HeroCentered>
-        <Hello>Hello, my name is</Hello>
-        <Name>Gui Silva.</Name>
-        <Desc>Front-end developer.</Desc>
-        <Para>
+        <Hello animTimeOuts={animTimeOuts}>Hello, my name is</Hello>
+        <Name animTimeOuts={animTimeOuts}>Gui Silva.</Name>
+        <Desc animTimeOuts={animTimeOuts}> Front-end developer.</Desc>
+        <Para animTimeOuts={animTimeOuts}>
           <ParaText>
             I am based in Seattle, WA and I enjoy making cool things for the
             web. I build functional and fun websites and aplications. Make sure
@@ -163,7 +216,7 @@ const Hero = (props) => {
       <DasherContainer>
         {props.activePage === 0 && <HeroShape />}
       </DasherContainer>
-      <FifteenContainer>
+      <FifteenContainer animTimeOuts={animTimeOuts}>
         <Fifteen contrast={props.contrast} mainPage={true} />
       </FifteenContainer>
     </HeroWrapper>

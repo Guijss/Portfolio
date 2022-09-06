@@ -8,7 +8,7 @@ export const images = [
     source: cor,
     desc: 'A tool to help you choose your favorite color scheme.',
     area: 'cor',
-    url: 'https://github.com/Guijss/cor',
+    url: 'https://guijss.github.io/cor/',
     ghUrl: 'https://github.com/Guijss/cor',
   },
   {
@@ -16,7 +16,7 @@ export const images = [
     source: wc,
     desc: 'Keep track of every world cup game with this one!',
     area: 'wc',
-    url: 'https://github.com/Guijss/worldCupTracker',
+    url: 'https://guijss.github.io/worldCupTracker/',
     ghUrl: 'https://github.com/Guijss/worldCupTracker',
   },
   {
