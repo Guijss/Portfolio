@@ -15,6 +15,13 @@ const AboutCont = styled.div`
     'proj title';
   grid-template-columns: 1.5fr 0.2fr;
   grid-template-rows: 1fr 1fr;
+  @media only screen and (max-width: 1700px), (max-height: 700px) {
+    grid-template-areas:
+      'proj'
+      'proj';
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
 `;
 
 const PageTitle = styled.div`
@@ -32,7 +39,6 @@ const PageTitle = styled.div`
   grid-area: title;
   margin-top: 10vh;
   margin-bottom: 10vh;
-  //border: 1px solid white;
   right: 0;
   @media only screen and (max-width: 1700px), (max-height: 700px) {
     display: none;

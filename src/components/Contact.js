@@ -48,7 +48,7 @@ const TextContainer = styled.div`
   margin-right: 15rem;
   z-index: 1;
   pointer-events: none;
-  @media (max-width: 1550px), (max-height: 600px) {
+  @media only screen and (max-width: 1550px), (max-height: 600px) {
     margin-right: 0;
   }
 `;
@@ -60,8 +60,9 @@ const ContactText = styled.span`
   text-align: center;
   color: ${(props) => props.theme.textMain};
   grid-area: text;
-  @media (max-width: 850px) {
+  @media only screen and (max-width: 850px) {
     font-size: 1.3rem;
+    width: 15rem;
   }
 `;
 
@@ -84,6 +85,9 @@ const Btn = styled.div`
     cursor: pointer;
     filter: brightness(2);
   }
+  @media only screen and (max-width: 850px) {
+    width: 10rem;
+  }
 `;
 
 const GameContainer = styled.div`
@@ -98,7 +102,7 @@ const GameContainer = styled.div`
   &:hover {
     cursor: pointer;
   }
-  @media (max-width: 1550px), (max-height: 900px) {
+  @media only screen and (max-width: 1550px), (max-height: 900px) {
     display: none;
   }
 `;
