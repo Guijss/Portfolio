@@ -62,14 +62,31 @@ const ImageContainer = styled.div`
 const ImageName = styled.span`
   position: absolute;
   width: 100%;
-  color: ${(props) => props.theme.textHighlight};
-  font-size: 2.5rem;
+  color: ${(props) => props.theme.textMain};
+  font-size: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  top: -4rem;
+  top: -3rem;
+  filter: brightness(1.3);
+  transition: color ease 0.5s;
   @media only screen and (max-width: 1700px) {
     font-size: 1rem;
+  }
+`;
+
+const Image = styled.img`
+  position: absolute;
+  width: 100%; //calc(1345px * 0.3);
+  height: 100%; //calc(810px * 0.3);
+  border-radius: 1rem;
+  filter: grayscale(0.8);
+  transform: translate(0, 0);
+  transition: filter ease-in-out 0.5s, transform ease-in-out 0.5s;
+  &:hover {
+    filter: grayscale(0);
+    transform: translate(3px, -3px);
+    cursor: pointer;
   }
 `;
 
@@ -93,20 +110,8 @@ const ImageBackdrop = styled.a`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-
-const Image = styled.img`
-  position: absolute;
-  width: 100%; //calc(1345px * 0.3);
-  height: 100%; //calc(810px * 0.3);
-  border-radius: 1rem;
-  filter: grayscale(0.8);
-  transform: translate(0, 0);
-  transition: filter ease-in-out 0.5s, transform ease-in-out 0.5s;
-  &:hover {
-    filter: grayscale(0);
-    transform: translate(3px, -3px);
-    cursor: pointer;
+  &:hover + ${ImageName} {
+    color: ${(props) => props.theme.textHighlight};
   }
 `;
 
@@ -115,6 +120,7 @@ const GHLink = styled.a`
   right: 1rem;
   color: ${(props) => props.theme.textMain};
   transition: filter ease-in-out 0.5s;
+  filter: brightness(1);
   &:hover {
     cursor: pointer;
     filter: brightness(2);
@@ -140,15 +146,15 @@ const About = (props) => {
                   margin: '2rem',
                 }}
               >
+                <ImageBackdrop href={e.url} target="_blank">
+                  <Image src={e.source} />
+                </ImageBackdrop>
                 <ImageName>
                   {e.name}
                   <GHLink href={e.ghUrl} target="_blank">
                     <GoMarkGithub size={20} />
                   </GHLink>
                 </ImageName>
-                <ImageBackdrop href={e.url} target="_blank">
-                  <Image src={e.source} />
-                </ImageBackdrop>
                 <ImageDesc>{e.desc}</ImageDesc>
               </ImageContainer>
             );

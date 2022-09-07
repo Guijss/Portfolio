@@ -61,7 +61,7 @@ const ContactText = styled.span`
   color: ${(props) => props.theme.textMain};
   grid-area: text;
   @media (max-width: 850px) {
-    font-size: 1rem;
+    font-size: 1.3rem;
   }
 `;
 
